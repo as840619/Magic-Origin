@@ -8,19 +8,22 @@ public class PlayerController : MonoBehaviour
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
     BoxCollider2D _idlecollider;
+    SpriteRenderer _spriteRenderer;
 
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 10;
     [SerializeField] float _jumpSpeed = 10;
+    [SerializeField] int side = 1;
 
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
 
     void Start()
     {
-        _idleRigidbody = GetComponent<Rigidbody2D>();
         _idleAnimation = GetComponent<Animator>();
+        _idleRigidbody = GetComponent<Rigidbody2D>();
         _idlecollider = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -63,16 +66,20 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetTrigger("Attack");//被搶拍
             _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;//加秒數沒用
         }
-        if (_idleRigidbody.velocity.x != 0 && _isGround)
+
+        if (moveDirect != 0)
         {
-            _idleAnimation.SetBool("Running", true);
-            if (_idleRigidbody.velocity.x > 0)
+            if (moveDirect > 0)
             {
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                side = 1;
+                bool state = (side == 1) ? false : true;
+                _spriteRenderer.flipX = state;
             }
-            if (_idleRigidbody.velocity.x < 0)
+            if (moveDirect < 0)
             {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
+                side = -1;
+                bool state = (side == -1) ? true : false;
+                _spriteRenderer.flipX = state;
             }
         }
     }
