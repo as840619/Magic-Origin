@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Other/MenuStyle.uss?fileID=7433441132597879392&amp;guid=9107ec27ed357854ea89bff8edd37052&amp;type=3#MenuStyle" />
+    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="LeftSection" style="width: 500px; height: 100%; background-color: rgb(24, 24, 24); left: 50px; align-items: center; opacity: 1;">
+            <ui:VisualElement name="Buttons" style="align-items: center; width: 100%; justify-content: center; flex-grow: 1; bottom: auto; padding-bottom: 30%; -unity-text-outline-color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightSection" />
+    </ui:VisualElement>
+</ui:UXML>
