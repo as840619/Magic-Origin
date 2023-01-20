@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 10;
     [SerializeField] float _jumpSpeed = 10;
-    [SerializeField] int side = 1;
+    [SerializeField] int _side = 1;
 
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
@@ -71,14 +71,14 @@ public class PlayerController : MonoBehaviour
         {
             if (moveDirect > 0)
             {
-                side = 1;
-                bool state = (side == 1) ? false : true;
+                _side = 1;
+                bool state = (_side == 1) ? false : true;
                 _spriteRenderer.flipX = state;
             }
             if (moveDirect < 0)
             {
-                side = -1;
-                bool state = (side == -1) ? true : false;
+                _side = -1;
+                bool state = (_side == -1) ? true : false;
                 _spriteRenderer.flipX = state;
             }
         }
