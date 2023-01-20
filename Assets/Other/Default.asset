@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Default
   m_EditorClassIdentifier: 
-  themeUss: {fileID: -4733365628477956816, guid: 89d63250f5ea9e8419ed5a52192aacac, type: 3}
+  themeUss: {fileID: -4733365628477956816, guid: dbf376de4c293074eb49129b4b23a4dc, type: 3}
   m_TargetTexture: {fileID: 0}
   m_ScaleMode: 1
   m_Scale: 1
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_AtlasBlitShader: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
   m_RuntimeShader: {fileID: 9100, guid: 0000000000000000f000000000000000, type: 0}
   m_RuntimeWorldShader: {fileID: 9102, guid: 0000000000000000f000000000000000, type: 0}
-  textSettings: {fileID: 0}
+  textSettings: {fileID: 11400000, guid: fddc91da52bd423449b3fd6d655f09a0, type: 2}
