@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Other/MenuStyle.uss?fileID=7433441132597879392&amp;guid=9107ec27ed357854ea89bff8edd37052&amp;type=3#MenuStyle" />
-    <ui:Button text="MainVolume" display-tooltip-when-elided="true" name="MainVolume" class="menu-button" style="color: rgba(255, 255, 255, 255);" />
-    <ui:Button text="MusicVolume" display-tooltip-when-elided="true" name="MusicVolume" class="menu-button" style="color: rgba(255, 255, 255, 255);" />
-    <ui:Button text="EffectVolume" display-tooltip-when-elided="true" name="EffectVolume" class="menu-button" style="color: rgba(255, 255, 255, 255);" />
-    <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="menu-button" style="color: rgba(255, 255, 255, 255);" />
+    <ui:Button text="Audio" display-tooltip-when-elided="true" name="Audio" class="menu-button" style="color: rgb(255, 255, 255);" />
+    <ui:Button text="Control" display-tooltip-when-elided="true" name="Control" class="menu-button" style="color: rgb(255, 255, 255);" />
+    <ui:Button text="Gamplay" display-tooltip-when-elided="true" name="Gameplay" class="menu-button" style="color: rgb(255, 255, 255);" />
+    <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="menu-button" style="color: rgb(255, 255, 255);" />
 </ui:UXML>
