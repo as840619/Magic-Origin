@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             if (moveDirect > 0)
             {
                 _side = 1;
-                bool state = (_side == 1) ? false : true;
+                bool state => _side == 1;
                 _spriteRenderer.flipX = state;
             }
             if (moveDirect < 0)
