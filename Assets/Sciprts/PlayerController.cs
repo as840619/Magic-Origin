@@ -66,23 +66,23 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetTrigger("Attack");//被搶拍
             _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;//加秒數沒用
         }
-
+        
         if (moveDirect != 0)
         {
             if (moveDirect > 0)
             {
-                _side = 1;
-                bool state => _side == 1;
-                _spriteRenderer.flipX = state;
+                _spriteRenderer.flipX = LeftWay;
             }
             if (moveDirect < 0)
             {
-                _side = -1;
-                bool state = (_side == -1) ? true : false;
-                _spriteRenderer.flipX = state;
+                _spriteRenderer.flipX = RightWay;
             }
         }
     }
+
+    bool RightWay => _side == 1;
+    bool LeftWay => _side == -1;
+
 
     public void confirmMovement(float x, float y, float yVelocity)
     {
