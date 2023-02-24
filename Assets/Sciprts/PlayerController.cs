@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
         _idleRigidbody = GetComponent<Rigidbody2D>();
         _idlecollider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        respawn();
     }
 
     void Update()
@@ -66,23 +67,26 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetTrigger("Attack");//被搶拍
             _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;//加秒數沒用
         }
-        
+
         if (moveDirect != 0)
         {
             if (moveDirect > 0)
             {
-                _spriteRenderer.flipX = LeftWay;
+                transform.localScale = new Vector2(1, 1);
             }
             if (moveDirect < 0)
             {
-                _spriteRenderer.flipX = RightWay;
+                transform.localScale = new Vector2(-1, 1);
             }
         }
     }
 
-    bool RightWay => _side == 1;
-    bool LeftWay => _side == -1;
-
+    //bool RightWay => _side == 1;
+    //bool LeftWay => _side == -1;
+    public void respawn()
+    {
+        this.transform.position = new Vector3(0, 2.7f, 0);
+    }
 
     public void confirmMovement(float x, float y, float yVelocity)
     {
