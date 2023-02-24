@@ -268,4 +268,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f58b99e86e6a948a5dea30f10ed478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingButtonTemplate: {fileID: 9197481963319205126, guid: b95e804875ffc8d4681e4afb8703587f, type: 3}
+  AudioSetting: {fileID: 9197481963319205126, guid: b95e804875ffc8d4681e4afb8703587f, type: 3}

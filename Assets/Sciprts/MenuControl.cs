@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
-    [SerializeField] VisualTreeAsset _settingButtonTemplate;
-    VisualElement _settingButtons;
+    [SerializeField] VisualTreeAsset AudioSetting;
+    VisualElement _audioSettingButtons;
     VisualElement _buttonWrapper;
     UIDocument _doc;
     Button _playButton;
     Button _exitButton;
     Button _settingButton;
+
     void Awake()
     {
         _doc = GetComponent<UIDocument>();
@@ -19,8 +20,8 @@ public class MenuControl : MonoBehaviour
         _settingButton = _doc.rootVisualElement.Q<Button>("SettingButton");
         _buttonWrapper = _doc.rootVisualElement.Q<VisualElement>("Buttons");
 
-        _settingButtons = _settingButtonTemplate.CloneTree();
-        var backButton = _settingButtons.Q<Button>("BackButton");
+        _audioSettingButtons = AudioSetting.CloneTree();
+        var backButton = _audioSettingButtons.Q<Button>("BackButton");
 
         _playButton.clicked += PlayButtonOnClicked;
         _exitButton.clicked += ExitButtonOnClicked;
@@ -30,7 +31,6 @@ public class MenuControl : MonoBehaviour
 
     void PlayButtonOnClicked()
     {
-        print("0");
         SceneManager.LoadScene("MainGamingScene");
     }
 
@@ -42,7 +42,7 @@ public class MenuControl : MonoBehaviour
     void SettingButtonOnClicked()
     {
         _buttonWrapper.Clear();
-        _buttonWrapper.Add(_settingButtons);
+        _buttonWrapper.Add(_audioSettingButtons);
     }
 
     void BackButtonButtonOnClicked()
