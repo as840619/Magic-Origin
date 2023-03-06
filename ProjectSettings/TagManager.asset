@@ -7,6 +7,11 @@ TagManager:
   - Enemy
   - Bullet
   - UnTouchEnemy
+  - PlayerWeapon
+  - Border
+  - Flag11
+  - Flag12
+  - Flag13
   layers:
   - Default
   - TransparentFX
