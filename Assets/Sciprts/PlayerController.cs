@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,10 +14,13 @@ public class PlayerController : MonoBehaviour
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 10;
     [SerializeField] float _jumpSpeed = 10;
-    [SerializeField] int _side = 1;
+    [SerializeField] int health = 100;
 
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
+    [SerializeField] private Slider _slider;
+
+    private int _maxHealth = 100;
 
     void Start()
     {
@@ -67,7 +71,6 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetTrigger("Attack");//被搶拍
             _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;//加秒數沒用
         }
-
         if (moveDirect != 0)
         {
             if (moveDirect > 0)
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
     //bool LeftWay => _side == -1;
     public void respawn()
     {
-        this.transform.position = new Vector3(0, 2.7f, 0);
+        this.transform.position = new Vector3(0, -4.2f, 0);
     }
 
     public void confirmMovement(float x, float y, float yVelocity)
@@ -102,8 +105,37 @@ public class PlayerController : MonoBehaviour
 
     void Jump(Vector2 direction)
     {
-
         _idleRigidbody.velocity = new Vector2(_idleRigidbody.velocity.x, 0);
         _idleRigidbody.velocity += direction * _jumpSpeed;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            print("1");
+        }
+        string collTag = (collision.gameObject.tag.ToString());
+        print("io");
+        switch (collTag)
+        {
+            case "Enemy":
+                this.health -= 2;
+                break;
+            case "Bullet":
+                this.health -= 5;
+                break;
+            case "Flag11":
+                this.transform.position = new Vector3(0, -36.7f, 0);
+                break;
+            case "Flag12":
+                this.transform.position = new Vector3(0, -72.2f, 0);
+                break;
+            case "Flag13":
+                this.transform.position = new Vector3(0, -97.2f, 0);
+                break;
+            default:
+                break;
+        }
     }
 }
