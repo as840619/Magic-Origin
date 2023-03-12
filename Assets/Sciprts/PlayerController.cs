@@ -50,38 +50,38 @@ public class PlayerController : MonoBehaviour
         float moveDirect = Input.GetAxis("Horizontal");
         float jumpDirect = Input.GetAxis("Vertical");
         float attackTime = 0.2f;
-        Vector2 direction = new Vector2(moveDirect, jumpDirect);
+        Vector2 Direction = new(moveDirect, jumpDirect);        //vector2 package
 
-        Run(direction);
-        ConfirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);
-        bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidGround"));//落下等圖塊地圖改好在調
+        Run(Direction);         
+        ConfirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);         //parameter
+        bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidGround"));    //BUG
 
-        if (_isGround == true)
+        if (_isGround == true)                                                      //boolean touching ground
         {
             _jumpTimes = 1;
             _idleAnimation.SetBool("OnGround", true);
             _idleAnimation.SetBool("Falling", false);
         }
-        if (_isGround == false)
+        if (_isGround == false)                                                     //boolean touching ground
         {
             _idleAnimation.SetBool("OnGround", false);
         }
-        if (_idleRigidbody.angularVelocity < 0)
+        if (_idleRigidbody.angularVelocity < 0)                                     //boolean falling 
         {
             _idleAnimation.SetBool("Falling", true);
         }
-        if (Input.GetButtonDown("Jump") && _jumpTimes > 0)
+        if (Input.GetButtonDown("Jump") && _jumpTimes > 0)                          //boolean jump
         {
             _jumpTimes--;
             _idleAnimation.SetTrigger("Jump");
             Jump(Vector2.up);
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))       //boolean attack
+        if (Input.GetKeyDown(KeyCode.Mouse0))                                       //boolean attack
         {
             _idleAnimation.SetTrigger("Attack");
             _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;
         }
-        if (moveDirect != 0)        //object scale
+        if (moveDirect != 0)                                                        //object scale
         {
             if (moveDirect > 0)
             {
@@ -94,15 +94,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Run(Vector2 moveDirect)
+    void Run(Vector2 moveDirection)
     {
-        _idleRigidbody.velocity = new Vector2(moveDirect.x * _moveSpeed, _idleRigidbody.velocity.y); ;
+        _idleRigidbody.velocity = new Vector2(moveDirection.x * _moveSpeed, _idleRigidbody.velocity.y);
     }
 
-    void Jump(Vector2 direction)
+    void Jump(Vector2 jumpDirection)
     {
-        _idleRigidbody.velocity = new Vector2(_idleRigidbody.velocity.x, 0);
-        _idleRigidbody.velocity += direction * _jumpSpeed;
+        _idleRigidbody.velocity += jumpDirection * _jumpSpeed;
     }
 
     void OnCollisionEnter(Collision collision)
