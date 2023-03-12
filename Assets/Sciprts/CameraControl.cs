@@ -22,7 +22,7 @@ public class CameraControl : MonoBehaviour
 
     void Look()
     {
-        _cameraPosition = new Vector3(_idle.transform.position.x, _idle.transform.position.y - 2, transform.position.z);
+        _cameraPosition = new Vector3(_idle.transform.position.x, _idle.transform.position.y + 2, transform.position.z);
         if (_idle.transform.localScale.x > 0f)
         {
             _cameraPosition = new Vector3(_cameraPosition.x + _offset, _cameraPosition.y, _cameraPosition.z);
