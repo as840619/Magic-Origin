@@ -1,39 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
     [Header("基本數據")]
-    [SerializeField] int _health;
-    [SerializeField] int _damage;
-    [SerializeField] float _flashTime;
+    [SerializeField] int _nowHealth = 0;
+    [SerializeField] int _maxHealth = 100;
+    [SerializeField] int _damage = 10;
+    [SerializeField] float _flashTime = 0.5f;
+    [SerializeField] float _invincibleTime = 2f;
+    [SerializeField] bool _invincible = false;
 
-    private SpriteRenderer _spriteRenderer;
-    private Color _originalColor;
+
+    public GameObject _healthUI;
+    //public TextMesh _healthValue;
+    public Slider _healthBar;
+    SpriteRenderer _spriteRenderer;
+    Color _originalColor;
+
+    public void TakeingDamage(int damage)
+    {
+        _nowHealth -= damage;
+        _invincible = true;
+        FlashColor(_flashTime);
+    }
 
     public void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _nowHealth = _maxHealth;
+        _healthBar.value = HealthUpdate();
+        //_healthUI.SetActive(false);
     }
 
     public void Update()
     {
-        if (_health <= 0)
+        _healthBar.value = HealthUpdate();
+        Debug.Log(_nowHealth);
+        /*if (_nowHealth < _maxHealth)
         {
-            Destroy(gameObject);
+            _healthUI.SetActive(true);
+        }*/
+        if (_nowHealth <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 
-    public void TakeingDamage(int _damage)
+    int HealthUpdate()
     {
-        _health -= _damage;
+        return _nowHealth / _maxHealth;
+    }
+
+    void Invincible()
+    {
+        float tempTime = Time.deltaTime * _invincibleTime;
+        if (tempTime == 0)
+        {
+            _invincible = false;
+        }
+        else
+        {
+            _invincible = true;
+        }
     }
 
     void FlashColor(float time)
     {
         _spriteRenderer.color = Color.black;
+        Invincible();
         Invoke("ResetColor", time);
     }
 
@@ -42,11 +80,15 @@ public abstract class Enemy : MonoBehaviour
         _spriteRenderer.color = _originalColor;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        //string collTag = (collision.gameObject.tag.ToString());
+        if (_invincible == false)
         {
-            //other.GetComponent<PlayerHealth>().TakeingDamage();
+            if (collision.gameObject.tag == "Player")
+            {
+                TakeingDamage(_damage);
+            }
         }
     }
 
