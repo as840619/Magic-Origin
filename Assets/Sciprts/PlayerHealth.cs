@@ -5,10 +5,20 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("基本數據")]
-    [SerializeField] float _dieTime;
+    float _dieTime;
+    [Tooltip("Player's existing health point")]
+    static int _health = 3;
+    [Tooltip("Player's existing shield point")]
+    static int _shield = 0;
+    [Tooltip("How long can Flash last")]
+    static float _flashTime = 3f;
+    [Tooltip("How long can invincible last")]
+    static float _invincibleTime = 0f;
 
-    static int _health;
-    static float _flashTime;
+    [Header("布林判斷")]
+    [Tooltip("Determine the boolean of is the player invincible")]
+    bool _invincible = false;
+
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private Animator _animator;
@@ -25,9 +35,6 @@ public class PlayerHealth : MonoBehaviour
         if (_health <= 0)
         {
             _health = 0;
-        }
-        if (_health <= 0)
-        {
             _animator.SetTrigger("Die");
             Invoke("KillPlayer", _dieTime);
         }
@@ -35,14 +42,35 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeingDamage()
     {
-        _health--;
-        FlashColor(_flashTime);
+        if (_shield > 0)
+        {
+            _shield--;
+        }
+        else
+        {
+            _health--;
+            FlashColor(_flashTime);
+        }
     }
 
     void FlashColor(float time)
     {
         _spriteRenderer.color = Color.black;
+        Invincible(time);
         Invoke("ResetColor", time);
+    }
+
+    void Invincible(float time)
+    {
+        _invincibleTime = Time.deltaTime * time;
+        if (_invincibleTime == 0)
+        {
+            _invincible = false;
+        }
+        else
+        {
+            _invincible = true;
+        }
     }
 
     void ResetColor()
@@ -58,18 +86,25 @@ public class PlayerHealth : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (_invincible == false)
         {
-            string collTag = (collision.gameObject.tag.ToString());
+            string collTag = collision.gameObject.tag.ToString();
             switch (collTag)
             {
                 case "Enemy":
                     TakeingDamage();
+                    _invincible = true;
+                    break;
+                case "UnTouchEnemy":
+                    TakeingDamage();
+                    _invincible = true;
                     break;
                 case "Bullet":
                     TakeingDamage();
+                    _invincible = true;
                     break;
             }
+
         }
     }
 
