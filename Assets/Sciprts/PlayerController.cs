@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         float attackTime = 0.2f;
         Vector2 Direction = new(moveDirect, jumpDirect);        //vector2 package
 
-        Run(Direction);         
+        Run(Direction);
         ConfirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);         //parameter
         bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidGround"));    //BUG
 
@@ -106,9 +106,21 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        string collTag = (collision.gameObject.tag.ToString());
         if (collision.gameObject.tag != "Enemy")
         {
-            string collTag = (collision.gameObject.tag.ToString());
+            if (collision.gameObject.tag == "Flag11")
+            {
+                this.transform.position = new Vector3(0, -36.7f, 0);
+            }
+            if (collision.gameObject.tag == "Flag12")
+            {
+                this.transform.position = new Vector3(0, -72.2f, 0);
+            }
+            if (collision.gameObject.tag == "Flag13")
+            {
+                this.transform.position = new Vector3(0, -97.2f, 0);
+            }
             switch (collTag)
             {
                 case "Flag11":

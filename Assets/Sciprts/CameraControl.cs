@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] float _offsetSmoothing;
     [SerializeField] Vector3 _cameraPosition;
 
-    public Transform target;
+    //public Transform target;
     void Start()
     {
         _cameraPosition = new Vector3(4, 0.6882281f, -10f);

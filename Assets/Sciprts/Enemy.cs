@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("基本數據")]
-    [SerializeField] int _nowHealth = 0;
+    [SerializeField] int _nowHealth = 100;
     [SerializeField] int _maxHealth = 100;
     [SerializeField] int _damage = 10;
     [SerializeField] float _flashTime = 0.5f;
@@ -39,15 +39,11 @@ public abstract class Enemy : MonoBehaviour
     public void Update()
     {
         _healthBar.value = HealthUpdate();
-        Debug.Log(_nowHealth);
+        //Debug.Log(_nowHealth);
         /*if (_nowHealth < _maxHealth)
         {
             _healthUI.SetActive(true);
         }*/
-        if (_nowHealth <= 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     int HealthUpdate()
@@ -80,7 +76,7 @@ public abstract class Enemy : MonoBehaviour
         _spriteRenderer.color = _originalColor;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         //string collTag = (collision.gameObject.tag.ToString());
         if (_invincible == false)
@@ -88,6 +84,10 @@ public abstract class Enemy : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 TakeingDamage(_damage);
+                if (_nowHealth == 0)
+                {
+                    DestroyImmediate(this.gameObject);
+                }
             }
         }
     }
