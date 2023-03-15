@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D _idlecollider;
     //SpriteRenderer _spriteRenderer;
 
-    [Header("°ò¥»¼Æ¾Ú")]
+    [Header("ï¿½ò¥»¼Æ¾ï¿½")]
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpSpeed = 5;
     [SerializeField] int _jumpTimes = 1;
 
-    [Header("¥¬ªL§PÂ_")]
+    [Header("ï¿½ï¿½ï¿½Lï¿½Pï¿½_")]
     [SerializeField] bool _isGround;
 
     public void Respawn()
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))                                       //boolean attack
         {
             _idleAnimation.SetTrigger("Attack");
-            _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;
+            _idleRigidbody.velocity = attackTime * Time.deltaTime * new Vector2(0, 0);
         }
         if (moveDirect != 0)                                                        //object scale
         {
@@ -104,38 +104,22 @@ public class PlayerController : MonoBehaviour
         _idleRigidbody.velocity += jumpDirection * _jumpSpeed;
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         string collTag = (collision.gameObject.tag.ToString());
-        if (collision.gameObject.tag != "Enemy")
+        switch (collTag)
         {
-            if (collision.gameObject.tag == "Flag11")
-            {
+            case "Flag11":
                 this.transform.position = new Vector3(0, -36.7f, 0);
-            }
-            if (collision.gameObject.tag == "Flag12")
-            {
+                break;
+            case "Flag12":
                 this.transform.position = new Vector3(0, -72.2f, 0);
-            }
-            if (collision.gameObject.tag == "Flag13")
-            {
+                break;
+            case "Flag13":
                 this.transform.position = new Vector3(0, -97.2f, 0);
-            }
-            switch (collTag)
-            {
-                case "Flag11":
-                    this.transform.position = new Vector3(0, -36.7f, 0);
-                    break;
-                case "Flag12":
-                    this.transform.position = new Vector3(0, -72.2f, 0);
-                    break;
-                case "Flag13":
-                    this.transform.position = new Vector3(0, -97.2f, 0);
-                    break;
-                default:
-                    break;
-            }
+                break;
+            default:
+                break;
         }
     }
-
 }
