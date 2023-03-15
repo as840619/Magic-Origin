@@ -1,11 +1,11 @@
 public class Enemy_Zombie : Enemy
 {
-    public void Start()
+    public new void Start()
     {
         base.Start();
     }
 
-    public void Update()
+    public new void Update()
     {
         base.Update();
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("°ò¥»¼Æ¾Ú")]
+    [Header("ï¿½ò¥»¼Æ¾ï¿½")]
     float _dieTime;
     [Tooltip("Player's existing health point")]
     static int _health = 3;
@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     [Tooltip("How long can invincible last")]
     static float _invincibleTime = 0f;
 
-    [Header("¥¬ªL§PÂ_")]
+    [Header("ï¿½ï¿½ï¿½Lï¿½Pï¿½_")]
     [Tooltip("Determine the boolean of is the player invincible")]
     bool _invincible = false;
 

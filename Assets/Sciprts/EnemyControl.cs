@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
-    [Header("基本數值")]
+    [Header("嚙踩本數哨蕭")]
     [SerializeField] int p;
     
 }
