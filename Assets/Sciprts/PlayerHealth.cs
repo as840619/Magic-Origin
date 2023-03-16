@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("�򥻼ƾ�")]
+    [Header("基本數據")]
     float _dieTime;
     [Tooltip("Player's existing health point")]
     static int _health = 3;
@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     [Tooltip("How long can invincible last")]
     static float _invincibleTime = 0f;
 
-    [Header("���L�P�_")]
+    [Header("布林判斷")]
     [Tooltip("Determine the boolean of is the player invincible")]
     bool _invincible = false;
 
@@ -81,7 +81,6 @@ public class PlayerHealth : MonoBehaviour
     void KillPlayer()
     {
         this.transform.position = new Vector3(0, -5.3f, 0);
-        //Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
