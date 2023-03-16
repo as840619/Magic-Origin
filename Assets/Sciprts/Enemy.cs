@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [Header("�򥻼ƾ�")]
+    [Header("基本數據")]
     [SerializeField] int _nowHealth = 100;
     [SerializeField] int _maxHealth = 100;
     [SerializeField] float _flashTime = 0.5f;
@@ -75,7 +75,7 @@ public abstract class Enemy : MonoBehaviour
             TakeDamage(_collisionDamage);
             if (_nowHealth <= 0)
             {
-                Destroy(this.gameObject);
+                DestroyImmediate(this.gameObject);
             }
         }
     }

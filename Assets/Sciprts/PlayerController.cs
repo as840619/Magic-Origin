@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D _idlecollider;
     //SpriteRenderer _spriteRenderer;
 
-    [Header("�򥻼ƾ�")]
+    [Header("基本數據")]
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpSpeed = 5;
     [SerializeField] int _jumpTimes = 1;
