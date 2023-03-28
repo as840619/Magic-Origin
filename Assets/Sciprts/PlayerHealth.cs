@@ -6,14 +6,19 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("基本數據")]
     float _dieTime;
+
     [Tooltip("Player's existing health point")]
     static int _health = 3;
+
     [Tooltip("Player's existing shield point")]
     static int _shield = 0;
+
     [Tooltip("How long can Flash last")]
     static float _flashTime = 3f;
+
     [Tooltip("How long can invincible last")]
     static float _invincibleTime = 0f;
+
 
     [Header("布林判斷")]
     [Tooltip("Determine the boolean of is the player invincible")]
@@ -36,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
         {
             _health = 0;
             _animator.SetTrigger("Die");
-            Invoke("KillPlayer", _dieTime);
+            Invoke(nameof(KillPlayer), _dieTime);
         }
     }
 
@@ -57,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _spriteRenderer.color = Color.black;
         Invincible(time);
-        Invoke("ResetColor", time);
+        Invoke(nameof(ResetColor), time);
     }
 
     void Invincible(float time)
@@ -85,26 +90,24 @@ public class PlayerHealth : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (_invincible == false)
-        {
-            string collTag = collision.gameObject.tag.ToString();
-            switch (collTag)
-            {
-                case "Enemy":
-                    TakeingDamage();
-                    _invincible = true;
-                    break;
-                case "UnTouchEnemy":
-                    TakeingDamage();
-                    _invincible = true;
-                    break;
-                case "Bullet":
-                    TakeingDamage();
-                    _invincible = true;
-                    break;
-            }
+        if (_invincible)
+            return;
 
+        string collTag = collision.gameObject.tag.ToString();
+        switch (collTag)
+        {
+            case "Enemy":
+                TakeingDamage();
+                _invincible = true;
+                break;
+            case "UnTouchEnemy":
+                TakeingDamage();
+                _invincible = true;
+                break;
+            case "Bullet":
+                TakeingDamage();
+                _invincible = true;
+                break;
         }
     }
-
 }

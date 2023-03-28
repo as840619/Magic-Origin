@@ -9,5 +9,4 @@ public class Enemy_Zombie : Enemy
     {
         base.Update();
     }
-
 }

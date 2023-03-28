@@ -35,8 +35,8 @@ public abstract class Enemy : MonoBehaviour
     {
         _healthBar.value = Health;
 
-        if (_nowHealth < 0)
-            _healthUI.SetActive(false);
+        if (_nowHealth <= 0)
+            Destroy(this.gameObject);
 
         if (_collisionTime > 0)
             _collisionTime -= Time.deltaTime;
@@ -63,8 +63,6 @@ public abstract class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //string collTag = (collision.gameObject.tag.ToString());
-
         if (collision.gameObject.CompareTag("Player"))
         {
             if (_collisionTime > 0)
@@ -73,11 +71,6 @@ public abstract class Enemy : MonoBehaviour
             _collisionTime = _collisionDamageInterval;
 
             TakeDamage(_collisionDamage);
-            if (_nowHealth <= 0)
-            {
-                DestroyImmediate(this.gameObject);
-            }
         }
     }
-
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class CardUse : MonoBehaviour
 {
 
-          public void OnMouseDown()
+    public void OnMouseDown()
     {
-        Debug.Log("有感應到");
+    Debug.Log("1");
     }
 
     private void Update()

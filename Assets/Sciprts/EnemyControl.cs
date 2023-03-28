@@ -6,5 +6,4 @@ public class EnemyControl : MonoBehaviour
 {
     [Header("基本數據")]
     [SerializeField] int p;
-    
 }

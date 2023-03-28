@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpSpeed = 5;
     [SerializeField] int _jumpTimes = 1;
 
-    [Header("���L�P�_")]
+    [Header("布林判斷")]
     [SerializeField] bool _isGround;
 
     public void Respawn()
