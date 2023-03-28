@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    [Header("�򥻼ƾ�")]
+    [Header("基本數據")]
     [SerializeField] GameObject _idle;
     [SerializeField] float _offset;
     [SerializeField] float _offsetSmoothing;
