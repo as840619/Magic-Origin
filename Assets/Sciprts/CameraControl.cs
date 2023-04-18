@@ -13,7 +13,7 @@ public class CameraControl : MonoBehaviour
     //public Transform target;
     void Start()
     {
-        _cameraPosition = new Vector3(4, 0.6882281f, -10f);
+        //_cameraPosition = new Vector3(6, 0.6882281f, -10f);
     }
 
     void Update()
@@ -23,15 +23,74 @@ public class CameraControl : MonoBehaviour
 
     void Look()
     {
-        _cameraPosition = new Vector3(_idle.transform.position.x, _idle.transform.position.y + 2, transform.position.z);
-        if (_idle.transform.localScale.x > 0f)
+        _cameraPosition = new Vector3(_idle.transform.position.x, _idle.transform.position.y, transform.position.z);
+
+        if (CameraLimit(_cameraPosition.x, _cameraPosition.y))
         {
-            _cameraPosition = new Vector3(_cameraPosition.x + _offset, _cameraPosition.y, _cameraPosition.z);
+            if (_idle.transform.localScale.x > 0f)
+            {
+                if (CameraLimit(_cameraPosition.x + _offset, _cameraPosition.y))
+                {
+                    _cameraPosition = new Vector3(_cameraPosition.x + _offset, _cameraPosition.y, _cameraPosition.z);
+                }
+            }
+            else
+            {
+                if (CameraLimit(_cameraPosition.x - _offset, _cameraPosition.y))
+                {
+                    _cameraPosition = new Vector3(_cameraPosition.x - _offset, _cameraPosition.y, _cameraPosition.z);
+                }
+            }
+
+            transform.position = Vector3.Lerp(transform.position, _cameraPosition, _offsetSmoothing * Time.deltaTime);
+        }
+        if (LeftBorderReturn(_cameraPosition.x, _idle.transform.position.x))
+        {
+            transform.position = new Vector3(6f, _cameraPosition.y, _cameraPosition.z);
+        }
+        else if (RightBorderReturn(_cameraPosition.x, _idle.transform.position.x))
+        {
+            transform.position = new Vector3(52.5f, _cameraPosition.y, _cameraPosition.z);
+        }
+        else if (TopBorderReturn(_cameraPosition.y, _idle.transform.position.y))
+        {
+            transform.position = new Vector3(transform.position.x, 2.4f, _cameraPosition.z);
+        }
+    }
+
+    bool CameraLimit(float x, float y)
+    {
+        if (x >= 6f || x <= 60f || y <= 2.4f)
+        {
+            return true;
         }
         else
         {
-            _cameraPosition = new Vector3(_cameraPosition.x - _offset, _cameraPosition.y, _cameraPosition.z);
+            return false;
         }
-        transform.position = Vector3.Lerp(transform.position, _cameraPosition, _offsetSmoothing * Time.deltaTime);
+    }
+    bool LeftBorderReturn(float cx, float px)
+    {
+        if (cx < 6f && px > -2f)
+        {
+            return true;
+        }
+        return false;
+    }
+    bool RightBorderReturn(float cx, float px)
+    {
+        if (cx > 52.5f && px < 60f)
+        {
+            return true;
+        }
+        return false;
+    }
+    bool TopBorderReturn(float cy, float py)
+    {
+        if (cy > 2.4f && py < 6f)
+        {
+            return true;
+        }
+        return false;
     }
 }
