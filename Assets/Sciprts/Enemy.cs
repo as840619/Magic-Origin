@@ -1,54 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
     [Header("基本數據")]
-    public int health;
-    public int damage;
-    public float flashTime;
+    [SerializeField] int _nowHealth = 100;
+    [SerializeField] int _maxHealth = 100;
+    [SerializeField] float _flashTime = 0.5f;
+    [SerializeField] float _invincibleTime = 2f;
 
-    private SpriteRenderer sr;
-    private Color originalColor;
+    [SerializeField] int _collisionDamage = 10;
+    [SerializeField] float _collisionDamageInterval = 10f;
+    [SerializeField] float _collisionTime;
 
-    // Start is called before the first frame update
+    public GameObject _healthUI;
+    //public TextMesh _healthValue;
+    public Slider _healthBar;
+    SpriteRenderer _spriteRenderer;
+    Color _originalColor;
+
     public void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-        originalColor = sr.color;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _originalColor = _spriteRenderer.color;
+        _nowHealth = _maxHealth;
+        _healthBar.value = Health;
+        _collisionTime = 0;
+        //_healthUI.SetActive(false);
     }
 
-    // Update is called once per frame
     public void Update()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        _healthBar.value = Health;
+
+        if (_nowHealth <= 0)
+            Destroy(this.gameObject);
+
+        if (_collisionTime > 0)
+            _collisionTime -= Time.deltaTime;
     }
+
+    float Health => (float)_nowHealth / _maxHealth;
+
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        FlashColor(flashTime);
+        _nowHealth -= damage;
+        FlashColor(_flashTime);
     }
+
     void FlashColor(float time)
     {
-        sr.color = Color.black;
-        Invoke("ResetColor", time);
+        _spriteRenderer.color = Color.black;
+        Invoke(nameof(ResetColor), time);
     }
 
     void ResetColor()
     {
-        sr.color = originalColor;
+        _spriteRenderer.color = _originalColor;
     }
-    void OnTriggerEnter2D(Collider2D other)
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(damage);
+            if (_collisionTime > 0)
+                return;
+
+            _collisionTime = _collisionDamageInterval;
+
+            TakeDamage(_collisionDamage);
         }
     }
-
-
 }
