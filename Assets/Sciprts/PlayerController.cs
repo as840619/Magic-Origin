@@ -9,26 +9,35 @@ public class PlayerController : MonoBehaviour
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
     BoxCollider2D _idlecollider;
-    SpriteRenderer _spriteRenderer;
+    //SpriteRenderer _spriteRenderer;
 
-    [Header("°ò¥»¼Æ¾Ú")]
-    [SerializeField] float _moveSpeed = 10;
-    [SerializeField] float _jumpSpeed = 10;
-    [SerializeField] int health = 100;
+    [Header("åŸºæœ¬æ•¸æ“š")]
+    [SerializeField] float _moveSpeed = 5;
+    [SerializeField] float _jumpSpeed = 5;
+    [SerializeField] int _jumpTimes = 1;
 
-    [Header("¥¬ªL§PÂ_")]
+    [Header("ï¿½ï¿½ï¿½Lï¿½Pï¿½_")]
     [SerializeField] bool _isGround;
-    [SerializeField] private Slider _slider;
 
-    private int _maxHealth = 100;
+    public void Respawn()
+    {
+        this.transform.position = new Vector3(0, -5.3f, 0);
+    }
+
+    public void ConfirmMovement(float x, float y, float yVelocity)
+    {
+        _idleAnimation.SetFloat("HorizontalAxis", x);
+        _idleAnimation.SetFloat("VerticalAxis", y);
+        _idleAnimation.SetFloat("VerticalVelocity", yVelocity);
+    }
 
     void Start()
     {
         _idleAnimation = GetComponent<Animator>();
         _idleRigidbody = GetComponent<Rigidbody2D>();
         _idlecollider = GetComponent<BoxCollider2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        respawn();
+        //_spriteRenderer = GetComponent<SpriteRenderer>();
+        Respawn();
     }
 
     void Update()
@@ -38,93 +47,68 @@ public class PlayerController : MonoBehaviour
 
     void CheckParameter()
     {
-
         float moveDirect = Input.GetAxis("Horizontal");
         float jumpDirect = Input.GetAxis("Vertical");
-        float attackTime = 1f;
-        Vector2 direction = new Vector2(moveDirect, jumpDirect);
+        float attackTime = 0.2f;
+        Vector2 Direction = new(moveDirect, jumpDirect);        //vector2 package
 
-        Run(direction);
-        confirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);
-        _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("Ground"));//¸¨¤Uµ¥¹Ï¶ô¦a¹Ï§ï¦n¦b½Õ
+        Run(Direction);
+        ConfirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);         //parameter
+        bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidGround"));    //BUG
 
-        if (_isGround)
+        if (_isGround == true)                                                      //boolean touching ground
         {
+            _jumpTimes = 1;
             _idleAnimation.SetBool("OnGround", true);
             _idleAnimation.SetBool("Falling", false);
         }
-        if (_isGround)
+        if (_isGround == false)                                                     //boolean touching ground
         {
             _idleAnimation.SetBool("OnGround", false);
         }
-        if (_idleRigidbody.angularVelocity < 0)
+        if (_idleRigidbody.angularVelocity < 0)                                     //boolean falling 
         {
             _idleAnimation.SetBool("Falling", true);
         }
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && _jumpTimes > 0)                          //boolean jump
         {
+            _jumpTimes--;
             _idleAnimation.SetTrigger("Jump");
             Jump(Vector2.up);
         }
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))                                       //boolean attack
         {
-            _idleAnimation.SetTrigger("Attack");//³Q·m©ç
-            _idleRigidbody.velocity = new Vector2(0, 0) * Time.deltaTime * attackTime;//¥[¬í¼Æ¨S¥Î
+            _idleAnimation.SetTrigger("Attack");
+            _idleRigidbody.velocity = attackTime * Time.deltaTime * new Vector2(0, 0);
         }
-        if (moveDirect != 0)
+        if (moveDirect != 0)                                                        //object scale
         {
             if (moveDirect > 0)
             {
-                transform.localScale = new Vector2(1, 1);
+                transform.localScale = new Vector2(3, 3);
             }
             if (moveDirect < 0)
             {
-                transform.localScale = new Vector2(-1, 1);
+                transform.localScale = new Vector2(-3, 3);
             }
         }
     }
 
-    //bool RightWay => _side == 1;
-    //bool LeftWay => _side == -1;
-    public void respawn()
+    void Run(Vector2 moveDirection)
     {
-        this.transform.position = new Vector3(0, -4.2f, 0);
+        _idleRigidbody.velocity = new Vector2(moveDirection.x * _moveSpeed, _idleRigidbody.velocity.y);
     }
 
-    public void confirmMovement(float x, float y, float yVelocity)
+    void Jump(Vector2 jumpDirection)
     {
-        _idleAnimation.SetFloat("HorizontalAxis", x);
-        _idleAnimation.SetFloat("VerticalAxis", y);
-        _idleAnimation.SetFloat("VerticalVelocity", yVelocity);
+        _idleRigidbody.velocity += jumpDirection * _jumpSpeed;
     }
 
-    void Run(Vector2 moveDirect)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        _idleRigidbody.velocity = new Vector2(moveDirect.x * _moveSpeed, _idleRigidbody.velocity.y); ;
-    }
-
-    void Jump(Vector2 direction)
-    {
-        _idleRigidbody.velocity = new Vector2(_idleRigidbody.velocity.x, 0);
-        _idleRigidbody.velocity += direction * _jumpSpeed;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            print("1");
-        }
         string collTag = (collision.gameObject.tag.ToString());
-        print("io");
         switch (collTag)
         {
-            case "Enemy":
-                this.health -= 2;
-                break;
-            case "Bullet":
-                this.health -= 5;
-                break;
             case "Flag11":
                 this.transform.position = new Vector3(0, -36.7f, 0);
                 break;
