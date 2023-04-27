@@ -12,9 +12,9 @@ public class DrawCard : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject card = Instantiate(CardS1, new Vector2(5 + i * 100, 10), Quaternion.identity);
+            GameObject card = Instantiate(CardS1, new Vector2(5 + i * 55, 10), Quaternion.identity);
             card.GetComponent<CardUse>().pa = _pa;
-            card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform, false);//³]¸m¤÷¶µ¨Ó¶Ç¨ì«ü©w¹Ï¼h
+            card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform, false);//ï¿½]ï¿½mï¿½ï¿½ï¿½ï¿½ï¿½Ó¶Ç¨ï¿½ï¿½ï¿½wï¿½Ï¼h
         }
     }
 }
