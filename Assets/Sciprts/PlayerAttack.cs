@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("�򥻼ƾ�")]
+    [Header("基本數據")]
     public int damage;
     public float time;
 
