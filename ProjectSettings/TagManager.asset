@@ -12,6 +12,8 @@ TagManager:
   - Flag11
   - Flag12
   - Flag13
+  - Card
+  - UUI
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,17 @@ public class PlayerController : MonoBehaviour
         this.transform.position = new Vector3(0, -5.3f, 0);
     }
 
+    /// <summary>
+    ///     Player's start point.
+    /// </summary>
+    public void Respawn()
+    {
+        this.transform.position = new Vector3(0, -5.3f, 0);
+    }
+
+    /// <summary>
+    ///     Player's parameter judgement.
+    /// </summary>
     public void ConfirmMovement(float x, float y, float yVelocity)
     {
         _idleAnimation.SetFloat("HorizontalAxis", x);
@@ -75,11 +86,6 @@ public class PlayerController : MonoBehaviour
             _jumpTimes--;
             _idleAnimation.SetTrigger("Jump");
             Jump(Vector2.up);
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0))                                       //boolean attack
-        {
-            _idleAnimation.SetTrigger("Attack");
-            _idleRigidbody.velocity = attackTime * Time.deltaTime * new Vector2(0, 0);
         }
         if (moveDirect != 0)                                                        //object scale
         {

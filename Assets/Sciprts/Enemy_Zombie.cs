@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_Zombie : Enemy
 {
-
+    
     /*public new void Start()
     {
         base.Start();

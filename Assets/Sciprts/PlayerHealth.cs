@@ -5,109 +5,54 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("基本數據")]
-    float _dieTime;
+    public int health;
+    public int damage;
+    public float flashTime;
+    public float dieTime;
+    private SpriteRenderer sr;
+    private Color originalColor;
+    private Animator anim;
 
-    [Tooltip("Player's existing health point")]
-    static int _health = 3;
-
-    [Tooltip("Player's existing shield point")]
-    static int _shield = 0;
-
-    [Tooltip("How long can Flash last")]
-    static float _flashTime = 3f;
-
-    [Tooltip("How long can invincible last")]
-    static float _invincibleTime = 0f;
-
-
-    [Header("布林判斷")]
-    [Tooltip("Determine the boolean of is the player invincible")]
-    bool _invincible = false;
-
-    private SpriteRenderer _spriteRenderer;
-    private Color _originalColor;
-    private Animator _animator;
-
-    void Start()
+    // Start is called before the first frame update
+    public void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _originalColor = _spriteRenderer.color;
-        _animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
+        anim = GetComponent<Animator>();
     }
 
-    void Update()
+    // Update is called once per frame
+    public void Update()
     {
-        if (_health <= 0)
+        if (health <= 0)
         {
-            _health = 0;
-            _animator.SetTrigger("Die");
-            Invoke(nameof(KillPlayer), _dieTime);
+            health = 0;
+        }
+        if (health <= 0)
+        {
+            anim.SetTrigger("Die");
+            Invoke("KillPlayer", dieTime);
         }
     }
-
-    void TakeingDamage()
+    public void TakeDamage(int damage)
     {
-        if (_shield > 0)
-        {
-            _shield--;
-        }
-        else
-        {
-            _health--;
-            FlashColor(_flashTime);
-        }
-    }
 
+        health -= damage;
+        FlashColor(flashTime);
+    }
     void FlashColor(float time)
     {
-        _spriteRenderer.color = Color.black;
-        Invincible(time);
-        Invoke(nameof(ResetColor), time);
-    }
-
-    void Invincible(float time)
-    {
-        _invincibleTime = Time.deltaTime * time;
-        if (_invincibleTime == 0)
-        {
-            _invincible = false;
-        }
-        else
-        {
-            _invincible = true;
-        }
+        sr.color = Color.black;
+        Invoke("ResetColor", time);
     }
 
     void ResetColor()
     {
-        _spriteRenderer.color = _originalColor;
+        sr.color = originalColor;
     }
-
     void KillPlayer()
     {
-        this.transform.position = new Vector3(0, -5.3f, 0);
+        Destroy(gameObject);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (_invincible)
-            return;
-
-        string collTag = collision.gameObject.tag.ToString();
-        switch (collTag)
-        {
-            case "Enemy":
-                TakeingDamage();
-                _invincible = true;
-                break;
-            case "UnTouchEnemy":
-                TakeingDamage();
-                _invincible = true;
-                break;
-            case "Bullet":
-                TakeingDamage();
-                _invincible = true;
-                break;
-        }
-    }
 }
