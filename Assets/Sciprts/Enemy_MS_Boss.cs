@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Enemy_MS_Boss : Enemy
 {
-    /*void Start()
+    /*new void Start()
     {
-        
+
     }
-    void Update()
+
+    new void Update()
     {
-        
+
     }*/
 }
