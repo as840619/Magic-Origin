@@ -5,14 +5,14 @@ using UnityEngine;
 public class Enemy_Zombie : Enemy
 {
     
-    //public new void Start()
-    //{
-    //    base.Start();
-    //}
+    /*public new void Start()
+    {
+        base.Start();
+    }
 
-    //public new void Update()
-    //{
-    //    base.Update();
-    //}
+    public new void Update()
+    {
+        base.Update();
+    }*/
 
 }

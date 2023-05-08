@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class CardUse : MonoBehaviour
 {
-    // public bool cardn = false;//�ǥh���ⱱ��ƭ� wrong unicode
+    // public bool cardn = false;//
     public PlayerAttack pa;
     public void OnMouseDown()
     {
         Debug.Log("攻擊");
         pa.Attack();
         //cardn = true;
-        DestroyImmediate(this.gameObject);//�ήɺR������  wrong unicode
-        //Debug.Log(cardn);
+        DestroyImmediate(this.gameObject);
     }
 }
