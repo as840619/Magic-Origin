@@ -18,12 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
-
-    public void Respawn()
-    {
-        this.transform.position = new Vector3(0, -5.3f, 0);
-    }
-
     /// <summary>
     ///     Player's start point.
     /// </summary>
