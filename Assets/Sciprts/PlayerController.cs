@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         Run(Direction);
         ConfirmMovement(moveDirect, jumpDirect, _idleRigidbody.velocity.y);         //parameter
-        bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidGround"));    //BUG
+        bool _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidFloor"));    //BUG
 
         if (_isGround == true)                                                      //boolean touching ground
         {
