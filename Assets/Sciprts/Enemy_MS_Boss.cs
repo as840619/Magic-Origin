@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_MS_Boss : Enemy
 {
-    /*new void Start()
+    new void Start()
     {
 
     }
@@ -12,5 +12,5 @@ public class Enemy_MS_Boss : Enemy
     new void Update()
     {
 
-    }*/
+    }
 }
