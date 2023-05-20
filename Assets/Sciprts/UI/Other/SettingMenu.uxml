@@ -3,5 +3,5 @@
     <ui:Button text="Audio" display-tooltip-when-elided="true" name="Audio" class="menu-button" style="color: rgb(255, 255, 255);" />
     <ui:Button text="Control" display-tooltip-when-elided="true" name="Control" class="menu-button" style="color: rgb(255, 255, 255);" />
     <ui:Button text="Gamplay" display-tooltip-when-elided="true" name="Gameplay" class="menu-button" style="color: rgb(255, 255, 255);" />
-    <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="menu-button" style="color: rgb(255, 255, 255);" />
+    <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="menu-button" style="color: rgb(255, 255, 255);" />
 </ui:UXML>
