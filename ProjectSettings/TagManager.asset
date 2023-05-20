@@ -14,6 +14,9 @@ TagManager:
   - Flag13
   - Card
   - UUI
+  - MidFloor
+  - MidCeiling
+  - MidWall
   layers:
   - Default
   - TransparentFX

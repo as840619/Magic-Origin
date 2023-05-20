@@ -14,7 +14,7 @@ public class DrawCard : MonoBehaviour
         {
             GameObject card = Instantiate(CardS1, new Vector2(5 + i * 55, 10), Quaternion.identity);
             card.GetComponent<CardUse>().pa = _pa;
-            card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform, false);//�]�m�����ӶǨ���w�ϼh
+            card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform, false);
         }
     }
 }
