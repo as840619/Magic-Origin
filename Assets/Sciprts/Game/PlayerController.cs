@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetBool("Falling", true);
         }
 
-        if (Keyboard.current.sKey.isPressed)
+        if (Keyboard.current.downArrowKey.isPressed)
         {
 
             _fallThough = true;
