@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
@@ -9,11 +10,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
+    Animator _idleAnimation;
+    Rigidbody2D _idleRigidbody;
+    BoxCollider2D _idlecollider;
+
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpSpeed = 5;
     [SerializeField] int _jumpTimes = 1;
-
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
     [SerializeField] private Vector2 _direction;
@@ -48,11 +52,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         ConfirmMovement(_direction.x, _direction.y, _idleRigidbody.velocity.y); //parameter
-    }
 
+    }
     /// <summary>
     ///     Player's parameter judgement.
     /// </summary>
+
     void ConfirmMovement(float x, float y, float yVelocity)
     {
         _idleAnimation.SetFloat("HorizontalAxis", x);
@@ -63,6 +68,7 @@ public class PlayerController : MonoBehaviour
     void CheckMotion()
     {
         _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidFloor"));  //BUG
+
         if (_isGround == true)                                                      //boolean touching ground
         {
             _jumpTimes = 1;
@@ -77,7 +83,6 @@ public class PlayerController : MonoBehaviour
         {
             _idleAnimation.SetBool("Falling", true);
         }
-
         /*if (Keyboard.current.sKey.isPressed)
         {
 
@@ -131,8 +136,11 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         string collTag = (collision.gameObject.tag.ToString());
+
         //print(collTag);
         /*switch (collTag)
+
+        switch (collTag)
         {
             case "Flag11":
                 this.transform.position = new Vector3(0, -36.7f, 0);
