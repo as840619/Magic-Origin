@@ -10,10 +10,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    Animator _idleAnimation;
-    Rigidbody2D _idleRigidbody;
-    BoxCollider2D _idlecollider;
-
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpSpeed = 5;
