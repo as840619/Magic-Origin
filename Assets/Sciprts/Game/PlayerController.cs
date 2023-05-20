@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
-    [SerializeField] public bool _fallThough = false;
     [SerializeField] private Vector2 _direction;
+    public bool _fallThough;
 
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetBool("Falling", true);
         }
 
-        if (Keyboard.current.downArrowKey.isPressed)
+        /*if (Keyboard.current.sKey.isPressed)
         {
 
             _fallThough = true;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _fallThough = false;
-        }
+        }*/
 
     }
     public void Move(InputAction.CallbackContext ctx)
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)                          //boolean jump
+        if (ctx.performed)
         {
             if (_jumpTimes <= 0)
             {
