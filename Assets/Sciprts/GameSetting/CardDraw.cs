@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawCard : MonoBehaviour
+public class CardDraw : MonoBehaviour
 {
     //int rank = 0;
     public GameObject CardS1;

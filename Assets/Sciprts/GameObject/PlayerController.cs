@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
 {
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 5;
-    [SerializeField] float _jumpSpeed = 5;
+    [SerializeField] float _jumpSpeed = 9;
     [SerializeField] int _jumpTimes = 1;
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
     [SerializeField] private Vector2 _direction;
     public bool _fallThough;
 
+    Border border;
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
     BoxCollider2D _idlecollider;
@@ -110,23 +111,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        string collTag = (collision.gameObject.tag.ToString());
-        switch (collTag)
-        {
-            case "Flag11":
-                this.transform.position = new Vector3(0, -36.7f, 0);
-                break;
-            case "Flag12":
-                this.transform.position = new Vector3(0, -72.2f, 0);
-                break;
-            case "Flag13":
-                this.transform.position = new Vector3(0, -97.2f, 0);
-                break;
-            default:
-                break;
-        }
+        if (other.CompareTag("Flag11"))
+            this.transform.position = new Vector3(0, -36.7f, 0);
+        if (other.CompareTag("Flag12"))
+            this.transform.position = new Vector3(0, -72.2f, 0);
+        if (other.CompareTag("Flag13"))
+            this.transform.position = new Vector3(0, -97.2f, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

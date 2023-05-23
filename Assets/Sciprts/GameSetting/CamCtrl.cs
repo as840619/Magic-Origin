@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class CamCtrl : MonoBehaviour
 {
     [Header("基本數據")]
     [SerializeField] GameObject _idle;
@@ -56,6 +56,10 @@ public class CameraControl : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 2.4f, _cameraPosition.z);
         }
+        //else if (DeepBorderReturn)
+        
+
+        
     }
 
     bool CameraLimit(float x, float y)
@@ -86,6 +90,14 @@ public class CameraControl : MonoBehaviour
         return false;
     }
     bool TopBorderReturn(float cy, float py)
+    {
+        if (cy > 2.4f && py < 6f)
+        {
+            return true;
+        }
+        return false;
+    }
+    bool DeepBorderReturn(float cy, float py)
     {
         if (cy > 2.4f && py < 6f)
         {
