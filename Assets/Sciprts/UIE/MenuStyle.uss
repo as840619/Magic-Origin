@@ -1,0 +1,20 @@
+VisualElement {
+}
+
+.menu-button {
+    font-size: 35px;
+    -unity-text-align: middle-center;
+    background-color: rgba(24, 24, 24, 255);
+    border-left-color: rgba(24, 24, 24, 255);
+    border-right-color: rgba(24, 24, 24, 255);
+    border-top-color: rgba(24, 24, 24, 255);
+    border-bottom-color: rgba(24, 24, 24, 255);
+    transition-duration: 0.2s;
+}
+
+.menu-button:hover {
+    color: rgba(255, 255, 255, 255);
+    font-size: 40px;
+    rotate: -10deg;
+    transition-duration: 0.3s;
+}
