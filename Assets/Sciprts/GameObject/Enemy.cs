@@ -50,6 +50,7 @@ public abstract class Enemy : MonoBehaviour
         FlashColor(_flashTime);
     }
 
+
     void FlashColor(float time)
     {
         _spriteRenderer.color = Color.black;
