@@ -18,7 +18,7 @@ public class GroundPenetrate : MonoBehaviour
         if (_playerControls == null)
             return;
 
-        if (_playerControls.FallThough)
+        if (_playerControls._fallThough)
         {
             _platformEffector.rotationalOffset = 180;
             _playerControls = null;
