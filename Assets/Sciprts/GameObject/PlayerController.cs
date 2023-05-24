@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
     [SerializeField] private Vector2 _direction;
-    public bool _fallThough;
+    public bool FallThough;
 
     Border border;
     Animator _idleAnimation;
@@ -72,24 +72,18 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetBool("OnGround", true);
             _idleAnimation.SetBool("Falling", false);
         }
+
         if (_isGround == false)                                                     //boolean touching ground
         {
             _idleAnimation.SetBool("OnGround", false);
         }
+
         if (_idleRigidbody.angularVelocity < 0)                                     //boolean falling 
         {
             _idleAnimation.SetBool("Falling", true);
         }
-        /*if (Keyboard.current.sKey.isPressed)
-        {
 
-            _fallThough = true;
-        }
-        else
-        {
-            _fallThough = false;
-        }*/
-
+        FallThough = Keyboard.current.sKey.isPressed;
     }
     public void Move(InputAction.CallbackContext ctx)
     {

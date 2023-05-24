@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class GroundPenetrate : MonoBehaviour
 {
-    [SerializeField] bool fallthough = false;
-    PlayerController playerControls;
+    PlayerController _playerControls;
     PlatformEffector2D _platformEffector;
     private void Start()
     {
@@ -12,21 +11,28 @@ public class GroundPenetrate : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
-            playerControls = collision.gameObject.GetComponent<PlayerController>();
+            _playerControls = collision.gameObject.GetComponent<PlayerController>();
     }
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if (playerControls == null)
+        if (_playerControls == null)
             return;
-        if (playerControls._fallThough)
+
+        if (_playerControls.FallThough)
         {
-            _platformEffector.rotationalOffset = 180f;
-            playerControls = null;
+            _platformEffector.rotationalOffset = 180;
+            _playerControls = null;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        playerControls = null;
-        _platformEffector.rotationalOffset = 0f;
+        _playerControls = null;
+        //延遲生效
+        Invoke("ResetPlatRotOffset", 0.2f);
+    }
+
+    void ResetPlatRotOffset()
+    {
+        _platformEffector.rotationalOffset = 0;
     }
 }
