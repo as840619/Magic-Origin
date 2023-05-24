@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
-public class MenuControl : MonoBehaviour
+public class MenuControl : MonoBehaviour 
 {
-    [SerializeField] VisualTreeAsset AudioSetting;
+    [SerializeField] public static bool startGame = false;
+    public VisualTreeAsset AudioSetting;
     VisualElement _audioSettingButtons;
     VisualElement _buttonWrapper;
     UIDocument _doc;
@@ -31,7 +31,8 @@ public class MenuControl : MonoBehaviour
 
     void PlayButtonOnClicked()
     {
-        SceneManager.LoadScene("MainGamingScene");
+        _buttonWrapper.Clear();
+        startGame = true;
     }
 
     void ExitButtonOnClicked()
