@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
         _healthBar.value = Health;
 
         if (_nowHealth <= 0)
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
 
         if (_collisionTime > 0)
             _collisionTime -= Time.deltaTime;
