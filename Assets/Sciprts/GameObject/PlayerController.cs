@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
@@ -17,9 +16,8 @@ public class PlayerController : MonoBehaviour
     [Header("布林判斷")]
     [SerializeField] bool _isGround;
     [SerializeField] private Vector2 _direction;
-    public bool FallThough;
-
-    Border border;
+    public bool _fallThough;
+    PlayerHealth _playerHealth;
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
     BoxCollider2D _idlecollider;
@@ -83,7 +81,7 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetBool("Falling", true);
         }
 
-        FallThough = Keyboard.current.sKey.isPressed;
+        _fallThough = Keyboard.current.sKey.isPressed;
     }
     public void Move(InputAction.CallbackContext ctx)
     {
@@ -113,6 +111,14 @@ public class PlayerController : MonoBehaviour
             this.transform.position = new Vector3(0, -72.2f, 0);
         if (other.CompareTag("Flag13"))
             this.transform.position = new Vector3(0, -97.2f, 0);
+        if (other.CompareTag("Border"))
+        {
+            if (this.transform.position.y >= -8f)
+            {
+                this.transform.position = new Vector3(0, -5.3f, 0);
+                //_playerHealth.TakeDamage(1);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
