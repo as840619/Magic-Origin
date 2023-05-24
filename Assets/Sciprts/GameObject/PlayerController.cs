@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
@@ -18,8 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool _isGround;
     [SerializeField] private Vector2 _direction;
     public bool _fallThough;
-
-    Border border;
+    PlayerHealth _playerHealth;
     Animator _idleAnimation;
     Rigidbody2D _idleRigidbody;
     BoxCollider2D _idlecollider;
@@ -72,24 +70,18 @@ public class PlayerController : MonoBehaviour
             _idleAnimation.SetBool("OnGround", true);
             _idleAnimation.SetBool("Falling", false);
         }
+
         if (_isGround == false)                                                     //boolean touching ground
         {
             _idleAnimation.SetBool("OnGround", false);
         }
+
         if (_idleRigidbody.angularVelocity < 0)                                     //boolean falling 
         {
             _idleAnimation.SetBool("Falling", true);
         }
-        /*if (Keyboard.current.sKey.isPressed)
-        {
 
-            _fallThough = true;
-        }
-        else
-        {
-            _fallThough = false;
-        }*/
-
+        _fallThough = Keyboard.current.sKey.isPressed;
     }
     public void Move(InputAction.CallbackContext ctx)
     {
@@ -119,6 +111,14 @@ public class PlayerController : MonoBehaviour
             this.transform.position = new Vector3(0, -72.2f, 0);
         if (other.CompareTag("Flag13"))
             this.transform.position = new Vector3(0, -97.2f, 0);
+        if (other.CompareTag("Border"))
+        {
+            if (this.transform.position.y >= -8f)
+            {
+                this.transform.position = new Vector3(0, -5.3f, 0);
+                //_playerHealth.TakeDamage(1);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
