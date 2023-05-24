@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class Border : MonoBehaviour
 {
-    Collider2D _collider;
+
+    PlayerController _playerController;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-            Freeze();
-
+        {
+            //Debug.Log("00");
+            //Freeze();
+        }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-            Freeze();
-    }
-
 
     IEnumerable Freeze()
     {
