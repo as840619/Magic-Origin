@@ -5,8 +5,8 @@ namespace Object.Player
     public class PlayerHealth : MonoBehaviour
     {
         [Header("基本數據")]
-        [SerializeField] int _nowHealth = 10;
-        [SerializeField] int _maxHealth = 10;
+        [SerializeField]public int _nowHealth = 10;
+        [SerializeField]public int _maxHealth = 10;
         public float flashTime;
         public float dieTime;
         private SpriteRenderer _spriteRenderer;
