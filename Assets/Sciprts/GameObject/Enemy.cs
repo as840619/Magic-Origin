@@ -16,7 +16,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] float _collisionTime;
 
     public GameObject _healthUI;
-    //public TextMesh _healthValue;
     public Slider _healthBar;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
