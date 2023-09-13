@@ -1,5 +1,4 @@
 using UnityEngine;
-using Object.Player;
 
 public class GroundPenetrate : MonoBehaviour
 {
