@@ -25,9 +25,9 @@ public class EnemyChese : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, lineOfSite);
+        Gizmos.DrawWireSphere(transform.position, lineOfSite); 
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 7.5f);
+
     }
-
-
-
 }
