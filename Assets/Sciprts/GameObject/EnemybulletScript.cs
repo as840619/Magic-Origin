@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class EnemybulletScript : MonoBehaviour
 {
-    public GameObject Player;
-    private Rigidbody2D rb;
     public float force;
+    public Vector2 way;
+    public GameObject Player;
+
     private float timer;
+    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class EnemybulletScript : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
         Vector3 direction = Player.transform.position - transform.position;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
+        rb.velocity = way.normalized * force;
 
         float rot = Mathf.Atan2(-direction.y, -direction.x)*Mathf.Rad2Deg;//�l�u�ਤ��
         transform.rotation=Quaternion.Euler(0,0,rot+90);//����
