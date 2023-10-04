@@ -18,8 +18,8 @@ public class EnemybulletScript : MonoBehaviour
         Vector3 direction = Player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
 
-        float rot = Mathf.Atan2(-direction.y, -direction.x)*Mathf.Rad2Deg;//¤l¼uÂà¨¤«×
-        transform.rotation=Quaternion.Euler(0,0,rot+90);//¨¤«×
+        float rot = Mathf.Atan2(-direction.y, -direction.x)*Mathf.Rad2Deg;//ï¿½lï¿½uï¿½à¨¤ï¿½ï¿½
+        transform.rotation=Quaternion.Euler(0,0,rot+90);//ï¿½ï¿½ï¿½ï¿½
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class EnemybulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //¤l¼uªº¶Ë®`bulletdamage
+            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //ï¿½lï¿½uï¿½ï¿½ï¿½Ë®`bulletdamage
             Destroy (gameObject);
         }
     }
