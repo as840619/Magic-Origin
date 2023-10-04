@@ -19,9 +19,9 @@ public class CardUse : MonoBehaviour
         if (this.gameObject.name == "CardA4")
             pa.SplitSlash();
         if (this.gameObject.name == "CardA5")
-            pa.QuickStab();
-        if (this.gameObject.name == "CardA6")
             pa.Spin();
+        if (this.gameObject.name == "CardA6")
+            pa.QuickStab();
         if (this.gameObject.name == "CardD1")
             pa.Block();
         if (this.gameObject.name == "CardD2")
