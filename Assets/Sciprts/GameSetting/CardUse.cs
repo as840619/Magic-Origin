@@ -23,13 +23,13 @@ public class CardUse : MonoBehaviour
         if (this.gameObject.name == "CardA6")
             pa.QuickStab();
         if (this.gameObject.name == "CardD1")
-            pa.Block();
-        if (this.gameObject.name == "CardD2")
             pa.DashBlock();
+        if (this.gameObject.name == "CardD2")
+            pa.GloryShield();
         if (this.gameObject.name == "CardD3")
             pa.IronCastle();
         if (this.gameObject.name == "CardD4")
-            pa.GloryShield();
+            pa.Block();
 
 
 
