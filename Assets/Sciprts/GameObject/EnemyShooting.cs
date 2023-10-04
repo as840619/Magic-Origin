@@ -44,21 +44,25 @@ public class EnemyShooting : MonoBehaviour
     }
     void Shoot()        //1 to 1
     {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        Vector2 direction = Player.transform.position - transform.position;
+        GameObject bulletOTO = Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        bulletOTO.GetComponent<EnemybulletScript>().way = direction;
     }
 
     void TripperTake()      //3 to 1
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
         for (int n = -1; n <= 1; n++)
         {
             Vector3 newPostion = Calculation(n);
-            Instantiate(bullet, bulletPos.position + newPostion, Quaternion.identity);
-
+            GameObject bulletTTO = Instantiate(bullet, bulletPos.position + newPostion, Quaternion.identity);
+            Vector2 direction = Player.transform.position - bulletTTO.transform.position;
+            bulletTTO.GetComponent<EnemybulletScript>().way = direction;
         }
     }
     Vector3 Calculation(int i)
     {
-        Vector3 newPostion = new Vector3(0f, -0.675f * i, 0f);
+        Vector3 newPostion = new(0f, -0.675f * i, 0f);
         return newPostion;
     }
 }
