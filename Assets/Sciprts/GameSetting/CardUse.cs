@@ -10,7 +10,7 @@ public class CardUse : MonoBehaviour
     public void OnMouseDown()
     {
         Debug.Log("攻擊");
-        if (this.gameObject.name == "CardA1")
+        if (this.gameObject.name == "S1")
             pa.Attack();
         if (this.gameObject.name == "CardA2")
             pa.Slash();
