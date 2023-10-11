@@ -26,7 +26,19 @@ public class EnemybulletScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > 10)
+        if (lerping == true)        //Bug
+        {
+            rb.velocity *= 1.01f;
+        }
+        if (reCallTime > 0f)
+        {
+            if (timer > reCallTime)
+            {
+                Debug.Log("recallBullet");
+                rb.velocity = -(way.normalized * force);
+            }
+        }
+        if (timer > 6)
         {
             Destroy(gameObject);
         }
