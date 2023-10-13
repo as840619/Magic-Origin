@@ -13,21 +13,15 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject card = Instantiate(Card[i] ,new Vector2(5 + i * 55, 10), Quaternion.identity) ;
+            int RandomIndex = UnityEngine.Random.Range(0, Card.Count-1);
+            GameObject card = Instantiate(Card[RandomIndex] ,new Vector2(2 + i * 75, 10), Quaternion.identity) ;
             card.GetComponent<CardUse>().pa=_pa;
             card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform, false);
         }
         
     }
-    public int GetRaandomNum(List<int> listToRandomize)
-    {
-        int randomNum = Random.Range(0, listToRandomize.Count);
-        print(randomNum);
-        int printRandom = listToRandomize[randomNum];
-        print(printRandom);
-        return printRandom;
-    }
-    
+
+      
     
 }
 
