@@ -7,25 +7,22 @@ public class EnemyChese : MonoBehaviour
 {
     public float speed;
     public float lineOfSite;
-    private Transform player;
 
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
     void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        float distanceFromPlayer = Vector2.Distance(playerPosition, transform.position);
         if (distanceFromPlayer < lineOfSite)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, playerPosition, speed * Time.deltaTime);
         }
     }
+
+    Vector3 playerPosition => PlayerController.Instance.transform.position;
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, lineOfSite); 
+        Gizmos.DrawWireSphere(transform.position, lineOfSite);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 7.5f);
 
