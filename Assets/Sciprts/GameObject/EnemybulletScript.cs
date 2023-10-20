@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemybulletScript : MonoBehaviour
 {
     public bool lerping = false;
+    public int splits = 0;
     public float force;
     public float reCallTime;
     public Vector2 way;
@@ -26,7 +27,7 @@ public class EnemybulletScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (lerping == true)        //Bug
+        if (lerping == true)
         {
             rb.velocity *= 1.01f;
         }
@@ -34,7 +35,6 @@ public class EnemybulletScript : MonoBehaviour
         {
             if (timer > reCallTime)
             {
-                Debug.Log("recallBullet");
                 rb.velocity = -(way.normalized * force);
             }
         }
@@ -51,5 +51,26 @@ public class EnemybulletScript : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage
             Destroy(gameObject);
         }
+        if (!other.gameObject.CompareTag("MidFloor"))
+            return;
+        if (splits == 0)         // TODO : BUG
+            return;
+        for (int i = 0; i < splits; i++)
+        {
+            switch (i)
+            {
+                case 2:
+                    Splits();
+                    break;
+            }
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+
+    void Splits()       // TODO : 請換維上線處理
+    {
+        //GameObject bulletLeft = Instantiate(this, this.transform.position, Quaternion.identity);
     }
 }
