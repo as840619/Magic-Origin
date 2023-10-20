@@ -5,22 +5,23 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletPos;
     [SerializeField] private float gapFire = 0.5f;
+    [SerializeField] private GameObject player;
+
     private float timer;
     private int op;
     private Animator anim;
     private float opTimer;
     private float temp = 2f;
-    private GameObject Player;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = PlayerController.Instance.gameObject;
     }
 
     void Update()
     {
-        float distance = Vector2.Distance(transform.position, Player.transform.position);
+        float distance = Vector2.Distance(transform.position, playerPosition);
         //Debug.Log(distance);
 
         /*if (distance < 5)   //Zombie Shooting Range setup
@@ -48,6 +49,7 @@ public class EnemyShooting : MonoBehaviour
         {
             timer = 0;
             anim.SetTrigger("Fire");
+            //Raining();
             switch (op)
             {
                 case 0:
@@ -84,8 +86,8 @@ public class EnemyShooting : MonoBehaviour
             op = (op + 1) % 6;
         }
     }
-
-    Vector2 playerDirection => Player.transform.position - transform.position;
+    Vector3 playerPosition => PlayerController.Instance.Position;
+    Vector2 playerDirection => playerPosition - transform.position;
     float playerAngle => Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
     GameObject AngleFix(float angle)
     {
@@ -144,8 +146,16 @@ public class EnemyShooting : MonoBehaviour
         {
             Vector3 newPosition = Calculation(n);
             GameObject bulletTTO = Instantiate(bullet, bulletPos.position + newPosition, Quaternion.identity);
-            Vector2 direction = Player.transform.position - bulletTTO.transform.position;
+            Vector2 direction = playerPosition - bulletTTO.transform.position;
             bulletTTO.GetComponent<EnemybulletScript>().way = direction;
         }
+    }
+
+    void Raining()      //  _|_
+    {
+        float middlePoint = (playerPosition.x + bulletPos.transform.position.x) / 2;
+        GameObject bulletRain = Instantiate(bullet, new(middlePoint, (2 * bulletPos.position.y)), Quaternion.identity);
+        //bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
+        bulletRain.GetComponent<EnemybulletScript>().splits = 2;
     }
 }
