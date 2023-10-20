@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+
     [Header("基本數據")]
-    public int health;
+    public int health = 0;
+    private int maxHealth = 100;
     public int damage;
     public float flashTime;
     public float dieTime;
@@ -13,15 +15,14 @@ public class PlayerHealth : MonoBehaviour
     private Color originalColor;
     private Animator anim;
 
-    // Start is called before the first frame update
     public void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         anim = GetComponent<Animator>();
+        health = maxHealth;
     }
 
-    // Update is called once per frame
     public void Update()
     {
         if (health <= 0)
@@ -32,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         {
             anim.SetTrigger("Die");
             Invoke("KillPlayer", dieTime);
+            KillPlayer();
         }
     }
     public void TakeDamage(int damage)
@@ -45,14 +47,13 @@ public class PlayerHealth : MonoBehaviour
         sr.color = Color.black;
         Invoke("ResetColor", time);
     }
-
     void ResetColor()
     {
         sr.color = originalColor;
     }
     void KillPlayer()
     {
-        Destroy(gameObject);
+        GameManager.Instance.ResetObject();
     }
 
 }
