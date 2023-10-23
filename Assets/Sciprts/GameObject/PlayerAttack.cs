@@ -8,14 +8,14 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     public float time;
 
-    private Animator anim;
     private new PolygonCollider2D collider;
 
     void Start()
     {
-        anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         collider = GetComponent<PolygonCollider2D>();
     }
+
+    Animator anim => PlayerController.Instance.GetComponent<Animator>();
 
     public void Attack()
     {

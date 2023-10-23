@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4340236960458725528}
   m_Layer: 0
   m_Name: Bullet-YELLOW
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31639a4857b679e4480ad8b488333f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  lerping: 0
+  splits: 0
   force: 5
+  reCallTime: 0
+  way: {x: 0, y: 0}
 --- !u!61 &4340236960458725528
 BoxCollider2D:
   m_ObjectHideFlags: 0

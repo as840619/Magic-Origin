@@ -57,9 +57,9 @@ public class CamCtrl : MonoBehaviour
             transform.position = new Vector3(transform.position.x, 2.4f, _cameraPosition.z);
         }
         //else if (DeepBorderReturn)
-        
 
-        
+
+
     }
 
     bool CameraLimit(float x, float y)
@@ -104,5 +104,10 @@ public class CamCtrl : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void SetPlayerPosition(GameObject playerobj)
+    {
+        _idle = playerobj;
     }
 }

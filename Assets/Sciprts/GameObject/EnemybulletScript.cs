@@ -5,41 +5,72 @@ using UnityEngine;
 
 public class EnemybulletScript : MonoBehaviour
 {
+    public bool lerping = false;
+    public int splits = 0;
     public float force;
+    public float reCallTime;
     public Vector2 way;
-    public GameObject Player;
 
     private float timer;
     private Rigidbody2D rb;
-    // Start is called before the first frame update
+    private GameObject Player;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
-
         Vector3 direction = Player.transform.position - transform.position;
         rb.velocity = way.normalized * force;
-
-        float rot = Mathf.Atan2(-direction.y, -direction.x)*Mathf.Rad2Deg;//�l�u�ਤ��
-        transform.rotation=Quaternion.Euler(0,0,rot+90);//����
+        float rot = Mathf.Atan2(-way.y, -way.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > 10)
+        if (lerping == true)
+        {
+            rb.velocity *= 1.01f;
+        }
+        if (reCallTime > 0f)
+        {
+            if (timer > reCallTime)
+            {
+                rb.velocity = -(way.normalized * force);
+            }
+        }
+        if (timer > 6)
         {
             Destroy(gameObject);
         }
-
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //�l�u���ˮ`bulletdamage
-            Destroy (gameObject);
+            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage
+            Destroy(gameObject);
         }
+        if (!other.gameObject.CompareTag("MidFloor"))
+            return;
+        if (splits == 0)         // TODO : BUG
+            return;
+        for (int i = 0; i < splits; i++)
+        {
+            switch (i)
+            {
+                case 2:
+                    Splits();
+                    break;
+            }
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+
+    void Splits()       // TODO : 請換維上線處理
+    {
+        //GameObject bulletLeft = Instantiate(this, this.transform.position, Quaternion.identity);
     }
 }

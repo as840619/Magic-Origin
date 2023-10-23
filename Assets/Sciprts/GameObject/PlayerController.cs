@@ -9,6 +9,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
+    public static PlayerController Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.Find("Player").GetComponent<PlayerController>();
+            return instance;
+        }
+    }
+    public Vector3 Position
+    {
+        get
+        {
+            return instance.transform.position;
+        }
+    }
+
     [Header("基本數據")]
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpSpeed = 9;
