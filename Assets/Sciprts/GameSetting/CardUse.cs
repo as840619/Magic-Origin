@@ -1,42 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardUse : MonoBehaviour
 {
-    // public bool cardn = false;//�ǥh���ⱱ��ƭ� wrong unicode
+    // public bool cardn = false;
+    [SerializeField] ActionType actionType;
     PlayerAttack pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
     public void OnMouseDown()
     {
         Debug.Log("攻擊");
-        if (this.gameObject.name == "CardA1")
-            pa.Attack();
-        if (this.gameObject.name == "CardA2")
-            pa.Slash();
-        if (this.gameObject.name == "CardA3")
-            pa.Smash();
-        if (this.gameObject.name == "CardA4")
-            pa.SplitSlash();
-        if (this.gameObject.name == "CardA5")
-            pa.Spin();
-        if (this.gameObject.name == "CardA6")
-            pa.QuickStab();
-        if (this.gameObject.name == "CardD1")
-            pa.DashBlock();
-        if (this.gameObject.name == "CardD2")
-            pa.GloryShield();
-        if (this.gameObject.name == "CardD3")
-            pa.IronCastle();
-        if (this.gameObject.name == "CardD4")
-            pa.Block();
-
-
-
+        //呼叫ActionType名子
+        string methodName = actionType.ToString();
+        MethodInfo method = pa.GetType().GetMethod(methodName);
+        if (method != null)
+        {
+            method.Invoke(pa, null);
+        }
+        else
+        {
+            Debug.LogError("找不到");
+        }
         //cardn = true;
-        DestroyImmediate(this.gameObject);//�ήɺR������  wrong unicode
+        DestroyImmediate(this.gameObject);
         //Debug.Log(cardn);
     }
 
 }
-
+public enum ActionType
+{
+    Attack, Slash, Smash, SplitSlash, Spin, QuickStab, DashBlock, GloryShield, IronCastle, Block
+}
