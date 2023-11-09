@@ -10,85 +10,52 @@ public class PlayerAttack : MonoBehaviour
 
     private new PolygonCollider2D collider;
 
-    void Start()
+    private void Start()
     {
         collider = GetComponent<PolygonCollider2D>();
     }
 
-    Animator anim => PlayerController.Instance.GetComponent<Animator>();
+    private Animator Animation => PlayerController.Instance.GetComponent<Animator>();
 
-    public void Attack()
+    public void DoAction(ActionType actionType)
     {
-        print("attack");
+        print(actionType);
         collider.enabled = true;
-        anim.SetTrigger("Attack");
-        StartCoroutine(disableHitBox());
-    }
-    public void Slash()
-    {
-        print("Slash");
-        collider.enabled = true;
-        anim.SetTrigger("slash");
-        StartCoroutine(disableHitBox());
-    }
-    public void Smash()
-    {
-        print("Smash");
-        collider.enabled = true;
-        anim.SetTrigger("smash");
-        StartCoroutine(disableHitBox());
-    }
-    public void SplitSlash()
-    {
-        print("SplitSlash");
-        collider.enabled = true;
-        anim.SetTrigger("split_slash");
-        StartCoroutine(disableHitBox());
-    }
-    public void QuickStab()
-    {
-        print("QuickStab");
-        collider.enabled = true;
-        anim.SetTrigger("quick_stab");
-        StartCoroutine(disableHitBox());
-    }
-    public void Spin()
-    {
-        print("Spin");
-        collider.enabled = true;
-        anim.SetTrigger("spin");
-        StartCoroutine(disableHitBox());
-    }
-    public void Block()
-    {
-        print("Block");
-        collider.enabled = true;
-        anim.SetTrigger("block");
-        StartCoroutine(disableHitBox());
+        Animation.SetTrigger(actionType.ToString());
+        StartCoroutine(DisableHitBox());
     }
     public void DashBlock()
     {
         print("DashBlock");
         collider.enabled = true;
-        anim.SetTrigger("dash_block");
-        StartCoroutine(disableHitBox());
-    }
-    public void IronCastle()
-    {
-        print("IronCastle");
-        collider.enabled = true;
-        anim.SetTrigger("iron_castle");
-        StartCoroutine(disableHitBox());
+        //PlayerController.Instance.Dash();
+        Animation.SetTrigger("DashBlock");
+        StartCoroutine(DisableHitBox());
     }
     public void GloryShield()
     {
         print("GloryShield");
         collider.enabled = true;
-        anim.SetTrigger("glory_shield");
-        StartCoroutine(disableHitBox());
+        Animation.SetTrigger("GloryShield");
+        StartCoroutine(DisableHitBox());
+    }
+    public void IronCastle()
+    {
+        print("IronCastle");
+        collider.enabled = true;
+        Animation.SetTrigger("IronCastle");
+        StartCoroutine(DisableHitBox());
+    }
+    public void Block()
+    {
+        print("Block");
+        collider.enabled = true;
+        Animation.SetTrigger("Block");
+        StartCoroutine(DisableHitBox());
     }
 
-    IEnumerator disableHitBox()
+
+    IEnumerator DisableHitBox()
     {
         yield return new WaitForSeconds(time);
         collider.enabled = false;
@@ -98,9 +65,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            //Destroy(gameObject);
-            print("hit");
+            Debug.Log("hit");
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
+
 }

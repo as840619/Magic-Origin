@@ -26,101 +26,188 @@ public class PlayerController : MonoBehaviour
             return instance.transform.position;
         }
     }
-
     [Header("基本數據")]
-    [SerializeField] float _moveSpeed = 5;
-    [SerializeField] float _jumpSpeed = 9;
-    [SerializeField] int _jumpTimes = 1;
-    [Header("布林判斷")]
-    [SerializeField] bool _isGround;
-    [SerializeField] private Vector2 _direction;
+    [SerializeField] int jumpTimes = 2;
+    [SerializeField] float moveSpeed = 5;
+    [SerializeField] float jumpSpeed = 6;
+    [SerializeField] float dashTime = 0.5f;
+    [SerializeField] float dashForse = 20f;
+    [SerializeField] float dashCoefficient = 1f;
+    [SerializeField] float distanceBetweenImages = 0.2f;
+
+    public bool isGround;
+    public bool isWall;
+    public bool isDashing;
+    public bool canJump;
+    public bool canMove;
+    public bool canFilp;
     public bool _fallThough;
-    PlayerHealth _playerHealth;
-    Animator _idleAnimation;
-    Rigidbody2D _idleRigidbody;
-    BoxCollider2D _idlecollider;
+
+    public PlayerInputControl playerControl;
+    private int jumpLeft;
+    private float dashTimeLeft;
+    private float lastImageXpos;
+    private Vector2 moveDirection;
+
+    private InputAction move;
+    private InputAction jump;
+    private Animator idleAnimation;
+    private Rigidbody2D idleRigidbody;
+    private BoxCollider2D idlecollider;
+    private PlayerHealth playerHealth;
 
     private void Awake()
     {
+        playerControl = new PlayerInputControl();
         this.transform.position = new Vector3(0, -5.3f, 0);
-        _idleAnimation = GetComponent<Animator>();
-        _idleRigidbody = GetComponent<Rigidbody2D>();
-        _idlecollider = GetComponent<BoxCollider2D>();
+        idleAnimation = GetComponent<Animator>();
+        idleRigidbody = GetComponent<Rigidbody2D>();
+        idlecollider = GetComponent<BoxCollider2D>();
+    }
+
+    private void Start()
+    {
+        dashTimeLeft = 0f;
+        lastImageXpos = 0f;
+        canMove = true;
+        canFilp = true;
+        isDashing = false;
+        jumpLeft = jumpTimes;
+        dashForse *= dashCoefficient;
+    }
+
+    private void OnEnable()
+    {
+        move = playerControl.Normal.Move;
+        jump = playerControl.Normal.Jump;
+        move.Enable();
+        jump.Enable();
+    }
+
+    private void OnDisable()
+    {
+        move.Disable();
+        jump.Disable();
     }
 
     private void Update()
     {
-        CheckMotion();
-        if (_direction != Vector2.zero)
-        {
-            _idleRigidbody.velocity = new Vector2(_direction.x * _moveSpeed, _idleRigidbody.velocity.y);
-
-            if (_direction.x > 0)
-            {
-                transform.localScale = new Vector2(3, 3);
-            }
-            if (_direction.x < 0)
-            {
-                transform.localScale = new Vector2(-3, 3);
-            }
-        }
-        ConfirmMovement(_direction.x, _direction.y, _idleRigidbody.velocity.y); //parameter
-
+        moveDirection = move.ReadValue<Vector2>();
+        if (jump.IsPressed() && jumpLeft > 0)
+            Jump();
+        ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
+        CheckAction();
+        CheckFilp();
+        //CheckDash();
     }
+
+    private void FixedUpdate()
+    {
+        idleRigidbody.velocity = new(moveDirection.x * moveSpeed, idleRigidbody.velocity.y);
+    }
+    /*
+    public void Dash()
+    {
+        isDashing = true;
+        dashTimeLeft = dashTime;
+        Debug.Log("該變了吧");
+        //lastDash += Time.time;
+        PlayerDashImagePool.Instance.GetFromPool();
+        lastImageXpos = transform.position.x;
+    }
+    */
+    private void Jump()
+    {
+        Debug.Log(jumpLeft);
+        idleRigidbody.velocity = Vector2.up * jumpSpeed;
+        idleAnimation.SetTrigger("Jump");
+        jumpLeft--;
+    }
+
     /// <summary>
     ///     Player's parameter judgement.
     /// </summary>
 
-    void ConfirmMovement(float x, float y, float yVelocity)
+    private void ConfirmMovement(float x, float y, float yVelocity)
     {
-        _idleAnimation.SetFloat("HorizontalAxis", x);
-        _idleAnimation.SetFloat("VerticalAxis", y);
-        _idleAnimation.SetFloat("VerticalVelocity", yVelocity); //
+        idleAnimation.SetFloat("HorizontalAxis", x);
+        idleAnimation.SetFloat("VerticalAxis", y);
+        idleAnimation.SetFloat("VerticalVelocity", yVelocity); //
     }
 
-    void CheckMotion()
+    private void CheckFilp()
     {
-        _isGround = _idlecollider.IsTouchingLayers(LayerMask.GetMask("MidFloor"));  //BUG
-
-        if (_isGround == true)                                                      //boolean touching ground
+        if (moveDirection == Vector2.zero || canFilp == false)
+            return;
+        if (moveDirection.x > 0)
         {
-            _jumpTimes = 1;
-            _idleAnimation.SetBool("OnGround", true);
-            _idleAnimation.SetBool("Falling", false);
+            transform.localScale = new Vector2(3, 3);
+        }
+        if (moveDirection.x < 0)
+        {
+            transform.localScale = new Vector2(-3, 3);
+        }
+    }
+
+    private void CheckAction()
+    {
+        isGround = idlecollider.IsTouchingLayers(LayerMask.GetMask("MidFloor"));  //BUG
+
+        if (isGround == true)                                                      //boolean touching ground
+        {
+            jumpLeft = jumpTimes;
+            idleAnimation.SetBool("OnGround", true);
+            idleAnimation.SetBool("Falling", false);
         }
 
-        if (_isGround == false)                                                     //boolean touching ground
+        if (isGround == false)                                                     //boolean touching ground
         {
-            _idleAnimation.SetBool("OnGround", false);
+            idleAnimation.SetBool("OnGround", false);
         }
 
-        if (_idleRigidbody.angularVelocity < 0)                                     //boolean falling 
+        if (idleRigidbody.angularVelocity < 0)                                     //boolean falling 
         {
-            _idleAnimation.SetBool("Falling", true);
+            idleAnimation.SetBool("Falling", true);
         }
-
         _fallThough = Keyboard.current.sKey.isPressed;
     }
-    public void Move(InputAction.CallbackContext ctx)
+    /*
+    private void CheckDash()
     {
-        _direction = ctx.ReadValue<Vector2>();
-    }
-
-    public void Jump(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
+        if (isDashing != true)
         {
-            if (_jumpTimes <= 0)
+            return;
+        }
+        Debug.Log(dashTimeLeft);
+        if (dashTimeLeft > 0)
+        {
+            canMove = false;
+            canFilp = false;
+            //_idleRigidbody.AddForce(_direction * dashForse, ForceMode2D.Impulse);
+            idleRigidbody.velocity = new Vector2(moveDirection.x * dashForse, idleRigidbody.velocity.y);
+            //Debug.Log("DDDD");
+            dashTimeLeft -= Time.deltaTime;
+            if (Mathf.Abs(transform.position.x - lastImageXpos) > distanceBetweenImages)
             {
-                return;
+                PlayerDashImagePool.Instance.GetFromPool();
+                lastImageXpos = transform.position.x;
             }
-            _jumpTimes--;
-            _idleAnimation.SetTrigger("Jump");
-            //_idleRigidbody.AddForce();
-            _idleRigidbody.velocity += Vector2.up * _jumpSpeed;
+        }
+        if (dashTimeLeft <= 0 || isWall)
+        {
+            isDashing = false;
+            canMove = true;
+            canFilp = true;
         }
     }
 
+    private IEnumerator DashOne()
+    {
+        idleRigidbody.velocity = new Vector2(moveDirection.x * dashForse, idleRigidbody.velocity.y);
+        yield return new WaitForSeconds(0.25F);
+        //yield return new WaitForSeconds(0.25F);
+    }
+    */
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Flag11"))
@@ -139,26 +226,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        string collTag = (collision.gameObject.tag.ToString());
-
-        //print(collTag);
-        /*switch (collTag)
-
-        switch (collTag)
-        {
-            case "Flag11":
-                this.transform.position = new Vector3(0, -36.7f, 0);
-                break;
-            case "Flag12":
-                this.transform.position = new Vector3(0, -72.2f, 0);
-                break;
-            case "Flag13":
-                this.transform.position = new Vector3(0, -97.2f, 0);
-                break;
-            default:
-                break;
-        }*/
-    }
 }
