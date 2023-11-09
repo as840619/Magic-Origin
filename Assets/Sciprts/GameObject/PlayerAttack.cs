@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     {
         print("DashBlock");
         collider.enabled = true;
-        PlayerController.Instance.Dash();
+        //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
         StartCoroutine(DisableHitBox());
     }

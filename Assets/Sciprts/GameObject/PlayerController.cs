@@ -98,14 +98,14 @@ public class PlayerController : MonoBehaviour
         ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
         CheckAction();
         CheckFilp();
-        CheckDash();
+        //CheckDash();
     }
 
     private void FixedUpdate()
     {
         idleRigidbody.velocity = new(moveDirection.x * moveSpeed, idleRigidbody.velocity.y);
     }
-
+    /*
     public void Dash()
     {
         isDashing = true;
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         PlayerDashImagePool.Instance.GetFromPool();
         lastImageXpos = transform.position.x;
     }
-
+    */
     private void Jump()
     {
         Debug.Log(jumpLeft);
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
         }
         _fallThough = Keyboard.current.sKey.isPressed;
     }
-
+    /*
     private void CheckDash()
     {
         if (isDashing != true)
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.25F);
         //yield return new WaitForSeconds(0.25F);
     }
-
+    */
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Flag11"))
