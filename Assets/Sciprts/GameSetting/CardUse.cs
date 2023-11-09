@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -8,30 +9,51 @@ using UnityEngine;
 
 public class CardUse : MonoBehaviour
 {
-    // public bool cardn = false;
+    // public bool cardn = false;   //cardn = true;
     [SerializeField] ActionType actionType;
-    PlayerAttack pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
+    PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
     public void OnMouseDown()
     {
-        Debug.Log("攻擊");
-        //呼叫ActionType名子
-        string methodName = actionType.ToString();
-        MethodInfo method = pa.GetType().GetMethod(methodName);
-        if (method != null)
+        ActionType[] actionTypes =
         {
-            method.Invoke(pa, null);
+            ActionType.DashBlock,
+            ActionType.GloryShield,
+            ActionType.IronCastle,
+            ActionType.Block
+        };
+        if (actionTypes.Contains(actionType))
+        {
+            string methodName = actionType.ToString();        //呼叫ActionType名子
+            MethodInfo method = Pa.GetType().GetMethod(methodName);       //勿
+            if (method != null)
+            {
+                method.Invoke(Pa, null);
+            }
+            else
+            {
+                Debug.LogError("找不到");
+            }
         }
         else
         {
-            Debug.LogError("找不到");
+            Pa.DoAction(actionType);                //將改成傳入"ActionType"
         }
-        //cardn = true;
-        DestroyImmediate(this.gameObject);
-        //Debug.Log(cardn);
+        //DestroyImmediate(this.gameObject);
     }
-
 }
+
+
 public enum ActionType
 {
-    Attack, Slash, Smash, SplitSlash, Spin, QuickStab, DashBlock, GloryShield, IronCastle, Block
+    Attack,
+    Slash,
+    Smash,
+    SplitSlash,
+    Spin,
+    QuickStab,
+    DashBlock,
+    GloryShield,
+    IronCastle,
+    Block
 }
+
