@@ -1,4 +1,0 @@
-repository "Magic-Origin@as22281624@cloud"
-  path "/"
-    br "/main"
-    co "/main"
