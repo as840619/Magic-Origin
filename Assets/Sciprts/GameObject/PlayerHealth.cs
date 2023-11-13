@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
+
 
     [Header("基本數據")]
     public int health = 0;
@@ -15,12 +16,17 @@ public class PlayerHealth : MonoBehaviour
     private Color originalColor;
     private Animator anim;
 
+    private Rigidbody2D rb;
+    
+
     public void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         anim = GetComponent<Animator>();
         health = maxHealth;
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Update()
@@ -31,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (health <= 0)
         {
-            anim.SetTrigger("Die");
+            
             Invoke("KillPlayer", dieTime);
             KillPlayer();
         }
@@ -53,7 +59,16 @@ public class PlayerHealth : MonoBehaviour
     }
     void KillPlayer()
     {
-        GameManager.Instance.ResetObject();
+        //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
+        rb.bodyType = RigidbodyType2D.Static;
+        anim.SetTrigger("Death");
+        //Destroy(this.gameObject);
+        //GameManager.Instance.ResetObject();
     }
 
+    //重新讀取關卡
+    private void restartlevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
