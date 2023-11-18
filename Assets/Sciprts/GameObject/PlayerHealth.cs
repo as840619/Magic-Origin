@@ -6,8 +6,9 @@ public class PlayerHealth : MonoBehaviour
 {
 
     [Header("基本數據")]
-    public int health = 0;
-    private int maxHealth = 100;
+    //public int health = 0;
+    //private int maxHealth = 100;
+    public int health;
     public int damage;
     public float flashTime;
     public float dieTime;
@@ -17,29 +18,31 @@ public class PlayerHealth : MonoBehaviour
 
     public void Start()
     {
+        HealthBar.HealthMax = health;
+        HealthBar.HealthCurrent = health;
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         anim = GetComponent<Animator>();
-        health = maxHealth;
     }
 
     public void Update()
     {
+        
+    }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
         if (health <= 0)
         {
             health = 0;
         }
+        HealthBar.HealthCurrent = health;
         if (health <= 0)
         {
             anim.SetTrigger("Die");
             Invoke("KillPlayer", dieTime);
             KillPlayer();
         }
-    }
-    public void TakeDamage(int damage)
-    {
-
-        health -= damage;
         FlashColor(flashTime);
     }
     void FlashColor(float time)
