@@ -1,11 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
-
-
     [Header("基本數據")]
     public int health = 0;
     private int maxHealth = 100;
@@ -38,8 +37,9 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             
-            Invoke("KillPlayer", dieTime);
+            //Invoke("KillPlayer", dieTime);
             KillPlayer();
+            StartCoroutine(SecondToScene());
         }
     }
     public void TakeDamage(int damage)
@@ -59,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
     }
     void KillPlayer()
     {
+        
         //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Death");
@@ -66,9 +67,12 @@ public class PlayerHealth : MonoBehaviour
         //GameManager.Instance.ResetObject();
     }
 
-    //重新讀取關卡
-    private void restartlevel()
+    //計時完後讀取Scene
+    private IEnumerator SecondToScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("GameOver");
     }
+
+
 }
