@@ -6,7 +6,7 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] private Transform bulletPos;
     [SerializeField] private float gapFire = 0.5f;
     [SerializeField] private GameObject player;
-
+    private  PlayerHealth playerHealth;
     private float timer;
     private int op;
     private Animator anim;
@@ -15,6 +15,7 @@ public class EnemyShooting : MonoBehaviour
 
     void Start()
     {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         anim = GetComponent<Animator>();
         player = PlayerController.Instance.gameObject;
     }
