@@ -22,8 +22,6 @@ public class EnemyShooting : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(transform.position, playerPosition);
-        //Debug.Log(distance);
-
         /*if (distance < 5)   //Zombie Shooting Range setup
         {
             timer += Time.deltaTime;
@@ -33,17 +31,9 @@ public class EnemyShooting : MonoBehaviour
                 anim.SetTrigger("Fire");
                 Shoot();
             }
-        }
-        if (distance >= 7.5f)   //Zombie Shooting Range setup
-        {
-            timer += Time.deltaTime;
-            if (timer > 2)
-            {
-                timer = 0;
-                anim.SetTrigger("Fire");
-                TripperTake();
-            }
         }*/
+        if (distance >= 12f)   //Zombie Shooting Range setup
+            return;
         timer += Time.deltaTime;
         if (timer > gapFire)
         {

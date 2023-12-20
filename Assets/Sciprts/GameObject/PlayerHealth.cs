@@ -16,7 +16,6 @@ public class PlayerHealth : MonoBehaviour
     private Animator anim;
 
     private Rigidbody2D rb;
-    
 
     public void Start()
     {
@@ -36,10 +35,9 @@ public class PlayerHealth : MonoBehaviour
         }
         if (health <= 0)
         {
-            
+
             //Invoke("KillPlayer", dieTime);
             KillPlayer();
-            StartCoroutine(SecondToScene());
         }
     }
     public void TakeDamage(int damage)
@@ -59,20 +57,23 @@ public class PlayerHealth : MonoBehaviour
     }
     void KillPlayer()
     {
-        
+
         //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Death");
-        //Destroy(this.gameObject);
-        //GameManager.Instance.ResetObject();
+        GameManager.Instance.ResetObject();
+        //StartCoroutine(SecondToScene());           <-改這個就好 言下之意就是別讀秒
     }
 
     //計時完後讀取Scene
     private IEnumerator SecondToScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("GameOver");
+        //Test();
     }
 
+    void Test()
+    {
+    }
 
 }
