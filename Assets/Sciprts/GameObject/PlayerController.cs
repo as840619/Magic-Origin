@@ -210,6 +210,8 @@ public class PlayerController : MonoBehaviour
     */
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //if (other.CompareTag("Water"))
+            //playerHealth.health = 0;
         if (other.CompareTag("Flag11"))
             this.transform.position = new Vector3(0, -36.7f, 0);
         if (other.CompareTag("Flag12"))
