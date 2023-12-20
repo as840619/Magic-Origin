@@ -53,8 +53,11 @@ public class EnemybulletScript : MonoBehaviour
         }
         if (!other.gameObject.CompareTag("MidFloor"))
             return;
-        if (splits == 0)         // TODO : BUG
+        if (splits == 0)
+        {
+            Destroy(gameObject);
             return;
+        }         // TODO : BUG
         for (int i = 0; i < splits; i++)
         {
             switch (i)
