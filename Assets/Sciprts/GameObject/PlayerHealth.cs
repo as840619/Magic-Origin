@@ -16,8 +16,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void Start()
     {
-       HealthBar.HealthMax = health;
-       HealthBar.HealthCurrent = health;
        sr = GetComponent<SpriteRenderer>();
        originalColor = sr.color;
        anim = GetComponent<Animator>();
@@ -34,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
         {
             health = 0;
         }
-        HealthBar.HealthCurrent = health;
         if (health <= 0)
         {
             anim.SetTrigger("Die");
