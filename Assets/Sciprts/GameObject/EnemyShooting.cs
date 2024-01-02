@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyShooting : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform bulletPos;
+    [SerializeField] public Transform bulletPos;
     [SerializeField] private float gapFire = 0.5f;
     [SerializeField] private GameObject player;
     private  PlayerHealth playerHealth;
@@ -50,7 +50,7 @@ public class EnemyShooting : MonoBehaviour
         {
             timer = 0;
             anim.SetTrigger("Fire");
-            //Raining();
+            Raining();
             switch (op)
             {
                 case 0:
@@ -156,7 +156,12 @@ public class EnemyShooting : MonoBehaviour
     {
         float middlePoint = (playerPosition.x + bulletPos.transform.position.x) / 2;
         GameObject bulletRain = Instantiate(bullet, new(middlePoint, (2 * bulletPos.position.y)), Quaternion.identity);
-        //bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
-        bulletRain.GetComponent<EnemybulletScript>().splits = 2;
+        bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
+        if (gameObject.CompareTag("MidFloor"))
+        {
+            GameObject bulletleft = Instantiate(bullet, this.transform.position, Quaternion.identity);
+            GameObject bulletRight = Instantiate(bullet,this.transform.position,Quaternion.identity);
+        }
+       // bulletRain.GetComponent<EnemybulletScript>().splits = 2;
     }
 }
