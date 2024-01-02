@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private Animator Animation => PlayerController.Instance.GetComponent<Animator>();
+    //private int shield => GameObject.Find("ShieldRemain").AddComponent<>()
 
     public void DoAction(ActionType actionType)
     {
@@ -28,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
     {
         print("DashBlock");
         collider.enabled = true;
+        
         //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
         StartCoroutine(DisableHitBox());
