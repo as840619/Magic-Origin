@@ -13,6 +13,10 @@ public class EnemyShooting : MonoBehaviour
     private float opTimer;
     private float temp = 2f;
 
+    //Split計時用//
+    private float splitcooldown=2f;
+    public static float sdeltaTime;
+    //                    //
     void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
@@ -86,6 +90,14 @@ public class EnemyShooting : MonoBehaviour
             opTimer = 0;
             op = (op + 1) % 6;
         }
+
+        //Split用計時//
+        sdeltaTime+=Time.deltaTime;
+        if (sdeltaTime > splitcooldown)
+        {
+            sdeltaTime = 0;
+        }
+        //                    //
     }
     Vector3 playerPosition => PlayerController.Instance.Position;
     Vector2 playerDirection => playerPosition - transform.position;
@@ -157,11 +169,25 @@ public class EnemyShooting : MonoBehaviour
         float middlePoint = (playerPosition.x + bulletPos.transform.position.x) / 2;
         GameObject bulletRain = Instantiate(bullet, new(middlePoint, (2 * bulletPos.position.y)), Quaternion.identity);
         bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
-        if (gameObject.CompareTag("MidFloor"))
+
+        //(Split用的嘗試)   //
+        if (sdeltaTime>=0&&sdeltaTime<=0.5f)
         {
-            GameObject bulletleft = Instantiate(bullet, this.transform.position, Quaternion.identity);
+            GameObject bulletleft = Instantiate(bullet,new(middlePoint,(2*bulletPos.position.x)), Quaternion.identity);
+            bulletleft.GetComponent<EnemybulletScript>().way = -(transform.up);
             GameObject bulletRight = Instantiate(bullet,this.transform.position,Quaternion.identity);
+            bulletRight.GetComponent<EnemybulletScript>().way = -(transform.up);
         }
+        //                              //
        // bulletRain.GetComponent<EnemybulletScript>().splits = 2;
     }
+    //子彈:跟Raining一樣模式，進過N秒後分裂成兩顆各往X與-X軸平行移動。(目前未完成)//
+    void Split()
+    {
+        GameObject bulletleft = Instantiate(bullet,bulletPos.position, Quaternion.identity);
+        //Vector2 direction = playerDirection - bulletleft.transform.position;  //沒用記得刪掉
+        bulletleft.GetComponent<EnemybulletScript>().way = -(transform.up);
+    }
+    //                                                                                                                                                        //
+
 }
