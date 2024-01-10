@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool isGround;
     public bool isWall;
     public bool isDashing;
+    //public bool isPause;
     public bool canJump;
     public bool canMove;
     public bool canFilp;
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private InputAction move;
     private InputAction jump;
+    private InputAction skip;
+    private InputAction escape;
     private Animator idleAnimation;
     private Rigidbody2D idleRigidbody;
     private BoxCollider2D idlecollider;
@@ -78,16 +81,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        skip = playerControl.UI.SkipDialogue;
         move = playerControl.Normal.Move;
         jump = playerControl.Normal.Jump;
+        escape = playerControl.Normal.Exit;
+        skip.Enable();
         move.Enable();
         jump.Enable();
+        escape.Enable();
     }
 
     private void OnDisable()
     {
+        skip.Disable();
         move.Disable();
         jump.Disable();
+        escape.Disable();
     }
 
     private void Update()
@@ -95,6 +104,10 @@ public class PlayerController : MonoBehaviour
         moveDirection = move.ReadValue<Vector2>();
         if (jump.IsPressed() && jumpLeft > 0)
             Jump();
+        if (escape.IsPressed())
+        {
+
+        }
         ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
         CheckAction();
         CheckFilp();
@@ -211,7 +224,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //if (other.CompareTag("Water"))
-            //playerHealth.health = 0;
+        //playerHealth.health = 0;
         if (other.CompareTag("Flag11"))
             this.transform.position = new Vector3(0, -36.7f, 0);
         if (other.CompareTag("Flag12"))
