@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 2435171715691253030}
   - component: {fileID: 5916583688600500593}
   - component: {fileID: 5022646753839809751}
-  - component: {fileID: 5022646753839809754}
+  - component: {fileID: -3545964233183471861}
   m_Layer: 0
   m_Name: Enemy_Zombie Far
   m_TagString: Enemy
@@ -551,7 +551,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   lineOfSite: 1.49
---- !u!114 &5022646753839809754
+  blackOne: 1
+  grayThree: 3
+  whiteFive: 5
+  redSeven: 7
+  yellowNine: 9
+  greenSix: 11
+--- !u!114 &-3545964233183471861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -560,13 +566,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5022646755006805309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bc1684b93bd414b87d7c8818112aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 61911f75a982ba84bbe1b99ba758101b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3394373959840294898, guid: 2393f732820fb8b4582696644faa24eb, type: 3}
   bulletPos: {fileID: 5022646754163865370}
-  gapFire: 0
+  gapFire: 0.5
   player: {fileID: 0}
+  playerHealth: {fileID: 0}
+  timer: 0
+  op: 0
+  anim: {fileID: 0}
+  opTimer: 0
+  temp: 2
+  lineOflerp: 12
+  lineOf31: 5
+  lineOf13: 5
 --- !u!1 &5022646755058008504
 GameObject:
   m_ObjectHideFlags: 0
