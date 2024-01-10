@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpTimes = 2;
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpSpeed = 6;
-    [SerializeField] float dashTime = 0.5f;
+    [SerializeField] private float dashTime = 0.5f;
     [SerializeField] float dashForse = 20f;
     [SerializeField] float dashCoefficient = 1f;
     [SerializeField] float distanceBetweenImages = 0.2f;

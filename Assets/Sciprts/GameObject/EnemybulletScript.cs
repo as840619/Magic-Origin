@@ -48,7 +48,8 @@ public class EnemybulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage
+            other.gameObject.GetComponent<PlayerHealth>().takeDamage = true;
+            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage  //TODO 修改判斷
             Destroy(gameObject);
         }
         if (!other.gameObject.CompareTag("MidFloor"))

@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         _cameraobj = GameObject.FindWithTag("MainCamera");
         _camCtrl = _cameraobj.GetComponent<CamCtrl>();
         points = GetComponent<SavePoint>().pointVectors;
+        ResetObject();
     }
 
     public void ResetObject()
