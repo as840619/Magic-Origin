@@ -66,7 +66,4 @@ public class PlayerHealth : MonoBehaviour
         //Test();
     }
 
-    void Test()
-    {
-    }
 }

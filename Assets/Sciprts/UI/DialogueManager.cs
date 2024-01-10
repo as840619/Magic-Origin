@@ -38,7 +38,6 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("1231321");
         //GameObject.Find("Player").GetComponent<PauseJudge>().gamePause.Invoke();
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;

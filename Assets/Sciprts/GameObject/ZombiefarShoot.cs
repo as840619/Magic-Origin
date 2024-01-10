@@ -4,28 +4,53 @@ using UnityEngine;
 
 public class ZombiefarShoot : EnemyShooting
 {
-    
+    [Header("攻擊距離")]
+    [SerializeField] float lineOflerp = 12f;
+    [SerializeField] float lineOf31 = 5f;
+    [SerializeField] float lineOf13 = 5f;
+    public string enemyType = "ZombieFar";
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+        player = PlayerController.Instance.gameObject;
     }
 
     void Update()
     {
-
-        // 在这里执行子类的特定逻辑
-        // 例如重写父类的方法或添加新的逻辑
-
-        // 调用父类的 Shoot 方法，并在其基础上添加额外的逻辑
-        Shoot();
-    }
-
-    // 重写父类的 Shoot 方法
-    void Shoot()
-    {
-        // 使用 base 关键字来调用父类的方法
-
-        // 在这里添加子类特有的逻辑或修改 Shoot 方法的行为
-        // 例如，添加子类特有的射击行为
+        float distance = Vector2.Distance(transform.position, playerPosition);
+        if (distance >= 12f)
+            return;
+        timer += Time.deltaTime;
+        if (timer > gapFire)
+        {
+            timer = 0;
+            anim.SetTrigger("Fire");
+            if (distance >= 5f && distance <= 12f)
+            {
+                LerpShot();
+                gapFire = 1f;
+            }
+            else if (distance >= 1.5f && distance <= 5f)
+            {
+                switch (op)
+                {
+                    case 0:
+                        TripperTake();
+                        gapFire = 0.5f;
+                        break;
+                    case 1:
+                        ShotgunShot();
+                        gapFire = 0.5f;
+                        break;
+                }
+            }
+            opTimer += Time.deltaTime;
+            if (opTimer > temp)
+            {
+                opTimer = 0;
+                op = (op + 1) % 2;
+            }
+        }
     }
 }
