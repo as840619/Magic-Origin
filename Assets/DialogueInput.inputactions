@@ -1,0 +1,34 @@
+{
+    "name": "Dialogue",
+    "maps": [
+        {
+            "name": "Dialogue",
+            "id": "19ae3c26-5390-40d6-a143-8af10249c4b1",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Value",
+                    "id": "c73a6862-9308-420a-8e1b-006703b2e5e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "854438ac-1166-43ab-90be-23cd53ccf27a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Hold(duration=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
