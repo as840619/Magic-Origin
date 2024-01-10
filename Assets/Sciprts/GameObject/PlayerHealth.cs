@@ -36,6 +36,8 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    Rigidbody2D playerRb => GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+
     void FlashColor(float time)
     {
         sr.color = Color.black;
@@ -51,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
     {
 
         //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
-        rb.bodyType = RigidbodyType2D.Static;
+        playerRb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Death");
         GameManager.Instance.ResetObject();
         //StartCoroutine(SecondToScene());           <-改這個就好 言下之意就是別讀秒
