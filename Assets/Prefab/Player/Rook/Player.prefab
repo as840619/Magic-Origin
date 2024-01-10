@@ -442,6 +442,7 @@ GameObject:
   - component: {fileID: 7378186775415801030}
   - component: {fileID: 4695050275380686337}
   - component: {fileID: 3764586457719677294}
+  - component: {fileID: 5977309261676696125}
   - component: {fileID: 3764586457719677204}
   m_Layer: 0
   m_Name: Player
@@ -608,7 +609,7 @@ MonoBehaviour:
   distanceBetweenImages: 0.2
   isGround: 0
   isWall: 0
-  isDashing: 0
+  isPause: 0
   canJump: 0
   canMove: 0
   canFilp: 0
@@ -628,7 +629,48 @@ MonoBehaviour:
   health: 100
   flashTime: 0.2
   dieTime: 0.5
-  takeDamage: 0
+--- !u!114 &5977309261676696125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4695050275380686342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcabf01b24bd6a438385a201a098791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4695050275380686337}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gameResume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4695050275380686337}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &3764586457719677204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +728,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3059775e-f282-4ae7-8900-6c084b8c86b8
     m_ActionName: Normal/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d7f019fa-80ae-4476-9f17-65e80c7eae19
+    m_ActionName: Normal/Exit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f351ffbe-4cee-4536-880a-3296bef241a4
+    m_ActionName: UI/SkipDialogue[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Normal
