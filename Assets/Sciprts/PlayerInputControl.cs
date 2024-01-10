@@ -44,6 +44,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7f019fa-80ae-4476-9f17-65e80c7eae19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,45 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe4dd274-8895-462e-9063-c63ffb9bcc5d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""7220a6e5-da73-433f-948b-665a7e5ee351"",
+            ""actions"": [
+                {
+                    ""name"": ""SkipDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""f351ffbe-4cee-4536-880a-3296bef241a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d0dd3ebf-f08e-4f31-95e0-2534f69479ac"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Hold(duration=2.5)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +170,10 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_Normal = asset.FindActionMap("Normal", throwIfNotFound: true);
         m_Normal_Jump = m_Normal.FindAction("Jump", throwIfNotFound: true);
         m_Normal_Move = m_Normal.FindAction("Move", throwIfNotFound: true);
+        m_Normal_Exit = m_Normal.FindAction("Exit", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,12 +235,14 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private INormalActions m_NormalActionsCallbackInterface;
     private readonly InputAction m_Normal_Jump;
     private readonly InputAction m_Normal_Move;
+    private readonly InputAction m_Normal_Exit;
     public struct NormalActions
     {
         private @PlayerInputControl m_Wrapper;
         public NormalActions(@PlayerInputControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Normal_Jump;
         public InputAction @Move => m_Wrapper.m_Normal_Move;
+        public InputAction @Exit => m_Wrapper.m_Normal_Exit;
         public InputActionMap Get() { return m_Wrapper.m_Normal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -204,6 +258,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnMove;
+                @Exit.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_NormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,13 +271,54 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
         }
     }
     public NormalActions @Normal => new NormalActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_SkipDialogue;
+    public struct UIActions
+    {
+        private @PlayerInputControl m_Wrapper;
+        public UIActions(@PlayerInputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkipDialogue => m_Wrapper.m_UI_SkipDialogue;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @SkipDialogue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SkipDialogue.started += instance.OnSkipDialogue;
+                @SkipDialogue.performed += instance.OnSkipDialogue;
+                @SkipDialogue.canceled += instance.OnSkipDialogue;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface INormalActions
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnSkipDialogue(InputAction.CallbackContext context);
     }
 }
