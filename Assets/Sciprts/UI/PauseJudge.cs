@@ -1,31 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PauseJudge : MonoBehaviour
 {
-    float _previousTimeScale = 1;
+    public GameObject dialogueBox;
     public static bool isPaused;
-
-    void Update()
+    //GameObject dialogueBox => GameObject.Find("DialogueManager");
+    public void PauseIt()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+        isPaused = true;
+        dialogueBox.SetActive(true);
+        Time.timeScale = 0;
     }
-    void TogglePause()
+    public void Continue()
     {
-        if (Time.timeScale > 0)
-        {
-            _previousTimeScale = Time.timeScale;
-            Time.timeScale = 0;
-            isPaused = true;
-        }
-        else if (Time.timeScale == 0)
-        {
-            Time.timeScale = _previousTimeScale;
-            isPaused = false;
-        }
+        isPaused = false;
+        Time.timeScale = 1;
     }
 }
