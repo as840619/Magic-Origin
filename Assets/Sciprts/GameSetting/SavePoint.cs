@@ -11,6 +11,6 @@ namespace RespawnPositions
             public GameObject gameobj;
             public Transform ogjpositions;
         }
-        public List<Point> pointVectors = new List<Point>();
+        public List<Point> pointVectors = new();
     }
 }
