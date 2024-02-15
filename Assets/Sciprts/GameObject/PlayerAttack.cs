@@ -7,7 +7,6 @@ public class PlayerAttack : MonoBehaviour
     [Header("基本數據")]
     public int damage;
     public float time;
-
     private new PolygonCollider2D collider;
 
     private void Start()
@@ -15,8 +14,20 @@ public class PlayerAttack : MonoBehaviour
         collider = GetComponent<PolygonCollider2D>();
     }
 
-    private Animator Animation => PlayerController.Instance.GetComponent<Animator>();
-    //private int shield => GameObject.Find("ShieldRemain").AddComponent<>()
+    /*int Shield
+    {
+        get
+        {
+            int shieldValue = GameObject.FindWithTag("Player").GetComponentInChildren<ShieldValue>().shieldValue;
+            return shieldValue;
+        }
+        set
+        {
+        }           
+    }*/
+
+    //ShieldValue ShieldValue => GameObject.Find("Shield").GetComponent<ShieldValue>();
+    Animator Animation => PlayerController.Instance.GetComponent<Animator>();
 
     public void DoAction(ActionType actionType)
     {
@@ -29,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
     {
         print("DashBlock");
         collider.enabled = true;
-        
         //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
         StartCoroutine(DisableHitBox());
@@ -46,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
         print("IronCastle");
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
+        //Shield = 7;
         StartCoroutine(DisableHitBox());
     }
     public void Block()
@@ -53,9 +64,9 @@ public class PlayerAttack : MonoBehaviour
         print("Block");
         collider.enabled = true;
         Animation.SetTrigger("Block");
+        //Shield += 6;
         StartCoroutine(DisableHitBox());
     }
-
 
     IEnumerator DisableHitBox()
     {
@@ -71,5 +82,4 @@ public class PlayerAttack : MonoBehaviour
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
-
 }

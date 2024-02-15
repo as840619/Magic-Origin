@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8445596809979183286}
   - component: {fileID: 2624835805185917619}
   - component: {fileID: 5980388491498135484}
+  - component: {fileID: 915884978}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -101,6 +102,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &915884978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313122416453686142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b58be7e56d1ede4ab94b393298413a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldValue: 0
+  shieldText: {fileID: 6325170833028915789}
 --- !u!1 &659143196323837942
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +227,7 @@ GameObject:
   - component: {fileID: 1688624060104109752}
   - component: {fileID: 6325170833028915789}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,7 +457,6 @@ GameObject:
   - component: {fileID: 7378186775415801030}
   - component: {fileID: 4695050275380686337}
   - component: {fileID: 3764586457719677294}
-  - component: {fileID: 5977309261676696125}
   - component: {fileID: 3764586457719677204}
   m_Layer: 0
   m_Name: Player
@@ -609,7 +623,7 @@ MonoBehaviour:
   distanceBetweenImages: 0.2
   isGround: 0
   isWall: 0
-  isPause: 0
+  isDashing: 0
   canJump: 0
   canMove: 0
   canFilp: 0
@@ -626,51 +640,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928e7a2844a77ec498e33a94ac5166c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
   flashTime: 0.2
-  dieTime: 0.5
---- !u!114 &5977309261676696125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4695050275380686342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcabf01b24bd6a438385a201a098791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamePause:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4695050275380686337}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  gameResume:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4695050275380686337}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  dieTime: 1
+  takeDamage: 0
 --- !u!114 &3764586457719677204
 MonoBehaviour:
   m_ObjectHideFlags: 0

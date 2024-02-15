@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
             takeDamage = false;
             health = 0;
             anim.SetTrigger("Die");
-            Invoke("KillPlayer", dieTime);      //TODO 更改兩項invoke使用方式
+            Invoke(nameof(KillPlayer), dieTime);      //TODO 更改兩項invoke使用方式
             FlashColor(flashTime);
             KillPlayer();
         }
