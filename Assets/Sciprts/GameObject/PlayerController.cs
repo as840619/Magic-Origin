@@ -81,11 +81,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        skip = playerControl.UI.SkipDialogue;
+        //skip = playerControl.UI.SkipDialogue;
         move = playerControl.Normal.Move;
         jump = playerControl.Normal.Jump;
         escape = playerControl.Normal.Exit;
-        skip.Enable();
+        //skip.Enable();
         move.Enable();
         jump.Enable();
         escape.Enable();
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        skip.Disable();
+        //skip.Disable();
         move.Disable();
         jump.Disable();
         escape.Disable();
