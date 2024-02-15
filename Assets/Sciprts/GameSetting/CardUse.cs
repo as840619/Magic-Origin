@@ -38,10 +38,9 @@ public class CardUse : MonoBehaviour
         {
             Pa.DoAction(actionType);                //將改成傳入"ActionType"
         }
-        //DestroyImmediate(this.gameObject);
+        DestroyImmediate(this.gameObject);
     }
 }
-
 
 public enum ActionType
 {
