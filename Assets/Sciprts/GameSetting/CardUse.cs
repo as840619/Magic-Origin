@@ -38,7 +38,9 @@ public class CardUse : MonoBehaviour
         {
             Pa.DoAction(actionType);                //將改成傳入"ActionType"
         }
-        DestroyImmediate(this.gameObject);
+        CardManager.Instance.GetComponent<GraveYard>().graveYardCard.Add(this.gameObject);
+        gameObject.transform.position = GameObject.Find("Draw").transform.position;
+        // DestroyImmediate(this.gameObject);
     }
 }
 
