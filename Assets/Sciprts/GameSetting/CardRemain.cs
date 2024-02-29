@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CardRemain : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Cards
-    {
-        public GameObject Cardobj;
-        public int cardAmount;
-    }
-    public List<Cards> CardsAmount = new();
+    public List<GameObject> CardsAmount = new();
 }
