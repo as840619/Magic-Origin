@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("基本數據")]
     public int damage;
     public float time;
+    private int shieldInt;
     private new PolygonCollider2D collider;
 
     private void Start()
@@ -42,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
         collider.enabled = true;
         //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
+        PlayerManager.Instance.shieldValue += 1;
         StartCoroutine(DisableHitBox());
     }
     public void GloryShield()
@@ -49,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
         print("GloryShield");
         collider.enabled = true;
         Animation.SetTrigger("GloryShield");
+        PlayerManager.Instance.shieldValue += 2;
         StartCoroutine(DisableHitBox());
     }
     public void IronCastle()
@@ -56,7 +59,7 @@ public class PlayerAttack : MonoBehaviour
         print("IronCastle");
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
-        //Shield = 7;
+        PlayerManager.Instance.shieldValue += 3;
         StartCoroutine(DisableHitBox());
     }
     public void Block()
@@ -64,8 +67,16 @@ public class PlayerAttack : MonoBehaviour
         print("Block");
         collider.enabled = true;
         Animation.SetTrigger("Block");
-        //Shield += 6;
+        PlayerManager.Instance.shieldValue += 4;
         StartCoroutine(DisableHitBox());
+    }
+
+    public void PP()
+    {
+        if (collider != null)
+        {
+            collider.points = new Vector2[] {  };
+        }
     }
 
     IEnumerator DisableHitBox()
