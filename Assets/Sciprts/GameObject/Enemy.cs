@@ -14,8 +14,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] int _collisionDamage = 10;
     [SerializeField] float _collisionDamageInterval = 10f;
     [SerializeField] float _collisionTime;
-
     public GameObject _healthUI;
+    private GameObject tmpObject;
     //public TextMesh _healthValue;
     public Slider _healthBar;
     SpriteRenderer _spriteRenderer;
@@ -36,7 +36,14 @@ public abstract class Enemy : MonoBehaviour
         _healthBar.value = Health;
 
         if (_nowHealth <= 0)
+        {
             Destroy(transform.parent.gameObject);
+            if (Random.Range(0, 100) <= 100)
+            {
+                CardManager.Instance.DropCard(transform.position);
+            }
+
+        }
 
         if (_collisionTime > 0)
             _collisionTime -= Time.deltaTime;
