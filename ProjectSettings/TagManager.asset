@@ -17,6 +17,7 @@ TagManager:
   - MidFloor
   - MidCeiling
   - MidWall
+  - CardDrop
   layers:
   - Default
   - TransparentFX
