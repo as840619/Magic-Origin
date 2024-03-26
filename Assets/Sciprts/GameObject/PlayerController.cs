@@ -239,6 +239,10 @@ public class PlayerController : MonoBehaviour
                 //_playerHealth.TakeDamage(1);
             }
         }
+        if (other.CompareTag("CardDrop"))
+        {
+            Destroy(other);
+            CardManager.Instance.AddCardRemain();
+        }
     }
-
 }
