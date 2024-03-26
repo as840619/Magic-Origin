@@ -16,7 +16,6 @@ public class PlayerAttack : MonoBehaviour
         collider = GetComponent<PolygonCollider2D>();
     }
 
-    //ShieldValue ShieldValue => GameObject.Find("Shield").GetComponent<ShieldValue>();
     Animator Animation => PlayerController.Instance.GetComponent<Animator>();
 
 
