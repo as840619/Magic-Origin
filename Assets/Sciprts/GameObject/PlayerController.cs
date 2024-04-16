@@ -232,6 +232,8 @@ public class PlayerController : MonoBehaviour
             this.transform.position = new Vector3(0, -72.2f, 0);
         if (other.CompareTag("Flag13"))
             this.transform.position = new Vector3(0, -97.2f, 0);
+        if (other.CompareTag("Flag14"))
+            this.transform.position = new Vector3(-1, -132f, 0);
         if (other.CompareTag("Border"))
         {
             if (this.transform.position.y >= -8f)
