@@ -50,6 +50,8 @@ public class EnemybulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (PlayerController.Instance.invincible)
+                return;
             if (shieldInt == 0)
             {
                 other.gameObject.GetComponent<PlayerHealth>().takeDamage = true;
