@@ -294,7 +294,7 @@ public class PlayerAttack : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("hit");
-            other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<Enemy>().TakeDamage(damage);//TODO：當接觸到敵人時會有問題
         }
     }
 }
