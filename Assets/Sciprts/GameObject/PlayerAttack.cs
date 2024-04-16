@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public float time;
     private int shieldInt;
     private new PolygonCollider2D collider;
-   
+
     private void Start()
     {
         collider = GetComponent<PolygonCollider2D>();
@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     ////////////////////////////////////設置collider用區域//////////////////////////////////
     private void SetColliderShapeAction1()
     {
-        if(collider != null)
+        if (collider != null)
         {
             collider.points = new Vector2[]
             {
@@ -160,10 +160,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
     public void PerformAction1()
-        {
-            Debug.Log("動作1");
-            SetColliderShapeAction1();
-        }
+    {
+        Debug.Log("動作1");
+        SetColliderShapeAction1();
+    }
     public void PerformAction2()
     {
         Debug.Log("動作2");
@@ -215,7 +215,8 @@ public class PlayerAttack : MonoBehaviour
     public void DoAction(ActionType actionType)
     {
         print(actionType);
- 
+        PlayerManager.Instance.staminaValue -= 1;
+
         switch (actionType)//辨識動作變更collider
         {
             case ActionType.Attack:
@@ -245,6 +246,7 @@ public class PlayerAttack : MonoBehaviour
     public void DashBlock()
     {
         print("DashBlock");
+        PlayerManager.Instance.staminaValue -= 1;
         PerformAction7();
         collider.enabled = true;
         //PlayerController.Instance.Dash();
@@ -255,6 +257,7 @@ public class PlayerAttack : MonoBehaviour
     public void GloryShield()
     {
         print("GloryShield");
+        PlayerManager.Instance.staminaValue -= 1;
         PerformAction8();
         collider.enabled = true;
         Animation.SetTrigger("GloryShield");
@@ -264,6 +267,7 @@ public class PlayerAttack : MonoBehaviour
     public void IronCastle()
     {
         print("IronCastle");
+        PlayerManager.Instance.staminaValue -= 1;
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
         PlayerManager.Instance.shieldValue += 3;
@@ -272,6 +276,7 @@ public class PlayerAttack : MonoBehaviour
     public void Block()
     {
         print("Block");
+        PlayerManager.Instance.staminaValue -= 1;
         collider.enabled = true;
         Animation.SetTrigger("Block");
         PlayerManager.Instance.shieldValue += 4;
@@ -292,7 +297,4 @@ public class PlayerAttack : MonoBehaviour
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
-
-
-
 }
