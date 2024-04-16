@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     public bool canFilp;
     public bool _fallThough;
+    public bool invincible;
 
     public PlayerInputControl playerControl;
     private int jumpLeft;
