@@ -12,6 +12,12 @@ public class CardUse : MonoBehaviour
     // public bool cardn = false;   //cardn = true;
     [SerializeField] ActionType actionType;
     PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
+    int staminaValue => PlayerManager.Instance.staminaValue;
+
+    public void OnMouseOver()   //TODO：鼠標放上去會放大，同時卡牌會顯示名稱和功能
+    {
+    }
+
     public void OnMouseDown()
     {
         ActionType[] actionTypes =
@@ -21,6 +27,8 @@ public class CardUse : MonoBehaviour
             ActionType.IronCastle,
             ActionType.Block
         };
+        if (staminaValue < 1)
+            return;
         if (actionTypes.Contains(actionType))
         {
             string methodName = actionType.ToString();        //呼叫ActionType名子
