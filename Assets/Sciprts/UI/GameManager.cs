@@ -64,5 +64,4 @@ public class GameManager : MonoBehaviour
             Destroy(temp);
         }
     }
-
 }
