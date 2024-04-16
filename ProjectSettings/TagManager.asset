@@ -19,6 +19,8 @@ TagManager:
   - MidWall
   - CardDrop
   - Water
+  - Flag14
+  - Flag21
   layers:
   - Default
   - TransparentFX
