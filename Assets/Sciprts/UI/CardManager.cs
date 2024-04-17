@@ -45,8 +45,8 @@ public class CardManager : MonoBehaviour
 
     public void AddCardRemain()
     {
-        GetComponent<CardRemain>().CardsAmount.Add(cardType[Random.Range(0, 9)]);
+       // GetComponent<CardRemain>().CardsAmount.Add(cardType[Random.Range(0, 9)]);
     }
 
-    private List<GameObject> cardType => GetComponent<CardType>().cardType;
+    //private List<GameObject> cardType => GetComponent<CardType>().cardType;
 }

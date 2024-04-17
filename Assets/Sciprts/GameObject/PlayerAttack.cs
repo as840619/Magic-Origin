@@ -289,12 +289,29 @@ public class PlayerAttack : MonoBehaviour
         collider.enabled = false;
     }
 
+    /*  void OnTriggerEnter2D(Collider2D other)
+      {
+          if (other.gameObject.CompareTag("Enemy"))
+          {
+              Debug.Log("hit");
+              other.GetComponent<Enemy>().TakeDamage(damage);//TODO：當接觸到敵人時會有問題
+          }
+      }*/
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("hit");
-            other.GetComponent<Enemy>().TakeDamage(damage);//TODO：當接觸到敵人時會有問題
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                Debug.Log("有傷害");
+            }
+            else
+            {
+                Debug.LogWarning("可能沒事吧");
+            }
         }
     }
 }

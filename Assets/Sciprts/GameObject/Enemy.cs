@@ -38,11 +38,11 @@ public abstract class Enemy : MonoBehaviour
         if (_nowHealth <= 0)
         {
             Destroy(transform.parent.gameObject);
-            if (Random.Range(0, 100) <= 100)
+           /* if (Random.Range(0, 100) <= 100)
             {
                 CardManager.Instance.DropCard(transform.position);
             }
-
+           */
         }
 
         if (_collisionTime > 0)
