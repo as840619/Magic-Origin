@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CardManager : MonoBehaviour
 {
+    [Header("座標")]
+    [SerializeField] Transform cardRewardShow;
+    [SerializeField] Transform cardRewardLerp;
+    [SerializeField] RectTransform handPlace;
+    [SerializeField] GameObject plusOne;
+    [SerializeField] GameObject CardTrigger;
+
     private static CardManager instance;
     public static CardManager Instance
     {
@@ -14,7 +22,6 @@ public class CardManager : MonoBehaviour
             return instance;
         }
     }
-    [SerializeField] GameObject CardDroped;
 
     public List<string> skillAttack = new();
     public List<string> skillSlash = new();
@@ -38,15 +45,40 @@ public class CardManager : MonoBehaviour
         GetComponent<GraveYard>().graveYardCard.Clear();
     }
 
-    public void DropCard(Vector2 position)
+    /*public void DropCard(Vector2 position)
     {
         GameObject gameObject = Instantiate(CardDroped, position, Quaternion.identity);
-    }
+    }*/
 
-    public void AddCardRemain()
+    public void CardInstantiate()
     {
-       // GetComponent<CardRemain>().CardsAmount.Add(cardType[Random.Range(0, 9)]);
+        int index = Random.Range(0, 9);
+        //GameObject gameObject = Instantiate(cardType[index], rectPosition.anchoredPosition, Quaternion.identity);
+        GameObject gameObject = Instantiate(cardType[index], cardRewardShow.position, Quaternion.identity);
+        gameObject.name = cardType[index].name;
+        gameObject.transform.parent = handPlace;
+        AddCardRemain(gameObject);
+        StartCoroutine(CardAddEvent(gameObject));
     }
 
-    //private List<GameObject> cardType => GetComponent<CardType>().cardType;
+    public void DropCard(Vector3 vector3)
+    {
+        Instantiate(CardTrigger, vector3, Quaternion.identity);
+    }
+
+    public void AddCardRemain(GameObject gameObject)
+    {
+        GetComponent<CardRemain>().CardsAmount.Add(gameObject);
+    }
+
+    IEnumerator CardAddEvent(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(1.5F);
+        gameObject.transform.position = GameObject.Find("Draw").transform.position;
+        plusOne.SetActive(true);
+        yield return new WaitForSeconds(1.5F);
+        plusOne.SetActive(false);
+
+    }
+    private List<GameObject> cardType => GetComponent<CardType>().cardType;
 }
