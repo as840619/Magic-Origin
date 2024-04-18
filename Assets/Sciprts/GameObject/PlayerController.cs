@@ -261,6 +261,10 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.position = new Vector3(27, -29, 0);
         }
+        if (other.GetComponent<Celling>() != null)
+        {
+
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
