@@ -8,6 +8,7 @@ using RespawnPositions;
 
 public class GameManager : MonoBehaviour
 {
+    int playerLevel = 0;
     GameObject _cameraobj;
     CamCtrl _camCtrl;
     private static GameManager instance;
@@ -21,34 +22,26 @@ public class GameManager : MonoBehaviour
         }
     }
     List<SavePoint.Point> points;
-
-    /*[Header("")]
-    public static int enemyInfectorFarHP;
-    public static int enemyInfectorNearHP;
-    public static int enemyInfectorBossHP;
-    public static int enemyHP;
-    [Header("")]
-    [SerializeField] Text _enemyInfectorFarHPText;
-    [SerializeField] Text _enemyInfectorNearHPText;
-    [SerializeField] Text _enemyInfectorBossHPText;*/
+    List<SavePoint.Saving> savings;
 
     void Start()
     {
         _cameraobj = GameObject.FindWithTag("MainCamera");
         _camCtrl = _cameraobj.GetComponent<CamCtrl>();
         points = GetComponent<SavePoint>().pointVectors;
+        savings = GetComponent<SavePoint>().levelVectors;
         ResetObject();
     }
 
     public void ResetObject()
     {
+        playerLevel = 0;
         TagCatcher("Enemy");
         TagCatcher("Bullet");
         Destroy(GameObject.FindWithTag("Player"));
         foreach (SavePoint.Point container in points)
         {
-            GameObject Zo = Instantiate(
-                container.gameobj, container.ogjpositions.position, Quaternion.identity);
+            GameObject Zo = Instantiate(container.gameobj, container.ogjpositions.position, Quaternion.identity);
             if (Zo.CompareTag("Player"))
             {
                 Zo.name = "Player";
@@ -63,5 +56,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(temp);
         }
+    }
+
+    public Vector3 NextLevel()
+    {
+        playerLevel++;
+        print("進入第" + playerLevel + 1 + "關");
+        return savings[playerLevel].playerPositions.position;
+    }
+
+    public Vector3 ReturnLevel()
+    {
+        return savings[playerLevel].playerPositions.position;
     }
 }
