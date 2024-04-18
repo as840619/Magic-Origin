@@ -53,6 +53,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Draw"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0a6f0dc-3a18-40f5-825f-a1b1acc34287"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,28 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bea7098c-6d02-4af4-903c-e0b88bd2b7a7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Draw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6674fe7d-6122-42ba-bd14-a3583f6c3ad4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Draw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -171,6 +202,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_Normal_Jump = m_Normal.FindAction("Jump", throwIfNotFound: true);
         m_Normal_Move = m_Normal.FindAction("Move", throwIfNotFound: true);
         m_Normal_Exit = m_Normal.FindAction("Exit", throwIfNotFound: true);
+        m_Normal_Draw = m_Normal.FindAction("Draw", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
@@ -236,6 +268,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Normal_Jump;
     private readonly InputAction m_Normal_Move;
     private readonly InputAction m_Normal_Exit;
+    private readonly InputAction m_Normal_Draw;
     public struct NormalActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -243,6 +276,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Normal_Jump;
         public InputAction @Move => m_Wrapper.m_Normal_Move;
         public InputAction @Exit => m_Wrapper.m_Normal_Exit;
+        public InputAction @Draw => m_Wrapper.m_Normal_Draw;
         public InputActionMap Get() { return m_Wrapper.m_Normal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +295,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Exit.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
+                @Draw.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Draw.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Draw.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
             }
             m_Wrapper.m_NormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +311,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
+                @Draw.started += instance.OnDraw;
+                @Draw.performed += instance.OnDraw;
+                @Draw.canceled += instance.OnDraw;
             }
         }
     }
@@ -316,6 +356,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnDraw(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
