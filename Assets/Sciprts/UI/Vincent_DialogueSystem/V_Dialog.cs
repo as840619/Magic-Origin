@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+
 public class V_Dialog : MonoBehaviour
 {
     public Text textComponent;
@@ -13,24 +14,23 @@ public class V_Dialog : MonoBehaviour
 
     private DefaultInputActions action;
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         action.Enable();
     }
     private void OnDisable()
     {
         action.Disable();
-    }
+    }*/
     void Start()
     {
         textComponent.text = string.Empty;
         StartDialogue();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (action.UI.Click.IsPressed())
+        if (true)//action.UI.Click.IsPressed())
         {
             if (textComponent.text == lines[index])
             {
@@ -58,17 +58,17 @@ public class V_Dialog : MonoBehaviour
         }
     }
     void NextLine()
+    {
+        if (index < lines.Length - 1)
         {
-            if (index < lines.Length - 1)
-            {
-                index++;
-                textComponent.text = string.Empty;
-                StartCoroutine(TypeLine());
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
+            index++;
+            textComponent.text = string.Empty;
+            StartCoroutine(TypeLine());
         }
-    
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
 }
