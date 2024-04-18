@@ -38,13 +38,15 @@ public abstract class Enemy : MonoBehaviour
         if (_nowHealth <= 0)
         {
             Destroy(transform.parent.gameObject);
-           /* if (Random.Range(0, 100) <= 100)
+            if (Random.Range(0, 100) <= 12)
             {
                 CardManager.Instance.DropCard(transform.position);
+                if (this.CompareTag("Boss"))
+                {
+                    gameObject.GetComponent<GameObject>().SetActive(true);
+                }
             }
-           */
         }
-
         if (_collisionTime > 0)
             _collisionTime -= Time.deltaTime;
     }
