@@ -71,6 +71,11 @@ public class CardManager : MonoBehaviour
         GetComponent<CardRemain>().CardsAmount.Add(gameObject);
     }
 
+    private void ShowGY()
+    {
+        GameObject.Find("StaminaUI").SetActive(true);
+    }
+
     IEnumerator CardAddEvent(GameObject gameObject)
     {
         yield return new WaitForSeconds(1.5F);
@@ -78,7 +83,8 @@ public class CardManager : MonoBehaviour
         plusOne.SetActive(true);
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(false);
-
     }
+
+
     private List<GameObject> cardType => GetComponent<CardType>().cardType;
 }
