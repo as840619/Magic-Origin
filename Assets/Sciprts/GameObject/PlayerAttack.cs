@@ -18,7 +18,6 @@ public class PlayerAttack : MonoBehaviour
 
     Animator Animation => PlayerController.Instance.GetComponent<Animator>();
 
-
     ////////////////////////////////////設置collider用區域//////////////////////////////////
     private void SetColliderShapeAction1()
     {
@@ -161,53 +160,63 @@ public class PlayerAttack : MonoBehaviour
     }
     public void PerformAction1()
     {
-        Debug.Log("動作1");
+        Debug.Log("動作1開始");
         SetColliderShapeAction1();
+        Debug.Log("動作1結束");
     }
     public void PerformAction2()
     {
-        Debug.Log("動作2");
+        Debug.Log("動作2開始");
         SetColliderShapeAction2();
+        Debug.Log("動作2結束");
     }
     public void PerformAction3()
     {
-        Debug.Log("動作3");
+        Debug.Log("動作3開始");
         SetColliderShapeAction3();
+        Debug.Log("動作3結束");
     }
     public void PerformAction4()
     {
-        Debug.Log("動作4");
+        Debug.Log("動作4開始");
         SetColliderShapeAction4();
+        Debug.Log("動作4結束");
     }
     public void PerformAction5()
     {
-        Debug.Log("動作5");
+        Debug.Log("動作5開始");
         SetColliderShapeAction5();
+        Debug.Log("動作5結束");
     }
     public void PerformAction6()
     {
-        Debug.Log("動作6");
+        Debug.Log("動作6開始");
         SetColliderShapeAction6();
+        Debug.Log("動作6結束");
     }
     public void PerformAction7()
     {
-        Debug.Log("動作7");
+        Debug.Log("動作7開始");
         SetColliderShapeAction7();
+        Debug.Log("動作7結束");
     }
     public void PerformAction8()
     {
-        Debug.Log("動作8");
+        Debug.Log("動作8開始");
         SetColliderShapeAction8();
+        Debug.Log("動作8結束");
     }
     public void PerformAction9()
     {
-        Debug.Log("動作9");
+        Debug.Log("動作9開始");
         SetColliderShapeAction9();
+        Debug.Log("動作9結束");
     }
     public void PerformAction10()
     {
-        Debug.Log("動作10");
+        Debug.Log("動作10開始");
         SetColliderShapeAction10();
+        Debug.Log("動作10結束");
     }
     ////////////////////////////////////設置collider用區域//////////////////////////////////
 
@@ -243,6 +252,7 @@ public class PlayerAttack : MonoBehaviour
         Animation.SetTrigger(actionType.ToString());
         StartCoroutine(DisableHitBox());
     }
+
     public void DashBlock()
     {
         print("DashBlock");
@@ -254,6 +264,7 @@ public class PlayerAttack : MonoBehaviour
         PlayerManager.Instance.shieldValue += 1;
         StartCoroutine(DisableHitBox());
     }
+
     public void GloryShield()
     {
         print("GloryShield");
@@ -264,6 +275,7 @@ public class PlayerAttack : MonoBehaviour
         PlayerManager.Instance.shieldValue += 2;
         StartCoroutine(DisableHitBox());
     }
+
     public void IronCastle()
     {
         print("IronCastle");
@@ -271,8 +283,11 @@ public class PlayerAttack : MonoBehaviour
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
         PlayerManager.Instance.shieldValue += 3;
+        if (PlayerController.Instance.createrMode == false)
+            StartCoroutine(InvincibleTime());
         StartCoroutine(DisableHitBox());
     }
+
     public void Block()
     {
         print("Block");
@@ -289,6 +304,13 @@ public class PlayerAttack : MonoBehaviour
         collider.enabled = false;
     }
 
+    IEnumerator InvincibleTime()
+    {
+        PlayerController.Instance.invincible = true;
+        yield return new WaitForSeconds(5F);
+        PlayerController.Instance.invincible = false;
+    }
+
     /*  void OnTriggerEnter2D(Collider2D other)
       {
           if (other.gameObject.CompareTag("Enemy"))
@@ -303,7 +325,7 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.Log("hit");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
+            if (enemy != null)
             {
                 enemy.TakeDamage(damage);
                 Debug.Log("有傷害");
