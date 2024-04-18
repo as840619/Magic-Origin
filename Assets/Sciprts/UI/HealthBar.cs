@@ -17,6 +17,6 @@ public class HealthBar : MonoBehaviour
     {
         HealthCurrent = transform.GetComponentInParent<PlayerHealth>().health;
         float p = Mathf.Max(0, (float)HealthCurrent / HealthMax);
-        spr.size = new Vector2(p, 1);
+        //spr.size = new Vector2(p, 1);
     }
 }
