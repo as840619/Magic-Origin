@@ -11,6 +11,12 @@ namespace RespawnPositions
             public GameObject gameobj;
             public Transform ogjpositions;
         }
+        [System.Serializable]
+        public struct Saving
+        {
+            public Transform playerPositions;
+        }
         public List<Point> pointVectors = new();
+        public List<Saving> levelVectors = new();
     }
 }
