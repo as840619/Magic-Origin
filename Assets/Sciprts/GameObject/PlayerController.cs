@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
     public bool canFilp;
     public bool _fallThough;
     public bool invincible;
+    public bool createrMode;
+
+    public bool bossBattle = false;
 
     public PlayerInputControl playerControl;
     private int jumpLeft;
@@ -224,28 +227,46 @@ public class PlayerController : MonoBehaviour
     */
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.CompareTag("Water"))
-        //playerHealth.health = 0;
         if (other.CompareTag("Flag11"))
-            this.transform.position = new Vector3(0, -36.7f, 0);
+            this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag12"))
-            this.transform.position = new Vector3(0, -72.2f, 0);
+            this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag13"))
-            this.transform.position = new Vector3(0, -97.2f, 0);
+            this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag14"))
-            this.transform.position = new Vector3(-1, -132f, 0);
-        if (other.CompareTag("Border"))
+            this.transform.position = GameManager.Instance.NextLevel();
+        if (other.CompareTag("Hp"))
+            this.transform.position = new Vector3(52, -140, 0);
+        if (other.CompareTag("Water"))
         {
-            if (this.transform.position.y >= -8f)
-            {
-                this.transform.position = new Vector3(0, -5.3f, 0);
-                //_playerHealth.TakeDamage(1);
-            }
+            this.transform.position = GameManager.Instance.ReturnLevel();
         }
         if (other.CompareTag("CardDrop"))
         {
             Destroy(other);
-            CardManager.Instance.AddCardRemain();
+            CardManager.Instance.CardInstantiate();
+        }
+        if (other.CompareTag("BossZombieBattle"))
+            bossBattle = true;
+        if (other.CompareTag("HiddenTilemap"))
+        {
+            other.GetComponent<HiddenSpot>().SortingLayer();
+        }
+        if (other.CompareTag("Chest"))
+        {
+            //other.GetComponent<>()
+            CardManager.Instance.CardInstantiate();
+        }
+        if (other.CompareTag("EX"))
+        {
+            this.transform.position = new Vector3(27, -29, 0);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("HiddenTilemap"))
+        {
+            other.GetComponent<HiddenSpot>().LeaveSpot();
         }
     }
 }
