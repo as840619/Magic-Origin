@@ -74,7 +74,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.003, y: 0.291}
+  m_AnchoredPosition: {x: -0.016, y: 1.077}
   m_SizeDelta: {x: 1.5, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5022646753907582443
@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5022646754163865371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.008, y: 0.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -390,12 +390,11 @@ GameObject:
   - component: {fileID: 5022646755006805251}
   - component: {fileID: 5022646755006805308}
   - component: {fileID: 2435171715691253030}
-  - component: {fileID: 5916583688600500593}
-  - component: {fileID: 5022646753839809751}
-  - component: {fileID: 5022646753839809754}
+  - component: {fileID: 1120525696895514263}
+  - component: {fileID: 7932168167585318734}
   m_Layer: 0
   m_Name: Enemy_Zombie Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,9 +406,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5022646755006805309}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.64, y: 1.07, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5022646754679534431}
@@ -510,9 +509,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!61 &5916583688600500593
-BoxCollider2D:
+  m_Constraints: 7
+--- !u!60 &1120525696895514263
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -521,10 +520,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00112506, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -534,10 +533,69 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.31225014, y: 0.48}
-  m_EdgeRadius: 0
---- !u!114 &5022646753839809751
+  m_Points:
+    m_Paths:
+    - - {x: 0.22999999, y: -0.81}
+      - {x: 0.22, y: -0.88}
+      - {x: 0.14999999, y: -0.90999997}
+      - {x: 0.16, y: -0.96}
+      - {x: 0.45999998, y: -0.96}
+      - {x: 0.57, y: -0.84999996}
+      - {x: 0.57, y: -0.71}
+      - {x: 0.53, y: -0.69}
+      - {x: 0.53, y: -0.35}
+      - {x: 0.41, y: -0.29}
+      - {x: 0.44, y: -0.24}
+      - {x: 0.58, y: -0.38}
+      - {x: 0.62, y: -0.38}
+      - {x: 0.62, y: 0.26999998}
+      - {x: 0.53, y: 0.42}
+      - {x: 0.48999998, y: 0.48999998}
+      - {x: 0.45, y: 0.53999996}
+      - {x: 0.35999998, y: 0.55}
+      - {x: 0.37, y: 0.81}
+      - {x: 0.32999998, y: 0.89}
+      - {x: 0.21, y: 0.96}
+      - {x: -0.32, y: 0.96}
+      - {x: -0.35999998, y: 0.76}
+      - {x: -0.37, y: 0.59}
+      - {x: -0.32999998, y: 0.57}
+      - {x: -0.32999998, y: 0.39}
+      - {x: -0.29, y: 0.31}
+      - {x: -0.31, y: 0.26999998}
+      - {x: -0.38, y: 0.17}
+      - {x: -0.39999998, y: 0.04}
+      - {x: -0.42999998, y: -0.089999996}
+      - {x: -0.53, y: -0.19}
+      - {x: -0.56, y: -0.28}
+      - {x: -0.62, y: -0.44}
+      - {x: -0.62, y: -0.58}
+      - {x: -0.59999996, y: -0.58}
+      - {x: -0.59999996, y: -0.84}
+      - {x: -0.58, y: -0.85999995}
+      - {x: -0.53, y: -0.85999995}
+      - {x: -0.42999998, y: -0.72999996}
+      - {x: -0.35, y: -0.69}
+      - {x: -0.32, y: -0.59999996}
+      - {x: -0.24, y: -0.52}
+      - {x: -0.19999999, y: -0.24}
+      - {x: -0.19999999, y: -0.06}
+      - {x: -0.17999999, y: -0.13}
+      - {x: -0.099999994, y: -0.19}
+      - {x: -0.13, y: -0.32999998}
+      - {x: -0.17999999, y: -0.34}
+      - {x: -0.19999999, y: -0.35999998}
+      - {x: -0.24, y: -0.52}
+      - {x: -0.24, y: -0.62}
+      - {x: -0.26, y: -0.62}
+      - {x: -0.28, y: -0.64}
+      - {x: -0.32, y: -0.91999996}
+      - {x: -0.32, y: -0.96}
+      - {x: -0.08, y: -0.96}
+      - {x: 0.12, y: -0.64}
+      - {x: 0.14999999, y: -0.65}
+      - {x: 0.19999999, y: -0.76}
+--- !u!114 &7932168167585318734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,27 +604,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5022646755006805309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b236bd8982d534b84be5c33b797b99, type: 3}
+  m_Script: {fileID: 11500000, guid: b7b47b2b488ec2c48be6e3528a3301ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  lineOfSite: 1.49
---- !u!114 &5022646753839809754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5022646755006805309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bc1684b93bd414b87d7c8818112aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 3394373959840294898, guid: 2393f732820fb8b4582696644faa24eb, type: 3}
+  bullet1: {fileID: 8906468611610655508, guid: f8bc13ce4c1ea8e44954c9b011dd3ac3, type: 3}
+  bullet2: {fileID: 7412646667306588233, guid: 2e1e4890e1308bd4b8828794c42f0cd8, type: 3}
+  bullet3: {fileID: 7631202225647361833, guid: c3eb819ccf285624286069641d366a93, type: 3}
   bulletPos: {fileID: 5022646754163865370}
-  gapFire: 0
-  player: {fileID: 0}
+  op: 0
+  gapFire: 0.5
+  timer: 0
+  opTimer: 0
+  temp: 2
+  speed: 5
+  zombieNearFor: 8.5
+  zombieNearBack: 3
+  zombieStop: 1.5
+  blackOne: 1
+  grayThree: 3
+  whiteFive: 5
+  redSeven: 7
+  yellowNine: 9
+  greenSix: 11
 --- !u!1 &5022646755058008504
 GameObject:
   m_ObjectHideFlags: 0
