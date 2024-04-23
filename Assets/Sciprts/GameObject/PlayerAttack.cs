@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("基本數據")]
-    public int damage;
     public float time;
     private int shieldInt;
     private new PolygonCollider2D collider;
@@ -158,6 +157,12 @@ public class PlayerAttack : MonoBehaviour
             };
         }
     }
+    private void SetRendererAction10()
+    {
+        //GameObject.Find("ShieldRing").SetActive(true);
+    }
+
+
     public void PerformAction1()
     {
         Debug.Log("動作1開始");
@@ -229,6 +234,7 @@ public class PlayerAttack : MonoBehaviour
         switch (actionType)//辨識動作變更collider
         {
             case ActionType.Attack:
+                //CardManager.Instance.GetComponentInChildren<CardSkillDetails>()..name[1];
                 PerformAction1();
                 break;
             case ActionType.Slash:
@@ -256,7 +262,7 @@ public class PlayerAttack : MonoBehaviour
     public void DashBlock()
     {
         print("DashBlock");
-        PlayerManager.Instance.staminaValue -= 1;
+        PlayerManager.Instance.staminaValue -= 0;
         PerformAction7();
         collider.enabled = true;
         //PlayerController.Instance.Dash();
@@ -265,26 +271,27 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(DisableHitBox());
     }
 
-    public void GloryShield()
+    public void GrowingShield()
     {
-        print("GloryShield");
+        print("GrowingShield");
         PlayerManager.Instance.staminaValue -= 1;
         PerformAction8();
         collider.enabled = true;
-        Animation.SetTrigger("GloryShield");
-        PlayerManager.Instance.shieldValue += 2;
+        Animation.SetTrigger("GrowingShield");
+        PlayerManager.Instance.shieldValue += 1;
         StartCoroutine(DisableHitBox());
+        StartCoroutine(GrowingShieldValue());
     }
 
     public void IronCastle()
     {
         print("IronCastle");
-        PlayerManager.Instance.staminaValue -= 1;
+        PlayerManager.Instance.staminaValue -= 2;
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
-        PlayerManager.Instance.shieldValue += 3;
         if (PlayerController.Instance.createrMode == false)
             StartCoroutine(InvincibleTime());
+        SetRendererAction10();
         StartCoroutine(DisableHitBox());
     }
 
@@ -296,6 +303,16 @@ public class PlayerAttack : MonoBehaviour
         Animation.SetTrigger("Block");
         PlayerManager.Instance.shieldValue += 4;
         StartCoroutine(DisableHitBox());
+    }
+
+    IEnumerator GrowingShieldValue()
+    {
+        int i = 1;
+        while (i == 12)
+        {
+            yield return new WaitForSeconds(1F);
+            PlayerManager.Instance.shieldValue += i * 2;
+        }
     }
 
     IEnumerator DisableHitBox()
@@ -311,14 +328,6 @@ public class PlayerAttack : MonoBehaviour
         PlayerController.Instance.invincible = false;
     }
 
-    /*  void OnTriggerEnter2D(Collider2D other)
-      {
-          if (other.gameObject.CompareTag("Enemy"))
-          {
-              Debug.Log("hit");
-              other.GetComponent<Enemy>().TakeDamage(damage);//TODO：當接觸到敵人時會有問題
-          }
-      }*/
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -327,7 +336,7 @@ public class PlayerAttack : MonoBehaviour
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(10);
                 Debug.Log("有傷害");
             }
             else
