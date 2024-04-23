@@ -10,12 +10,12 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         spr = GetComponent<SpriteRenderer>();
-        HealthMax = transform.GetComponentInParent<PlayerHealth>().health;
+        HealthMax = transform.GetComponentInParent<PlayerHealth>().nowHealth;
     }
 
     void Update()
     {
-        HealthCurrent = transform.GetComponentInParent<PlayerHealth>().health;
+        HealthCurrent = transform.GetComponentInParent<PlayerHealth>().nowHealth;
         float p = Mathf.Max(0, (float)HealthCurrent / HealthMax);
         //spr.size = new Vector2(p, 1);
     }
