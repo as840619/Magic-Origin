@@ -8,15 +8,27 @@ public class CardListMenu : MonoBehaviour
 
     public void CatchCardList()
     {
-        cardList.AddRange(GetComponent<GraveYard>().graveYardCard);
-        cardList.AddRange(GetComponent<CardRemain>().CardsAmount);
+        foreach (GameObject gameObject in CardManager.Instance.GetComponent<GraveYard>().graveYardCard)
+            cardList.Add(gameObject);
+        foreach (GameObject gameObject in CardManager.Instance.GetComponent<CardRemain>().CardsAmount)
+            cardList.Add(gameObject);
+        SortingList(cardList);
+        /*for (int i = cardList.Count - 1; i >= 0; i--)
+        {
+            GameObject game = Instantiate(cardList[i], transform.localPosition, Quaternion.identity);   
+            //cardList[i].transform.position = ;
+            //cardList[i].transform.parent = transform.parent;
+            game.transform.parent = transform.parent;
+            cardList.RemoveAt(i);
+            print(i);
+        }*/
     }
 
     private void SortingList(List<GameObject> cardList)
     {
         for (int i = 1; i < cardList.Count; i++)
         {
-            GameObject targetGameObject = GetComponent<CardType>().cardType[i];
+            GameObject targetGameObject = CardManager.Instance.GetComponent<CardType>().cardType[i];
             int j = i - 1;
             while (j >= 0 && cardList[j] == targetGameObject)
             {
