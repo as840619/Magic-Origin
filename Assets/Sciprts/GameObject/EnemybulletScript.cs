@@ -55,7 +55,8 @@ public class EnemybulletScript : MonoBehaviour
             if (shieldInt == 0)
             {
                 other.gameObject.GetComponent<PlayerHealth>().takeDamage = true;
-                other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage  //TODO 修改判斷
+                PlayerManager.Instance.nowHealth--;
+                PlayerManager.Instance.UpdateHealth();
             }
             else
                 PlayerManager.Instance.shieldValue--;
