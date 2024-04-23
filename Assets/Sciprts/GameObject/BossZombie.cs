@@ -45,10 +45,8 @@ public class BossZombie : MonoBehaviour
     private void Update()
     {
         float distanceFromPlayer = Vector2.Distance(playerPosition, transform.position);
-
         if (distanceFromPlayer < zombieStop)
             return;
-
         // (distanceFromPlayer < zombieNearFor && distanceFromPlayer > zombieNearBack)
         //if (distanceFromPlayer < zombieNearBack)
         //transform.position = Vector2.MoveTowards(this.transform.position, playerPosition, speed * Time.deltaTime);
@@ -212,6 +210,5 @@ public class BossZombie : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, yellowNine);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, greenSix);
-
     }
 }

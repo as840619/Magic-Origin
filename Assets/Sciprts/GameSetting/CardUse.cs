@@ -16,6 +16,7 @@ public class CardUse : MonoBehaviour
 
     public void OnMouseOver()   //TODO：鼠標放上去會放大，同時卡牌會顯示名稱和功能
     {
+        Debug.Log("Mouse is over this object.");
     }
 
     public void OnMouseDown()
@@ -23,7 +24,7 @@ public class CardUse : MonoBehaviour
         ActionType[] actionTypes =
         {
             ActionType.DashBlock,
-            ActionType.GloryShield,
+            ActionType.GrowingShield,
             ActionType.IronCastle,
             ActionType.Block
         };
@@ -46,8 +47,14 @@ public class CardUse : MonoBehaviour
         {
             Pa.DoAction(actionType);                //將改成傳入"ActionType"
         }
+        ResetCards();
+    }
+
+    public void ResetCards()
+    {
         CardManager.Instance.GetComponent<GraveYard>().graveYardCard.Add(this.gameObject);
-        gameObject.transform.position = GameObject.Find("Draw").transform.position;
+        transform.position = GameObject.Find("Draw").transform.position;
+        Destroy(GetComponent<HandCards>());
     }
 }
 
@@ -60,7 +67,7 @@ public enum ActionType
     Spin,
     QuickStab,
     DashBlock,
-    GloryShield,
+    GrowingShield,
     IronCastle,
     Block
 }

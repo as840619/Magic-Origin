@@ -11,6 +11,9 @@ public class CardManager : MonoBehaviour
     [SerializeField] RectTransform handPlace;
     [SerializeField] GameObject plusOne;
     [SerializeField] GameObject CardTrigger;
+    [SerializeField] GameObject graveYard;
+    //public string oooo = nameof(Attack);
+    //public string opop = gameObject.GetComponentchilden<CardSkillDetails.Skills>().oooo;
 
     private static CardManager instance;
     public static CardManager Instance
@@ -23,16 +26,11 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public List<string> skillAttack = new();
-    public List<string> skillSlash = new();
-    public List<string> skillSmash = new();
-    public List<string> skillSplitSlash = new();
-    public List<string> skillSpin = new();
-    public List<string> skillQuickStab = new();
-    public List<string> skillDashBlock = new();
-    public List<string> skillGloryShield = new();
-    public List<string> skillIronCastle = new();
-    public List<string> skillBlock = new();
+    private void Update()
+    {
+        if (GetComponent<GraveYard>().graveYardCard.Count != 0)
+            ShowGY();
+    }
 
     public void GY2RM()
     {
@@ -43,12 +41,8 @@ public class CardManager : MonoBehaviour
             GetComponent<CardRemain>().CardsAmount.Add(card);
         }
         GetComponent<GraveYard>().graveYardCard.Clear();
+        HideGY();
     }
-
-    /*public void DropCard(Vector2 position)
-    {
-        GameObject gameObject = Instantiate(CardDroped, position, Quaternion.identity);
-    }*/
 
     public void CardInstantiate()
     {
@@ -71,6 +65,16 @@ public class CardManager : MonoBehaviour
         GetComponent<CardRemain>().CardsAmount.Add(gameObject);
     }
 
+    private void HideGY()
+    {
+        graveYard.SetActive(false);
+    }
+
+    private void ShowGY()
+    {
+        graveYard.SetActive(true);
+    }
+
     IEnumerator CardAddEvent(GameObject gameObject)
     {
         yield return new WaitForSeconds(1.5F);
@@ -78,7 +82,8 @@ public class CardManager : MonoBehaviour
         plusOne.SetActive(true);
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(false);
-
     }
+
+
     private List<GameObject> cardType => GetComponent<CardType>().cardType;
 }

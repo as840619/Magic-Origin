@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("基本數據")]
-    [SerializeField] int _nowHealth = 100;
-    [SerializeField] int _maxHealth = 100;
+    [SerializeField] int _nowHealth = 0;
+    [SerializeField] int _maxHealth = 30;
     [SerializeField] float _flashTime = 0.5f;
     [SerializeField] float _invincibleTime = 2f;
 
@@ -71,16 +71,16 @@ public abstract class Enemy : MonoBehaviour
         _spriteRenderer.color = _originalColor;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.GetComponent<PlayerAttack>() != null)
         {
             if (_collisionTime > 0)
                 return;
-
             _collisionTime = _collisionDamageInterval;
+            TakeDamage(CardManager.Instance.nowSkillDamage);
+            CardManager.Instance.nowSkillDamage = CardManager.Instance.GetComponentInChildren<CardSkillDetails>().Attack[0].damage;
 
-            TakeDamage(_collisionDamage);
         }
-    }
+    }*/
 }

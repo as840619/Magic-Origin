@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
             {
                 Zo.name = "Player";
                 _camCtrl.SetPlayerPosition(Zo);
+                PlayerManager.Instance.nowHealth = PlayerManager.Instance.maxHealth;
+                PlayerManager.Instance.UpdateHealth();
             }
         }
     }
@@ -53,9 +55,7 @@ public class GameManager : MonoBehaviour
     void TagCatcher(string tag)
     {
         foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
-        {
             Destroy(temp);
-        }
     }
 
     public Vector3 NextLevel()

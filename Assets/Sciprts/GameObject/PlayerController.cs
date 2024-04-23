@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cainos.PixelArtPlatformer_VillageProps;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -35,33 +36,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashCoefficient = 1f;
     [SerializeField] float distanceBetweenImages = 0.2f;
 
+    [Header("移動判斷")]
     public bool isGround;
     public bool isWall;
-    public bool isDashing;
     //public bool isPause;
+    public bool isDashing;
     public bool canJump;
     public bool canMove;
     public bool canFilp;
     public bool _fallThough;
-    public bool invincible;
     public bool createrMode;
+    public Vector2 moveDirection;
+
+    [Header("基本數據")]
+    [SerializeField] float timer;
+    [SerializeField] float onTime = 1f;
 
     public bool bossBattle = false;
-
+    public bool invincible;
     public PlayerInputControl playerControl;
+
     private int jumpLeft;
     private float dashTimeLeft;
     private float lastImageXpos;
-    private Vector2 moveDirection;
-
     private InputAction move;
     private InputAction jump;
+    private InputAction draw;
     private InputAction skip;
     private InputAction escape;
     private Animator idleAnimation;
     private Rigidbody2D idleRigidbody;
     private BoxCollider2D idlecollider;
     private PlayerHealth playerHealth;
+    private Chest chest;
 
     private void Awake()
     {
@@ -88,10 +95,12 @@ public class PlayerController : MonoBehaviour
         //skip = playerControl.UI.SkipDialogue;
         move = playerControl.Normal.Move;
         jump = playerControl.Normal.Jump;
+        draw = playerControl.Normal.Draw;
         escape = playerControl.Normal.Exit;
         //skip.Enable();
         move.Enable();
         jump.Enable();
+        draw.Enable();
         escape.Enable();
     }
 
@@ -100,6 +109,7 @@ public class PlayerController : MonoBehaviour
         //skip.Disable();
         move.Disable();
         jump.Disable();
+        draw.Disable();
         escape.Disable();
     }
 
@@ -108,14 +118,18 @@ public class PlayerController : MonoBehaviour
         moveDirection = move.ReadValue<Vector2>();
         if (jump.IsPressed() && jumpLeft > 0)
             Jump();
-        if (escape.IsPressed())
-        {
-
-        }
         ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
         CheckAction();
         CheckFilp();
         //CheckDash();
+        timer += Time.deltaTime;
+        if (timer < onTime)
+            return;
+        if (draw.IsPressed())
+        {
+            GameObject.Find("Draw").GetComponent<DrawCard>().Onclick();
+            timer = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -235,6 +249,8 @@ public class PlayerController : MonoBehaviour
             this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag14"))
             this.transform.position = GameManager.Instance.NextLevel();
+        if (other.CompareTag("Flag21"))
+            GameObject.FindWithTag("End").SetActive(true);
         if (other.CompareTag("Hp"))
             this.transform.position = new Vector3(52, -140, 0);
         if (other.CompareTag("Water"))
@@ -254,15 +270,20 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Chest"))
         {
-            //other.GetComponent<>()
+            if (other.GetComponent<Chest>().IsOpened == true)
+                return;
             CardManager.Instance.CardInstantiate();
+            other.GetComponent<Chest>().IsOpened = true;
         }
         if (other.CompareTag("EX"))
         {
             this.transform.position = new Vector3(27, -29, 0);
         }
+        //if (other.GetComponent<Celling>() != null)
+        {
+        }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("HiddenTilemap"))
         {

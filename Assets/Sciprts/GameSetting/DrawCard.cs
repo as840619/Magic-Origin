@@ -13,15 +13,26 @@ public class DrawCard : MonoBehaviour
 
     public void Onclick()
     {
+        TagCatcher("Card");
         for (int i = 0; i < maxHandCard; i++)
         {
             GameObject cardObj = GetRandomCard();
-            GameObject card = Instantiate(cardObj, new Vector2(2 + i * 75, -25), Quaternion.identity);
+            GameObject card = Instantiate(cardObj, new Vector2(-180 + i * 120, -400), Quaternion.identity);
             card.name = cardObj.name;
             card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform.Find("Hand"), false);
+            card.AddComponent<HandCards>();
         }
         drawbutton.enabled = false;//抽卡按鈕關閉
         UseDraw();
+    }
+
+    private void TagCatcher(string tag)
+    {
+        foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
+        {
+            if (temp.GetComponent<HandCards>() != null)
+                temp.GetComponent<CardUse>().ResetCards();
+        }
     }
 
     private GameObject GetRandomCard()
@@ -30,7 +41,6 @@ public class DrawCard : MonoBehaviour
         {
             CardManager.Instance.GY2RM();
         }
-
         int RandomIndex = Random.Range(0, CardsAmount.Count - 1);
         GameObject cardObj = CardsAmount[RandomIndex];
         CardsAmount.RemoveAt(RandomIndex);
