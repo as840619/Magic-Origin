@@ -11,17 +11,6 @@ public class V_Dialog : MonoBehaviour
     public float textSpeed;
 
     private int index;
-
-    private DefaultInputActions action;
-
-    /*private void OnEnable()
-    {
-        action.Enable();
-    }
-    private void OnDisable()
-    {
-        action.Disable();
-    }*/
     void Start()
     {
         textComponent.text = string.Empty;
@@ -30,7 +19,7 @@ public class V_Dialog : MonoBehaviour
 
     void Update()
     {
-        if (true)//action.UI.Click.IsPressed())
+        if (InputSystem.GetDevice<Keyboard>().kKey.wasPressedThisFrame)//action.UI.Click.IsPressed())
         {
             if (textComponent.text == lines[index])
             {
@@ -48,6 +37,7 @@ public class V_Dialog : MonoBehaviour
     {
         index = 0;
         StartCoroutine(TypeLine());
+      
     }
     IEnumerator TypeLine()
     {
@@ -67,6 +57,7 @@ public class V_Dialog : MonoBehaviour
         }
         else
         {
+            index=0;
             gameObject.SetActive(false);
         }
     }
