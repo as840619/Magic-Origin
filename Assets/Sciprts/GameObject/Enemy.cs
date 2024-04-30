@@ -71,16 +71,11 @@ public abstract class Enemy : MonoBehaviour
         _spriteRenderer.color = _originalColor;
     }
 
-    /*void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerAttack>() != null)
+        if (collision.gameObject.CompareTag("Water"))
         {
-            if (_collisionTime > 0)
-                return;
-            _collisionTime = _collisionDamageInterval;
-            TakeDamage(CardManager.Instance.nowSkillDamage);
-            CardManager.Instance.nowSkillDamage = CardManager.Instance.GetComponentInChildren<CardSkillDetails>().Attack[0].damage;
-
+            Destroy(gameObject);
         }
-    }*/
+    }
 }
