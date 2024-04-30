@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 705797021985071636}
   - component: {fileID: 867188763737856174}
   - component: {fileID: 6170609609674179165}
+  - component: {fileID: 2500799569753830323}
   m_Layer: 0
   m_Name: CardTrigger
   m_TagString: CardDrop
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.807827, y: 2.9614906}
   m_EdgeRadius: 0
+--- !u!114 &2500799569753830323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981509482359065378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6027f74deee9afe44aab654d2f3a259f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

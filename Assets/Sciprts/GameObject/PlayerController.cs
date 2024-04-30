@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("CardDrop"))
         {
-            Destroy(other);
+            Destroy(other.gameObject);
             CardManager.Instance.CardInstantiate();
         }
         if (other.CompareTag("BossZombieBattle"))
