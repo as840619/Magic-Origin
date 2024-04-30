@@ -52,12 +52,16 @@ public class PlayerHealth : MonoBehaviour
 
     private void KillPlayer()
     {
+        SceneManager.LoadScene(1);
+        /*
         StartCoroutine(GoingRestart());          //<-改這個就好 言下之意就是別讀秒
         Debug.Log("121212");
         GameManager.Instance.ResetObject();
+        */
     }
 
     //計時完後讀取Scene
+    /*
     private IEnumerator GoingRestart()
     {
         //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
@@ -68,4 +72,5 @@ public class PlayerHealth : MonoBehaviour
         anim.SetTrigger("Death");
         yield return new WaitForSeconds(3F);
     }
+    */
 }
