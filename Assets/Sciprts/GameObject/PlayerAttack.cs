@@ -267,7 +267,7 @@ public class PlayerAttack : MonoBehaviour
         collider.enabled = true;
         //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
-        PlayerManager.Instance.shieldValue += 1;
+        PlayerManager.Instance.shieldValue += 2;
         StartCoroutine(DisableHitBox());
     }
 
