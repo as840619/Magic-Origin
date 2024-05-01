@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private InputAction draw;
     private InputAction skip;
     private InputAction escape;
+    private InputAction interact;
     private Animator idleAnimation;
     private Rigidbody2D idleRigidbody;
     private BoxCollider2D idlecollider;
@@ -97,11 +98,13 @@ public class PlayerController : MonoBehaviour
         jump = playerControl.Normal.Jump;
         draw = playerControl.Normal.Draw;
         escape = playerControl.Normal.Exit;
+        interact = playerControl.Normal.Interact;
         //skip.Enable();
         move.Enable();
         jump.Enable();
         draw.Enable();
         escape.Enable();
+        interact.Enable();
     }
 
     private void OnDisable()
@@ -111,6 +114,7 @@ public class PlayerController : MonoBehaviour
         jump.Disable();
         draw.Disable();
         escape.Disable();
+        interact.Disable();
     }
 
     private void Update()
@@ -279,8 +283,12 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.position = new Vector3(27, -29, 0);
         }
-        //if (other.GetComponent<Celling>() != null)
+        if (interact.IsPressed())
         {
+            if (other.GetComponent<Scientist>() != null)
+                return;
+            if (other.GetComponent<Engineer>() != null)
+                return;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
