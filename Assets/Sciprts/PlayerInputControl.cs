@@ -62,6 +62,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""66e01499-dac2-45f4-8275-7af07184d1cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,17 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Draw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5495a0a1-7343-4f2b-9148-97d10f06df5c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -223,6 +243,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_Normal_Move = m_Normal.FindAction("Move", throwIfNotFound: true);
         m_Normal_Exit = m_Normal.FindAction("Exit", throwIfNotFound: true);
         m_Normal_Draw = m_Normal.FindAction("Draw", throwIfNotFound: true);
+        m_Normal_Interact = m_Normal.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
@@ -290,6 +311,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Normal_Move;
     private readonly InputAction m_Normal_Exit;
     private readonly InputAction m_Normal_Draw;
+    private readonly InputAction m_Normal_Interact;
     public struct NormalActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -298,6 +320,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Normal_Move;
         public InputAction @Exit => m_Wrapper.m_Normal_Exit;
         public InputAction @Draw => m_Wrapper.m_Normal_Draw;
+        public InputAction @Interact => m_Wrapper.m_Normal_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Normal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +342,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Draw.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
                 @Draw.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
                 @Draw.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Interact.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_NormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -335,6 +361,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Draw.started += instance.OnDraw;
                 @Draw.performed += instance.OnDraw;
                 @Draw.canceled += instance.OnDraw;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -386,6 +415,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
         void OnDraw(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
