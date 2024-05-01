@@ -32,6 +32,8 @@ public class CardManager : MonoBehaviour
             ShowGY();
     }
 
+    private List<GameObject> cardType => GetComponent<CardType>().cardType;
+
     public void GY2RM()
     {
         //GetComponent<CardRemain>().CardsAmount = GetComponent<GraveYard>().graveYardCard;
@@ -83,7 +85,4 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(false);
     }
-
-
-    private List<GameObject> cardType => GetComponent<CardType>().cardType;
 }
