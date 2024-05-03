@@ -28,6 +28,7 @@ TagManager:
   - EX
   - Boss
   - End
+  - SR
   layers:
   - Default
   - TransparentFX
