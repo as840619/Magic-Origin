@@ -71,6 +71,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowModeActivate"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6173838-fbd8-4abe-97b5-16ae2b0c1929"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9057114-fdd2-4ac5-8360-ccc904652532"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowModeActivate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -244,6 +264,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_Normal_Exit = m_Normal.FindAction("Exit", throwIfNotFound: true);
         m_Normal_Draw = m_Normal.FindAction("Draw", throwIfNotFound: true);
         m_Normal_Interact = m_Normal.FindAction("Interact", throwIfNotFound: true);
+        m_Normal_SlowModeActivate = m_Normal.FindAction("SlowModeActivate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
@@ -312,6 +333,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Normal_Exit;
     private readonly InputAction m_Normal_Draw;
     private readonly InputAction m_Normal_Interact;
+    private readonly InputAction m_Normal_SlowModeActivate;
     public struct NormalActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -321,6 +343,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         public InputAction @Exit => m_Wrapper.m_Normal_Exit;
         public InputAction @Draw => m_Wrapper.m_Normal_Draw;
         public InputAction @Interact => m_Wrapper.m_Normal_Interact;
+        public InputAction @SlowModeActivate => m_Wrapper.m_Normal_SlowModeActivate;
         public InputActionMap Get() { return m_Wrapper.m_Normal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -345,6 +368,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @SlowModeActivate.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
+                @SlowModeActivate.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
+                @SlowModeActivate.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
             }
             m_Wrapper.m_NormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -364,6 +390,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @SlowModeActivate.started += instance.OnSlowModeActivate;
+                @SlowModeActivate.performed += instance.OnSlowModeActivate;
+                @SlowModeActivate.canceled += instance.OnSlowModeActivate;
             }
         }
     }
@@ -416,6 +445,7 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         void OnExit(InputAction.CallbackContext context);
         void OnDraw(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSlowModeActivate(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
