@@ -17,7 +17,7 @@ public class DrawCard : MonoBehaviour
         for (int i = 0; i < maxHandCard; i++)
         {
             GameObject cardObj = GetRandomCard();
-            GameObject card = Instantiate(cardObj, new Vector2(-180 + i * 120, -400), Quaternion.identity);
+            GameObject card = Instantiate(cardObj, new Vector2(-380 + i * 145, -380), Quaternion.identity);
             card.name = cardObj.name;
             card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform.Find("Hand"), false);
             card.AddComponent<HandCards>();
