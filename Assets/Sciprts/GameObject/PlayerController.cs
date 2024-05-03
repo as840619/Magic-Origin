@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("基本數據")]
     [SerializeField] float timer;
+    [SerializeField] float slowModeTimer;
     [SerializeField] float onTime = 1f;
 
     public bool bossBattle = false;
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
     private InputAction skip;
     private InputAction escape;
     private InputAction interact;
+    private InputAction slowModeAct;
     private Animator idleAnimation;
     private Rigidbody2D idleRigidbody;
     private BoxCollider2D idlecollider;
@@ -99,12 +101,14 @@ public class PlayerController : MonoBehaviour
         draw = playerControl.Normal.Draw;
         escape = playerControl.Normal.Exit;
         interact = playerControl.Normal.Interact;
+        slowModeAct = playerControl.Normal.SlowModeActivate;
         //skip.Enable();
         move.Enable();
         jump.Enable();
         draw.Enable();
         escape.Enable();
         interact.Enable();
+        slowModeAct.Enable();
     }
 
     private void OnDisable()
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour
         draw.Disable();
         escape.Disable();
         interact.Disable();
+        slowModeAct.Disable();
     }
 
     private void Update()
@@ -127,6 +132,15 @@ public class PlayerController : MonoBehaviour
         CheckFilp();
         //CheckDash();
         timer += Time.deltaTime;
+        slowModeTimer += Time.deltaTime;
+        if (slowModeTimer > 0.01f)
+        {
+            if (slowModeAct.IsPressed())
+            {
+                GameManager.Instance.GetComponent<V_SlowMode>().ToggleSlowMode();
+                slowModeTimer = 0;
+            }
+        }
         if (timer < onTime)
             return;
         if (draw.IsPressed())
