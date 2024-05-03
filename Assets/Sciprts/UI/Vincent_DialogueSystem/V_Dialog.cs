@@ -12,8 +12,8 @@ public class V_Dialog : MonoBehaviour
     public bool DialogueActive = false;
 
     Rigidbody2D playerRb;
-    private int index =0;
-    void Start()
+    private int index = 0;
+    private void Start()
     {
         if (playerRb == null)
         {
@@ -22,17 +22,16 @@ public class V_Dialog : MonoBehaviour
         StartDialogue();
     }
 
-    void Update()
+    private void Update()
     {
-
         //檢查是否正在進行對話，如果是則不處理按鍵輸入（除非是跳過對話的特定按鍵）
-        if (DialogueActive && InputSystem.GetDevice<Keyboard>().kKey.wasPressedThisFrame)//action.UI.Click.IsPressed())
+        if (DialogueActive && InputSystem.GetDevice<Mouse>().leftButton.wasPressedThisFrame)       //action.UI.Click.IsPressed())
         {
             NextLine();
         }
     }
 
-public void StartDialogue()
+    public void StartDialogue()
     {
         DialogueActive = true;
         index = 0;
@@ -40,15 +39,18 @@ public void StartDialogue()
         StartCoroutine(TypeLine());
         Debug.Log("StartDia");
     }
-    IEnumerator TypeLine()
+
+    public void EndDialogue()
     {
-        foreach (char c in lines[index].ToCharArray())
-        {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
-        }
+
+        DialogueActive = false;
+        playerRb.bodyType = RigidbodyType2D.Dynamic;
+        index = 0;
+        gameObject.SetActive(false);
+        Debug.Log("ENDDia");
     }
-    void NextLine()
+
+    private void NextLine()
     {
 
         StopAllCoroutines();
@@ -65,13 +67,13 @@ public void StartDialogue()
             EndDialogue();
         }
     }
-    public void EndDialogue()
+
+    IEnumerator TypeLine()
     {
-        
-        DialogueActive = false;
-        playerRb.bodyType = RigidbodyType2D.Dynamic;
-        index = 0;
-        gameObject.SetActive(false);
-        Debug.Log("ENDDia");
+        foreach (char c in lines[index].ToCharArray())
+        {
+            textComponent.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
     }
 }
