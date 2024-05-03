@@ -81,6 +81,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(GetComponent<PlayerHearts>().Hearts[nowHealth]);
             GetComponent<PlayerHearts>().Hearts.RemoveAt(nowHealth);
             PlayerController.Instance.invincible = true;
+            GameObject.FindWithTag("SR").SetActive(true);
             StartCoroutine(ResetAtt());
         }
     }
@@ -89,5 +90,6 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2F);
         PlayerController.Instance.invincible = false;
+        GameObject.FindWithTag("SR").SetActive(false);
     }
 }

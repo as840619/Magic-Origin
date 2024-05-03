@@ -324,8 +324,10 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator InvincibleTime()
     {
         PlayerController.Instance.invincible = true;
+        GameObject.FindWithTag("SR").SetActive(true);
         yield return new WaitForSeconds(5F);
         PlayerController.Instance.invincible = false;
+        GameObject.FindWithTag("SR").SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
