@@ -234,30 +234,35 @@ public class PlayerAttack : MonoBehaviour
     {
         print(actionType);
         DamageSet(actionType);
-        PlayerManager.Instance.staminaValue -= 1;
         switch (actionType)//辨識動作變更collider
         {
             case ActionType.Attack:
-                PerformAction1();
+                PlayerManager.Instance.staminaValue -= 1;
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
+                PerformAction1();
                 break;
             case ActionType.Slash:
-                PerformAction2();
+                PlayerManager.Instance.staminaValue -= 1;
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
+                PerformAction2();
                 break;
             case ActionType.Smash:
+                PlayerManager.Instance.staminaValue -= 2;
                 PerformAction3();
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
                 break;
             case ActionType.SplitSlash:
+                PlayerManager.Instance.staminaValue -= 1;
                 PerformAction4();
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 break;
             case ActionType.Spin:
+                PlayerManager.Instance.staminaValue -= 1;
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 PerformAction5();
                 break;
             case ActionType.QuickStab:
+                PlayerManager.Instance.staminaValue -= 0;
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 PerformAction6();
                 break;
@@ -286,12 +291,11 @@ public class PlayerAttack : MonoBehaviour
     {
         print("GrowingShield");
         DamageReset();
-        PlayerManager.Instance.staminaValue -= 1;
+        PlayerManager.Instance.staminaValue -= 2;
         PerformAction8();
         collider.enabled = true;
         Animation.SetTrigger("GrowingShield");
         GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
-        PlayerManager.Instance.shieldValue += 1;
         StartCoroutine(DisableHitBox());
         StartCoroutine(GrowingShieldValue());
     }
@@ -304,7 +308,7 @@ public class PlayerAttack : MonoBehaviour
         PlayerManager.Instance.staminaValue -= 2;
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
-        
+
         if (PlayerController.Instance.createrMode == false)
             StartCoroutine(InvincibleTime());
         SetRendererAction10();
@@ -347,9 +351,8 @@ public class PlayerAttack : MonoBehaviour
         int i = 1;
         while (i <= 12)
         {
-            Debug.Log("加啊" + i);
             yield return new WaitForSeconds(1F);
-            PlayerManager.Instance.shieldValue += i * 2;
+            PlayerManager.Instance.shieldValue += 1;
             i++;
         }
     }
