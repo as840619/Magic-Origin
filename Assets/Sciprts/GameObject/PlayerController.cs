@@ -182,6 +182,8 @@ public class PlayerController : MonoBehaviour
         idleAnimation.SetFloat("HorizontalAxis", x);
         idleAnimation.SetFloat("VerticalAxis", y);
         idleAnimation.SetFloat("VerticalVelocity", yVelocity); //
+
+        GameManager.Instance.audioManager.Play(1,"sePlayerWalk",false);
     }
 
     private void CheckFilp()

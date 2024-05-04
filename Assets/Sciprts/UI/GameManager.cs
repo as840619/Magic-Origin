@@ -24,12 +24,17 @@ public class GameManager : MonoBehaviour
     List<SavePoint.Point> points;
     List<SavePoint.Saving> savings;
 
+
+    public GameObject audioManagerPrefab;
+    public AudioManager audioManager;
     void Start()
     {
         _cameraobj = GameObject.FindWithTag("MainCamera");
         _camCtrl = _cameraobj.GetComponent<CamCtrl>();
         points = GetComponent<SavePoint>().pointVectors;
         savings = GetComponent<SavePoint>().levelVectors;
+
+        audioManager = Instantiate(audioManagerPrefab).GetComponent<AudioManager>();
         ResetObject();
     }
 

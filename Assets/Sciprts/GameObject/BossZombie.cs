@@ -127,6 +127,7 @@ public class BossZombie : MonoBehaviour
     public void Shoot(int i, int n)        //1 to 1
     {
         AngleFix(playerAngle + i * (10 + n));
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void ShotgunShot()  //1 to 3
@@ -136,6 +137,7 @@ public class BossZombie : MonoBehaviour
             GameObject bulletSS = AngleFix(playerAngle + i * 2.5f);
             bulletSS.GetComponent<EnemybulletScript>().reCallTime = 3F;
         }
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void Pentagram()    //0 to 5
@@ -146,11 +148,13 @@ public class BossZombie : MonoBehaviour
             GameObject bulletFive = AngleFix(angleAim);
             angleAim += 72;
         }
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void WrongFuckingShoot()    //0 to 5
     {
         GameObject bulletShit = AngleFix(Mathf.Atan2(playerDirection.x, playerDirection.y) * Mathf.Rad2Deg);
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void LerpShot()     //lerp 1 to 1
@@ -158,14 +162,17 @@ public class BossZombie : MonoBehaviour
         GameObject bulletLerp = Instantiate(bullet2, bulletPos.position, Quaternion.identity);
         bulletLerp.GetComponent<EnemybulletScript>().way = playerDirection;
         bulletLerp.GetComponent<EnemybulletScript>().lerping = true;
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     //捲捲面
 
     public Vector2 Calculation(int i)
     {
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
         Vector2 newPosition = new(0f, -0.675f * i);
         return newPosition;
+        
     }
     public void TripperTake()      //3 to 1
     {
@@ -176,6 +183,7 @@ public class BossZombie : MonoBehaviour
             Vector2 direction = playerPosition - bulletTTO.transform.position;
             bulletTTO.GetComponent<EnemybulletScript>().way = direction;
         }
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void Raining()      //  _|_
@@ -184,6 +192,7 @@ public class BossZombie : MonoBehaviour
         GameObject bulletRain = Instantiate(bullet1, new(middlePoint, (2 * bulletPos.position.y)), Quaternion.identity);
         //bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
         bulletRain.GetComponent<EnemybulletScript>().splits = 2;
+        GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     private void First()

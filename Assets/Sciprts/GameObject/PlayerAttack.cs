@@ -236,20 +236,26 @@ public class PlayerAttack : MonoBehaviour
             case ActionType.Attack:
                 //CardManager.Instance.GetComponentInChildren<CardSkillDetails>()..name[1];
                 PerformAction1();
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
                 break;
             case ActionType.Slash:
                 PerformAction2();
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
                 break;
             case ActionType.Smash:
                 PerformAction3();
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
                 break;
             case ActionType.SplitSlash:
                 PerformAction4();
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 break;
             case ActionType.Spin:
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 PerformAction5();
                 break;
             case ActionType.QuickStab:
+                GameManager.Instance.audioManager.Play(3, "sePlayerATK2", false);
                 PerformAction6();
                 break;
         }
@@ -264,6 +270,7 @@ public class PlayerAttack : MonoBehaviour
         print("DashBlock");
         PlayerManager.Instance.staminaValue -= 0;
         PerformAction7();
+        GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
         collider.enabled = true;
         //PlayerController.Instance.Dash();
         Animation.SetTrigger("DashBlock");
@@ -278,6 +285,7 @@ public class PlayerAttack : MonoBehaviour
         PerformAction8();
         collider.enabled = true;
         Animation.SetTrigger("GrowingShield");
+        GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
         PlayerManager.Instance.shieldValue += 1;
         StartCoroutine(DisableHitBox());
         StartCoroutine(GrowingShieldValue());
@@ -285,10 +293,12 @@ public class PlayerAttack : MonoBehaviour
 
     public void IronCastle()
     {
+        GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
         print("IronCastle");
         PlayerManager.Instance.staminaValue -= 2;
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
+        
         if (PlayerController.Instance.createrMode == false)
             StartCoroutine(InvincibleTime());
         SetRendererAction10();
@@ -301,6 +311,7 @@ public class PlayerAttack : MonoBehaviour
         PlayerManager.Instance.staminaValue -= 1;
         collider.enabled = true;
         Animation.SetTrigger("Block");
+        GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
         PlayerManager.Instance.shieldValue += 4;
         StartCoroutine(DisableHitBox());
     }
