@@ -9,7 +9,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] int _nowHealth = 0;
     [SerializeField] int _maxHealth = 30;
     [SerializeField] float _flashTime = 0.5f;
-    [SerializeField] float _invincibleTime = 2f;
+    [SerializeField] float _invincibleTime = 0.01f;
 
     [SerializeField] int _collisionDamage = 10;
     [SerializeField] float _collisionDamageInterval = 10f;
