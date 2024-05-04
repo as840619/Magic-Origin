@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Cainos.PixelArtPlatformer_VillageProps;
 
@@ -52,10 +53,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timer;
     [SerializeField] float slowModeTimer;
     [SerializeField] float onTime = 1f;
-
+    [SerializeField] Image image;
     public bool bossBattle = false;
     public bool invincible;
     public PlayerInputControl playerControl;
+
 
     private int jumpLeft;
     private float dashTimeLeft;
@@ -124,6 +126,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        image.enabled = invincible;
         moveDirection = move.ReadValue<Vector2>();
         if (jump.IsPressed() && jumpLeft > 0)
             Jump();
@@ -154,6 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         idleRigidbody.velocity = new(moveDirection.x * moveSpeed, idleRigidbody.velocity.y);
     }
+
     /*
     public void Dash()
     {
