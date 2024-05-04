@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,12 +10,15 @@ public class PlayerAttack : MonoBehaviour
     public float time;
     private int shieldInt;
     private new PolygonCollider2D collider;
+    private List<CardSkillDetails.Skills> skillList;
+    private int nowDamage = 0;
+    private string infact;
 
     private void Start()
     {
         collider = GetComponent<PolygonCollider2D>();
+        skillList = CardManager.Instance.GetComponentInChildren<CardSkillDetails>().SkillList;
     }
-
     Animator Animation => PlayerController.Instance.GetComponent<Animator>();
 
     ////////////////////////////////////設置collider用區域//////////////////////////////////
@@ -229,12 +233,11 @@ public class PlayerAttack : MonoBehaviour
     public void DoAction(ActionType actionType)
     {
         print(actionType);
+        DamageSet(actionType);
         PlayerManager.Instance.staminaValue -= 1;
-
         switch (actionType)//辨識動作變更collider
         {
             case ActionType.Attack:
-                //CardManager.Instance.GetComponentInChildren<CardSkillDetails>()..name[1];
                 PerformAction1();
                 GameManager.Instance.audioManager.Play(3, "sePlayerATK", false);
                 break;
@@ -268,6 +271,7 @@ public class PlayerAttack : MonoBehaviour
     public void DashBlock()
     {
         print("DashBlock");
+        DamageReset();
         PlayerManager.Instance.staminaValue -= 0;
         PerformAction7();
         GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
@@ -281,6 +285,7 @@ public class PlayerAttack : MonoBehaviour
     public void GrowingShield()
     {
         print("GrowingShield");
+        DamageReset();
         PlayerManager.Instance.staminaValue -= 1;
         PerformAction8();
         collider.enabled = true;
@@ -295,6 +300,7 @@ public class PlayerAttack : MonoBehaviour
     {
         GameManager.Instance.audioManager.Play(3, "sePlayerShield", false);
         print("IronCastle");
+        DamageReset();
         PlayerManager.Instance.staminaValue -= 2;
         collider.enabled = true;
         Animation.SetTrigger("IronCastle");
@@ -308,6 +314,7 @@ public class PlayerAttack : MonoBehaviour
     public void Block()
     {
         print("Block");
+        DamageReset();
         PlayerManager.Instance.staminaValue -= 1;
         collider.enabled = true;
         Animation.SetTrigger("Block");
@@ -316,13 +323,34 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(DisableHitBox());
     }
 
+    private void DamageSet(ActionType actionType)
+    {
+        print(skillList.Count);
+        for (int i = 0; i < skillList.Count; i++)
+        {
+            if (actionType.ToString() == skillList[i].name)
+            {
+                nowDamage = skillList[i].damage;
+                Debug.Log("理應的傷害" + nowDamage);
+                infact = skillList[i].addOrNot ? infact : skillList[i].addition;
+            }
+        }
+    }
+
+    private void DamageReset()
+    {
+        nowDamage = 0;
+    }
+
     IEnumerator GrowingShieldValue()
     {
         int i = 1;
-        while (i == 12)
+        while (i <= 12)
         {
+            Debug.Log("加啊" + i);
             yield return new WaitForSeconds(1F);
             PlayerManager.Instance.shieldValue += i * 2;
+            i++;
         }
     }
 
@@ -335,21 +363,19 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator InvincibleTime()
     {
         PlayerController.Instance.invincible = true;
-        GameObject.FindWithTag("SR").SetActive(true);
         yield return new WaitForSeconds(5F);
         PlayerController.Instance.invincible = false;
-        GameObject.FindWithTag("SR").SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("hit");
+            Debug.Log("進行攻擊");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(10);
+                enemy.TakeDamage(nowDamage);
                 Debug.Log("有傷害");
             }
             else
