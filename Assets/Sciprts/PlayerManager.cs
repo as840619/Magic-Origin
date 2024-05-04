@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (heartCount != nowHealth)
+        if (HeartCount != nowHealth)
             UpdateHealth();
         staminaValueText.text = staminaValue.ToString();
         staminaMaxValueText.text = staminaMaxValue.ToString();
@@ -59,16 +59,16 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private int heartCount => GetComponent<PlayerHearts>().Hearts.Count;
+    private int HeartCount => GetComponent<PlayerHearts>().Hearts.Count;
 
     public void UpdateHealth()
     {
         //Debug.Log("UpdateHealth" + nowHealth);
-        if (heartCount < 0)
+        if (HeartCount < 0)
             return;
-        if (heartCount <= nowHealth)
+        if (HeartCount <= nowHealth)
         {
-            for (int i = heartCount; heartCount < nowHealth; i++)
+            for (int i = HeartCount; HeartCount < nowHealth; i++)
             {
                 Debug.Log("心呢" + nowHealth);
                 GameObject PlaerHeart = Instantiate(heart, new Vector2(-900 + i * 100, -480), Quaternion.identity);
