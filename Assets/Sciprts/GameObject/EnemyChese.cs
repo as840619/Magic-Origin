@@ -62,6 +62,13 @@ public class EnemyChese : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, yellowNine);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, greenSix);
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Water"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
