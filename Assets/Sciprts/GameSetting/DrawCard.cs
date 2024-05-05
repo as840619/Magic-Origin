@@ -5,45 +5,32 @@ using UnityEngine.UI;
 
 public class DrawCard : MonoBehaviour
 {
-    //public List<GameObject> Card = new();
-    private List<GameObject> CardsAmount => CardManager.Instance.GetComponent<CardRemain>().CardsAmount;
+    private List<GameObject> CardsRemainList => CardManager.Instance.GetComponent<CardRemain>().CardList;
 
     public Button drawbutton;
-    private int maxHandCard = 5;
+    private const int MAXHANDCARD = 5;
 
     public void Onclick()
     {
-        TagCatcher("Card");
-        for (int i = 0; i < maxHandCard; i++)
+        CardManager.Instance.HandCards2GraveYard();
+        for (int i = 0; i < MAXHANDCARD; i++)
         {
             GameObject cardObj = GetRandomCard();
-            GameObject card = Instantiate(cardObj, new Vector2(-380 + i * 145, -380), Quaternion.identity);
-            card.name = cardObj.name;
-            card.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform.Find("Hand"), false);
-            card.AddComponent<HandCards>();
+            cardObj.GetComponent<CardUse>().HandCardNumber = i;
+            CardManager.Instance.GetComponent<HandCards>().CardList.Add(cardObj);
         }
+        CardManager.Instance.ShowHandCard();
         drawbutton.enabled = false;//抽卡按鈕關閉
         UseDraw();
     }
 
-    private void TagCatcher(string tag)
-    {
-        foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
-        {
-            if (temp.GetComponent<HandCards>() != null)
-                temp.GetComponent<CardUse>().ResetCards();
-        }
-    }
-
     private GameObject GetRandomCard()
     {
-        if (CardsAmount.Count == 0)
-        {
-            CardManager.Instance.GY2RM();
-        }
-        int RandomIndex = Random.Range(0, CardsAmount.Count - 1);
-        GameObject cardObj = CardsAmount[RandomIndex];
-        CardsAmount.RemoveAt(RandomIndex);
+        if (CardsRemainList.Count == 0)
+            CardManager.Instance.GraveYard2CardRemain();
+        int RandomIndex = Random.Range(0, CardsRemainList.Count);
+        GameObject cardObj = CardsRemainList[RandomIndex];
+        CardsRemainList.RemoveAt(RandomIndex);
         return cardObj;
     }
 
@@ -58,4 +45,3 @@ public class DrawCard : MonoBehaviour
         StartCoroutine(DrawCoolDown());
     }
 }
-
