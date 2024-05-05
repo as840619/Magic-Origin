@@ -12,10 +12,11 @@ public class StashUIRemove : MonoBehaviour
     {
         foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
         {
-            if (temp.GetComponent<StashUIRemove>() != null)
+            if (temp.GetComponent<CardListInUI>() != null)
             {
-                temp.AddComponent<CardUse>();
-                Destroy(temp.GetComponent<StashUIRemove>());
+                //temp.AddComponent<CardUse>();
+                //Destroy(temp.GetComponent<StashUIRemove>());
+                Destroy(temp.gameObject);
                 //temp.GetComponent<CardUse>().ResetCards();
             }
         }
