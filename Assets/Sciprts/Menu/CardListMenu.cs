@@ -8,20 +8,33 @@ public class CardListMenu : MonoBehaviour
 
     public void CatchCardList()
     {
-        cardList.RemoveRange(0,cardList.Count);
-        foreach (GameObject gameObject in CardManager.Instance.GetComponent<GraveYard>().graveYardCard)
+        cardList.Clear();
+        foreach (GameObject gameObject in CardManager.Instance.GetComponent<GraveYard>().CardList)
             cardList.Add(gameObject);
-        foreach (GameObject gameObject in CardManager.Instance.GetComponent<CardRemain>().CardsAmount)
+        foreach (GameObject gameObject in CardManager.Instance.GetComponent<CardRemain>().CardList)
             cardList.Add(gameObject);
-        SortingList(cardList);
+        TagCatcher("Card");
+        SortingList();
         ShowCards();
+    }
+
+    private void TagCatcher(string tag)
+    {
+        foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
+        {
+            if (temp.GetComponent<HandCards>() != null)
+            {
+                cardList.Add(temp.gameObject);
+            }
+        }
     }
 
     private void ShowCards()
     {
         for (int i = 0; i < cardList.Count; i++)
         {
-            GameObject card = Instantiate(cardList[i], new Vector2(0 + i * 145, 380), Quaternion.identity);
+            int j = i / 4;
+            GameObject card = Instantiate(cardList[i], new Vector2(620 + i % 4 * (195.31F), 760 + j * -242), Quaternion.identity);
             card.name = cardList[i].name;
             card.transform.parent = transform.parent;
             card.AddComponent<CardListInUI>();
@@ -29,18 +42,8 @@ public class CardListMenu : MonoBehaviour
         }
     }
 
-    private void SortingList(List<GameObject> cardList)
+    private void SortingList()
     {
-        for (int i = 1; i < cardList.Count; i++)
-        {
-            GameObject targetGameObject = CardManager.Instance.GetComponent<CardType>().cardType[i];
-            int j = i - 1;
-            while (j >= 0 && cardList[j] == targetGameObject)
-            {
-                cardList[j + 1] = cardList[j];
-                j--;
-            }
-            cardList[j + 1] = targetGameObject;
-        }
+        cardList.Sort((x, y) => x.name.CompareTo(y.name));
     }
 }
