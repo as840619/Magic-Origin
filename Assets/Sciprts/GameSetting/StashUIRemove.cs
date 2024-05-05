@@ -8,6 +8,7 @@ public class StashUIRemove : MonoBehaviour
     {
         TagCatcher("Card");
     }
+
     private void TagCatcher(string tag)
     {
         foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
