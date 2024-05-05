@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class GraveYard : MonoBehaviour
 {
-    public List<GameObject> graveYardCard = new();
+    public List<GameObject> CardList = new();
 }
