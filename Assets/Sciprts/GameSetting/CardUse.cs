@@ -9,10 +9,13 @@ using UnityEngine;
 
 public class CardUse : MonoBehaviour
 {
+    public ActionType actionType;
+    public int HandCardNumber = -1;
+
     // public bool cardn = false;   //cardn = true;
-    [SerializeField] ActionType actionType;
-    PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
-    int staminaValue => PlayerManager.Instance.staminaValue;
+
+    private PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
+    private int StaminaValue => PlayerManager.Instance.staminaValue;
 
     public void OnMouseOver()   //TODO：鼠標放上去會放大，同時卡牌會顯示名稱和功能
     {
@@ -28,7 +31,7 @@ public class CardUse : MonoBehaviour
             ActionType.IronCastle,
             ActionType.Block
         };
-        if (staminaValue < 1)
+        if (StaminaValue < 1)
             return;
         if (actionTypes.Contains(actionType))
         {
@@ -47,14 +50,7 @@ public class CardUse : MonoBehaviour
         {
             Pa.DoAction(actionType);                //將改成傳入"ActionType"
         }
-        ResetCards();
-    }
-
-    public void ResetCards()
-    {
-        CardManager.Instance.GetComponent<GraveYard>().graveYardCard.Add(this.gameObject);
-        transform.position = GameObject.Find("Draw").transform.position;
-        Destroy(GetComponent<HandCards>());
+        CardManager.Instance.HandCard2GraveYard(gameObject);
     }
 }
 
@@ -71,4 +67,3 @@ public enum ActionType
     IronCastle,
     Block
 }
-
