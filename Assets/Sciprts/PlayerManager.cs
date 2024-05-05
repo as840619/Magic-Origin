@@ -63,7 +63,6 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateHealth()
     {
-        //Debug.Log("UpdateHealth" + nowHealth);
         if (HeartCount < 0)
             return;
         if (HeartCount <= nowHealth)
