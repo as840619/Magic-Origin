@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class CardRemain : MonoBehaviour
 {
-    public List<GameObject> CardsAmount = new();
+    public List<GameObject> CardList = new();
 }
