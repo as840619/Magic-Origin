@@ -34,16 +34,15 @@ public class CardManager : MonoBehaviour
 
     private List<GameObject> cardType => GetComponent<CardType>().cardType;
 
-    public void GY2RM()
+    public void ShowHandCard()
     {
-        //GetComponent<CardRemain>().CardsAmount = GetComponent<GraveYard>().graveYardCard;
-        foreach (GameObject card in GetComponent<GraveYard>().graveYardCard)
+        List<GameObject> cardList = GetComponent<HandCards>().CardList;
+        for (int i = 0; i < cardList.Count; i++)
         {
-            //card.SetActive(true);
-            GetComponent<CardRemain>().CardsAmount.Add(card);
+            GameObject cardObj = Instantiate(cardList[i], new Vector2(-380 + i * 145, -380), Quaternion.identity);
+            cardObj.name = cardList[i].name;
+            cardObj.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform.Find("Hand"), false);
         }
-        GetComponent<GraveYard>().graveYardCard.Clear();
-        HideGY();
     }
 
     public void CardInstantiate()
