@@ -28,11 +28,11 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
-        if (GetComponent<GraveYard>().graveYardCard.Count != 0)
-            ShowGY();
+        if (GetComponent<GraveYard>().CardList.Count != 0)
+            ShowGraveYard();
     }
 
-    private List<GameObject> cardType => GetComponent<CardType>().cardType;
+    private List<GameObject> CardType => GetComponent<CardType>().cardType;
 
     public void ShowHandCard()
     {
