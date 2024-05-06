@@ -7,7 +7,7 @@ public class V_TouchDialog : MonoBehaviour
 {
     public GameObject DialScript;
     Rigidbody2D playerRb;
-    //  public GameObject dialogueBox;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         playerRb = GameObject.FindWithTag("Player")?.GetComponent<Rigidbody2D>();
@@ -20,5 +20,4 @@ public class V_TouchDialog : MonoBehaviour
             DialScript.GetComponent<V_Dialog>().EndDialogue();
         }
     }
-
 }
