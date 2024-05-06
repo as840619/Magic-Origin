@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 5004833429717761104}
   - component: {fileID: 2390013085516146724}
   - component: {fileID: 7592867643364152041}
+  - component: {fileID: -2027772722999699178}
   m_Layer: 5
   m_Name: CardD2
   m_TagString: Card
@@ -325,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 7
+  HandCardNumber: 4
 --- !u!114 &7592867643364152041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +353,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &-2027772722999699178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3677886538933779297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7228887704683856879
 GameObject:
   m_ObjectHideFlags: 0
