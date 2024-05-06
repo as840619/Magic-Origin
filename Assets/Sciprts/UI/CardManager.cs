@@ -12,8 +12,6 @@ public class CardManager : MonoBehaviour
     [SerializeField] GameObject plusOne;
     [SerializeField] GameObject CardTrigger;
     [SerializeField] GameObject graveYard;
-    //public string oooo = nameof(Attack);
-    //public string opop = gameObject.GetComponentchilden<CardSkillDetails.Skills>().oooo;
 
     private static CardManager instance;
     public static CardManager Instance
