@@ -135,8 +135,8 @@ public class EnemyShooting : MonoBehaviour
     public Vector2 Calculation(int i)
     {
         Vector2 newPosition = new(0f, -0.675f * i);
-        return newPosition;
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
+        return newPosition;
     }
     public void TripperTake()      //3 to 1
     {
