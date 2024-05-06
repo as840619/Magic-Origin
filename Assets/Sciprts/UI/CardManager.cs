@@ -82,7 +82,7 @@ public class CardManager : MonoBehaviour
         graveYard.SetActive(false);
     }
 
-    private void ShowGY()
+    public void CardInstantiate()
     {
         graveYard.SetActive(true);
     }
