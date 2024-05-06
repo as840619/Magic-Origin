@@ -161,7 +161,7 @@ public class BossZombie : MonoBehaviour
         for (int n = -1; n <= 1; n++)
         {
             Vector3 newPosition = Calculation(n);
-            GameObject bulletTTO = Instantiate(bullet2, bulletPos.position + newPosition, Quaternion.identity);
+            GameObject bulletTTO = Instantiate(bullet3, bulletPos.position + newPosition, Quaternion.identity);
             Vector2 direction = playerPosition - bulletTTO.transform.position;
             bulletTTO.GetComponent<EnemybulletScript>().way = direction;
         }
