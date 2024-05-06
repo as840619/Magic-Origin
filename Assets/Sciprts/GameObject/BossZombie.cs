@@ -31,8 +31,6 @@ public class BossZombie : MonoBehaviour
     private PlayerHealth playerHealth;
     private Animator anim;
 
-    private string enemyType;
-
     private void Start()
     {
         //First();
@@ -43,7 +41,7 @@ public class BossZombie : MonoBehaviour
 
     private void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(playerPosition, transform.position);
+        float distanceFromPlayer = Vector2.Distance(PlayerPosition, transform.position);
         if (distanceFromPlayer < zombieStop)
             return;
         if (PlayerController.Instance.bossBattle == false)
@@ -87,18 +85,11 @@ public class BossZombie : MonoBehaviour
 
             }
         }
-        //隨機
-        /*opTimer += Time.deltaTime;
-        if (opTimer > temp)
-        {
-            opTimer = 0;
-            op = (op + 1) % 6;
-        }*/
     }
 
-    public Vector3 playerPosition => PlayerController.Instance.Position;
-    public Vector2 playerDirection => playerPosition - transform.position;
-    public float playerAngle => Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
+    public Vector3 PlayerPosition => PlayerController.Instance.Position;
+    public Vector2 PlayerDirection => PlayerPosition - transform.position;
+    public float PlayerAngle => Mathf.Atan2(PlayerDirection.y, PlayerDirection.x) * Mathf.Rad2Deg;
     public GameObject AngleFix(float angle)
     {
         GameObject bulletFive = Instantiate(bullet1, bulletPos.position, Quaternion.identity);
@@ -109,7 +100,7 @@ public class BossZombie : MonoBehaviour
 
     public void Shoot(int i, int n)        //1 to 1
     {
-        AngleFix(playerAngle + i * (10 + n));
+        AngleFix(PlayerAngle + i * (10 + n));
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
@@ -117,7 +108,7 @@ public class BossZombie : MonoBehaviour
     {
         for (int i = -1; i <= 1; i++)
         {
-            GameObject bulletSS = AngleFix(playerAngle + i * 2.5f);
+            GameObject bulletSS = AngleFix(PlayerAngle + i * 2.5f);
             bulletSS.GetComponent<EnemybulletScript>().reCallTime = 3F;
         }
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
@@ -125,7 +116,7 @@ public class BossZombie : MonoBehaviour
 
     public void Pentagram()    //0 to 5
     {
-        float angleAim = playerAngle;
+        float angleAim = PlayerAngle;
         for (int m = 0; m <= 5; m++)
         {
             GameObject bulletFive = AngleFix(angleAim);
@@ -136,14 +127,14 @@ public class BossZombie : MonoBehaviour
 
     public void WrongFuckingShoot()    //0 to 5
     {
-        GameObject bulletShit = AngleFix(Mathf.Atan2(playerDirection.x, playerDirection.y) * Mathf.Rad2Deg);
+        GameObject bulletShit = AngleFix(Mathf.Atan2(PlayerDirection.x, PlayerDirection.y) * Mathf.Rad2Deg);
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
 
     public void LerpShot()     //lerp 1 to 1
     {
         GameObject bulletLerp = Instantiate(bullet2, bulletPos.position, Quaternion.identity);
-        bulletLerp.GetComponent<EnemybulletScript>().way = playerDirection;
+        bulletLerp.GetComponent<EnemybulletScript>().way = PlayerDirection;
         bulletLerp.GetComponent<EnemybulletScript>().lerping = true;
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
@@ -161,7 +152,7 @@ public class BossZombie : MonoBehaviour
         {
             Vector3 newPosition = Calculation(n);
             GameObject bulletTTO = Instantiate(bullet3, bulletPos.position + newPosition, Quaternion.identity);
-            Vector2 direction = playerPosition - bulletTTO.transform.position;
+            Vector2 direction = PlayerPosition - bulletTTO.transform.position;
             bulletTTO.GetComponent<EnemybulletScript>().way = direction;
         }
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
@@ -169,7 +160,7 @@ public class BossZombie : MonoBehaviour
 
     public void Raining()      //  _|_
     {
-        float middlePoint = (playerPosition.x + bulletPos.transform.position.x) / 2;
+        float middlePoint = (PlayerPosition.x + bulletPos.transform.position.x) / 2;
         GameObject bulletRain = Instantiate(bullet1, new(middlePoint, (2 * bulletPos.position.y)), Quaternion.identity);
         //bulletRain.GetComponent<EnemybulletScript>().way = -(transform.up);
         bulletRain.GetComponent<EnemybulletScript>().splits = 2;
