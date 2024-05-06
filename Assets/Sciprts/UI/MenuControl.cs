@@ -37,7 +37,7 @@ public class MenuControl : MonoBehaviour
 
     void ExitButtonOnClicked()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit(); //關閉應用程式
     }
 
     void SettingButtonOnClicked()
