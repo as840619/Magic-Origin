@@ -15,10 +15,7 @@ public class StashUIRemove : MonoBehaviour
         {
             if (temp.GetComponent<CardListInUI>() != null)
             {
-                //temp.AddComponent<CardUse>();
-                //Destroy(temp.GetComponent<StashUIRemove>());
                 Destroy(temp.gameObject);
-                //temp.GetComponent<CardUse>().ResetCards();
             }
         }
     }

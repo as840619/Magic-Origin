@@ -79,9 +79,6 @@ public class EnemybulletScript : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// 
-    /// </summary>
 
     void Splits()       // TODO : 請換維上線處理
     {

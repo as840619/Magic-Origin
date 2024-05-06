@@ -32,7 +32,6 @@ public class BossZombie : MonoBehaviour
     private Animator anim;
 
     private string enemyType;
-    //string enemyType => this.gameObject.GetComponent<ZombieNearShoot>().enemyType;
 
     private void Start()
     {
@@ -47,22 +46,6 @@ public class BossZombie : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(playerPosition, transform.position);
         if (distanceFromPlayer < zombieStop)
             return;
-        // (distanceFromPlayer < zombieNearFor && distanceFromPlayer > zombieNearBack)
-        //if (distanceFromPlayer < zombieNearBack)
-        //transform.position = Vector2.MoveTowards(this.transform.position, playerPosition, speed * Time.deltaTime);
-        /*float distance = Vector2.Distance(transform.position, playerPosition);
-        if (distance < 5)   //Zombie Shooting Range setup
-        {
-            timer += Time.deltaTime;
-            if (timer > 2)
-            {
-                timer = 0;
-                anim.SetTrigger("Fire");
-                Shoot();
-            }
-        }
-        if (distance >= 12f)   //Zombie Shooting Range setup
-            return;*/
         if (PlayerController.Instance.bossBattle == false)
             return;
         timer += Time.deltaTime;
@@ -164,9 +147,7 @@ public class BossZombie : MonoBehaviour
         bulletLerp.GetComponent<EnemybulletScript>().lerping = true;
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
     }
-
     //捲捲面
-
     public Vector2 Calculation(int i)
     {
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
@@ -174,6 +155,7 @@ public class BossZombie : MonoBehaviour
         return newPosition;
         
     }
+
     public void TripperTake()      //3 to 1
     {
         for (int n = -1; n <= 1; n++)
@@ -200,10 +182,6 @@ public class BossZombie : MonoBehaviour
         transform.position = Vector2.left * speed * 0.5F;
         //transform.position = Vector2.MoveTowards(this.transform.position, playerPosition, speed * 2F);
     }
-
-
-
-
 
     private void OnDrawGizmosSelected()
     {

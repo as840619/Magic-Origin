@@ -12,8 +12,6 @@ public class CardUse : MonoBehaviour
     public ActionType actionType;
     public int HandCardNumber = -1;
 
-    // public bool cardn = false;   //cardn = true;
-
     private PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
     private int StaminaValue => PlayerManager.Instance.staminaValue;
 
@@ -36,7 +34,7 @@ public class CardUse : MonoBehaviour
         if (actionTypes.Contains(actionType))
         {
             string methodName = actionType.ToString();        //呼叫ActionType名子
-            MethodInfo method = Pa.GetType().GetMethod(methodName);       //勿
+            MethodInfo method = Pa.GetType().GetMethod(methodName);
             if (method != null)
             {
                 method.Invoke(Pa, null);

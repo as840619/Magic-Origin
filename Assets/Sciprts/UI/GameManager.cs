@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using RespawnPositions;
 
-
 public class GameManager : MonoBehaviour
 {
     int playerLevel = 0;

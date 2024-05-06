@@ -16,7 +16,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] float _collisionTime;
     public GameObject _healthUI;
     private GameObject tmpObject;
-    //public TextMesh _healthValue;
     public Slider _healthBar;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
@@ -28,7 +27,6 @@ public abstract class Enemy : MonoBehaviour
         _nowHealth = _maxHealth;
         _healthBar.value = Health;
         _collisionTime = 0;
-        //_healthUI.SetActive(false);
     }
 
     public void Update()

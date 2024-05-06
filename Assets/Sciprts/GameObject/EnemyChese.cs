@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyChese : MonoBehaviour
 {
-
     [Header("顏色對應距離")]
     [SerializeField] float blackOne = 1;
     [SerializeField] float grayThree = 3;
@@ -18,7 +17,6 @@ public class EnemyChese : MonoBehaviour
     public float zombieNearBack = 3f;
     public float zombieStop = 1.5f;
     private string enemyType;
-    //string enemyType => this.gameObject.GetComponent<ZombieNearShoot>().enemyType;
 
     private void Start()
     {
