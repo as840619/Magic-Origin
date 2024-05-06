@@ -22,7 +22,7 @@ public class CardListMenu : MonoBehaviour
     {
         foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
         {
-            if (temp.GetComponent<HandCards>() != null)
+            if (temp.GetComponent<HandCard>() != null)
             {
                 cardList.Add(temp.gameObject);
             }
