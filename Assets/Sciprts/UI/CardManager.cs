@@ -87,11 +87,13 @@ public class CardManager : MonoBehaviour
         graveYard.SetActive(true);
     }
 
-    IEnumerator CardAddEvent(GameObject gameObject)
+    private IEnumerator CardAddEvent(GameObject gameObject)
     {
+        GameObject temp = Instantiate(gameObject, cardRewardShow.position, Quaternion.identity);
+        temp.transform.parent = handPlace;
         yield return new WaitForSeconds(1.5F);
-        gameObject.transform.position = GameObject.Find("Draw").transform.position;
         plusOne.SetActive(true);
+        Destroy(temp);
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(false);
     }
