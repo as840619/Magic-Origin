@@ -30,8 +30,7 @@ public class CardUse : MonoBehaviour
             return;
         if (actionTypes.Contains(actionType))
         {
-            string methodName = actionType.ToString();        //呼叫ActionType名子
-            MethodInfo method = Pa.GetType().GetMethod(methodName);
+            MethodInfo method = Pa.GetType().GetMethod(actionType.ToString());
             if (method != null)
             {
                 method.Invoke(Pa, null);
@@ -49,7 +48,7 @@ public class CardUse : MonoBehaviour
     }
 }
 
-public enum ActionType
+public enum ActionType  //TIPS：enum可以代替string的功能，是一個基礎類型，原理上，自動幫我們把字串作編號的字典的概念，
 {
     Attack,
     Slash,

@@ -54,10 +54,10 @@ public class CardManager : MonoBehaviour
 
     public void HandCard2GraveYard(GameObject card)
     {
-        GameObject temp = CardType.Find(c => c.GetComponent<CardUse>().actionType == card.GetComponent<CardUse>().actionType);
-        int handCardNumber = card.GetComponent<CardUse>().HandCardNumber;
+        GameObject temp = CardType.Find(c => c.GetComponent<CardUse>().actionType == card.GetComponent<CardUse>().actionType);  //是不是要找的東西，找到我要墓地目的的卡片
         GetComponent<GraveYard>().CardList.Add(temp);
-        GetComponent<HandCards>().CardList.RemoveAll(card => card.GetComponent<CardUse>().HandCardNumber == handCardNumber);
+        int handCardNumber = card.GetComponent<CardUse>().HandCardNumber;
+        GetComponent<HandCards>().CardList.RemoveAll(card => card.GetComponent<CardUse>().HandCardNumber == handCardNumber);    //移除掉全部符合條件的手牌LIST中的卡片，條件為
         Destroy(card);
     }
 
