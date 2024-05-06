@@ -45,15 +45,14 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void CardInstantiate()
+    public void GraveYard2CardRemain()
     {
-        int index = Random.Range(0, 9);
-        //GameObject gameObject = Instantiate(cardType[index], rectPosition.anchoredPosition, Quaternion.identity);
-        GameObject gameObject = Instantiate(cardType[index], cardRewardShow.position, Quaternion.identity);
-        gameObject.name = cardType[index].name;
-        gameObject.transform.parent = handPlace;
-        AddCardRemain(gameObject);
-        StartCoroutine(CardAddEvent(gameObject));
+        foreach (GameObject card in GetComponent<GraveYard>().CardList)
+        {
+            GetComponent<CardRemain>().CardList.Add(card);
+        }
+        GetComponent<GraveYard>().CardList.Clear();
+        HideGraveYard();
     }
 
     public void DropCard(Vector3 vector3)
