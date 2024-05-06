@@ -41,7 +41,6 @@ public class CamCtrl : MonoBehaviour
                     _cameraPosition = new Vector3(_cameraPosition.x - _offset, _cameraPosition.y, _cameraPosition.z);
                 }
             }
-
             transform.position = Vector3.Lerp(transform.position, _cameraPosition, _offsetSmoothing * Time.deltaTime);
         }
         if (LeftBorderReturn(_cameraPosition.x, _idle.transform.position.x))

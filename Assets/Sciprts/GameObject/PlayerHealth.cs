@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("基本數據")]
-    public int health;
+    public int nowHealth = 0;
+    public int maxHealth = 3;
     public float flashTime;
     public float dieTime;
     public bool takeDamage;
@@ -19,51 +17,37 @@ public class PlayerHealth : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
         anim = GetComponent<Animator>();
+        nowHealth = maxHealth;
     }
 
-    private void Update()       //TODO 修改判斷
+    private void Update()
     {
         if (!takeDamage)
             return;
-        if (health <= 0)
+        if (HeartRemain <= 0)
         {
             takeDamage = false;
-            health = 0;
-            anim.SetTrigger("Die");
-            Invoke(nameof(KillPlayer), dieTime);      //TODO 更改兩項invoke使用方式
+            Invoke(nameof(KillPlayer), dieTime);
             FlashColor(flashTime);
-            KillPlayer();
         }
     }
 
-    Rigidbody2D playerRb => GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+    Rigidbody2D PlayerRb => GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+    private int HeartRemain => PlayerManager.Instance.nowHealth;
 
-    void FlashColor(float time)
+    private void FlashColor(float time)
     {
         sr.color = Color.black;
-        Invoke("ResetColor", time);
+        Invoke(nameof(ResetColor), time);
     }
 
-    void ResetColor()
+    private void ResetColor()
     {
         sr.color = originalColor;
     }
 
-    void KillPlayer()
+    private void KillPlayer()
     {
-
-        //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
-        playerRb.bodyType = RigidbodyType2D.Static;
-        anim.SetTrigger("Death");
-        GameManager.Instance.ResetObject();
-        //StartCoroutine(SecondToScene());           <-改這個就好 言下之意就是別讀秒
+        SceneManager.LoadScene(1);
     }
-
-    //計時完後讀取Scene
-    private IEnumerator SecondToScene()
-    {
-        yield return new WaitForSeconds(3);
-        //Test();
-    }
-
 }

@@ -5,14 +5,18 @@ using TMPro;
 
 public class ShieldValue : MonoBehaviour
 {
-    public int shieldValue;  //當前護盾量
     public TextMeshProUGUI shieldText;
-        
+    
+    private int shieldInt => PlayerManager.Instance.shieldValue;
+    private void Start()
+    {
+        shieldText.fontSize = 0.1f;
+    }
     void Update()
     {
-        if (shieldValue >= 0)
-            shieldText.text = shieldValue.ToString();
-        if (shieldValue == 0)
+        if (shieldInt >= 0)
+            shieldText.text = shieldInt.ToString();
+        if (shieldInt == 0)
             shieldText.text = "";
     }
 }

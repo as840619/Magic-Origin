@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Cainos.PixelArtPlatformer_VillageProps;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -35,29 +37,43 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashCoefficient = 1f;
     [SerializeField] float distanceBetweenImages = 0.2f;
 
+    [Header("移動判斷")]
     public bool isGround;
     public bool isWall;
-    public bool isDashing;
     //public bool isPause;
+    public bool isDashing;
     public bool canJump;
     public bool canMove;
     public bool canFilp;
     public bool _fallThough;
+    public bool createrMode;
+    public Vector2 moveDirection;
 
+    [Header("基本數據")]
+    [SerializeField] float timer;
+    [SerializeField] float slowModeTimer;
+    [SerializeField] float onTime = 1f;
+    [SerializeField] Image image;
+    public bool bossBattle = false;
+    public bool invincible;
     public PlayerInputControl playerControl;
+
+
     private int jumpLeft;
     private float dashTimeLeft;
     private float lastImageXpos;
-    private Vector2 moveDirection;
-
     private InputAction move;
     private InputAction jump;
+    private InputAction draw;
     private InputAction skip;
     private InputAction escape;
+    private InputAction interact;
+    private InputAction slowModeAct;
     private Animator idleAnimation;
     private Rigidbody2D idleRigidbody;
     private BoxCollider2D idlecollider;
     private PlayerHealth playerHealth;
+    private Chest chest;
 
     private void Awake()
     {
@@ -81,43 +97,67 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        skip = playerControl.UI.SkipDialogue;
+        //skip = playerControl.UI.SkipDialogue;
         move = playerControl.Normal.Move;
         jump = playerControl.Normal.Jump;
+        draw = playerControl.Normal.Draw;
         escape = playerControl.Normal.Exit;
-        skip.Enable();
+        interact = playerControl.Normal.Interact;
+        slowModeAct = playerControl.Normal.SlowModeActivate;
+        //skip.Enable();
         move.Enable();
         jump.Enable();
+        draw.Enable();
         escape.Enable();
+        interact.Enable();
+        slowModeAct.Enable();
     }
 
     private void OnDisable()
     {
-        skip.Disable();
+        //skip.Disable();
         move.Disable();
         jump.Disable();
+        draw.Disable();
         escape.Disable();
+        interact.Disable();
+        slowModeAct.Disable();
     }
 
     private void Update()
     {
+        image.enabled = invincible;
         moveDirection = move.ReadValue<Vector2>();
         if (jump.IsPressed() && jumpLeft > 0)
             Jump();
-        if (escape.IsPressed())
-        {
-
-        }
         ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
         CheckAction();
         CheckFilp();
         //CheckDash();
+        timer += Time.deltaTime;
+        slowModeTimer += Time.deltaTime;
+        if (slowModeTimer > 0.01f)
+        {
+            if (slowModeAct.IsPressed())
+            {
+                GameManager.Instance.GetComponent<V_SlowMode>().ToggleSlowMode();
+                slowModeTimer = 0;
+            }
+        }
+        if (timer < onTime)
+            return;
+        if (draw.IsPressed())
+        {
+            GameObject.Find("Draw").GetComponent<DrawCard>().Onclick();
+            timer = 0;
+        }
     }
 
     private void FixedUpdate()
     {
         idleRigidbody.velocity = new(moveDirection.x * moveSpeed, idleRigidbody.velocity.y);
     }
+
     /*
     public void Dash()
     {
@@ -146,6 +186,8 @@ public class PlayerController : MonoBehaviour
         idleAnimation.SetFloat("HorizontalAxis", x);
         idleAnimation.SetFloat("VerticalAxis", y);
         idleAnimation.SetFloat("VerticalVelocity", yVelocity); //
+
+        GameManager.Instance.audioManager.Play(1,"sePlayerWalk",false);
     }
 
     private void CheckFilp()
@@ -223,22 +265,57 @@ public class PlayerController : MonoBehaviour
     */
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.CompareTag("Water"))
-        //playerHealth.health = 0;
         if (other.CompareTag("Flag11"))
-            this.transform.position = new Vector3(0, -36.7f, 0);
+            this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag12"))
-            this.transform.position = new Vector3(0, -72.2f, 0);
+            this.transform.position = GameManager.Instance.NextLevel();
         if (other.CompareTag("Flag13"))
-            this.transform.position = new Vector3(0, -97.2f, 0);
-        if (other.CompareTag("Border"))
+            this.transform.position = GameManager.Instance.NextLevel();
+        if (other.CompareTag("Flag14"))
+            this.transform.position = GameManager.Instance.NextLevel();
+        if (other.CompareTag("Flag21"))
+            GameObject.FindWithTag("End").SetActive(true);
+        if (other.CompareTag("Hp"))
+            this.transform.position = new Vector3(52, -140, 0);
+        if (other.CompareTag("Water"))
         {
-            if (this.transform.position.y >= -8f)
-            {
-                this.transform.position = new Vector3(0, -5.3f, 0);
-                //_playerHealth.TakeDamage(1);
-            }
+            this.transform.position = GameManager.Instance.ReturnLevel();
+        }
+        if (other.CompareTag("CardDrop"))
+        {
+            Destroy(other.gameObject);
+            CardManager.Instance.CardInstantiate();
+        }
+        if (other.CompareTag("BossZombieBattle"))
+            bossBattle = true;
+        if (other.CompareTag("HiddenTilemap"))
+        {
+            other.GetComponent<HiddenSpot>().SortingLayer();
+        }
+        if (other.CompareTag("Chest"))
+        {
+            if (other.GetComponent<Chest>().IsOpened == true)
+                return;
+            CardManager.Instance.CardInstantiate();
+            other.GetComponent<Chest>().IsOpened = true;
+        }
+        if (other.CompareTag("EX"))
+        {
+            this.transform.position = new Vector3(27, -29, 0);
+        }
+        if (interact.IsPressed())
+        {
+            if (other.GetComponent<Scientist>() != null)
+                return;
+            if (other.GetComponent<Engineer>() != null)
+                return;
         }
     }
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("HiddenTilemap"))
+        {
+            other.GetComponent<HiddenSpot>().LeaveSpot();
+        }
+    }
 }

@@ -6,7 +6,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI dialogueListText;
     public Animator animator;
     public float DisplayStart;
     public float DisplaySpeed;
@@ -36,7 +36,25 @@ public class DialogueManager : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(List<Dialogue> dialogueList)
+    {
+        //GameObject.Find("Player").GetComponent<PauseJudge>().gamePause.Invoke();
+        animator.SetBool("IsOpen", true);
+        foreach (Dialogue dialogue in dialogueList)
+        {
+            Debug.Log(dialogue.name);
+            nameText.text = dialogue.name;
+            sentences.Clear();
+            StartCoroutine(StartADialogue());
+            foreach (string sentence in dialogue.sentneces)
+            {
+                sentences.Enqueue(sentence);
+            }
+            DisplayNextCentence();
+        }
+    }
+
+    /*public void StartDialogue(Dialogue dialogue)
     {
         //GameObject.Find("Player").GetComponent<PauseJudge>().gamePause.Invoke();
         animator.SetBool("IsOpen", true);
@@ -48,7 +66,7 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
         DisplayNextCentence();
-    }
+    }*/
 
     public void DisplayNextCentence()
     {
@@ -83,10 +101,10 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TypeSentence(string sentence)
     {
         Displaying = true;
-        dialogueText.text = "";
+        dialogueListText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text += letter;
+            dialogueListText.text += letter;
             yield return new WaitForSeconds(DisplaySpeed);
         }
         Displaying = false;

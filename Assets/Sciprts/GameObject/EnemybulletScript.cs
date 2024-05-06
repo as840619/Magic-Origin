@@ -14,6 +14,8 @@ public class EnemybulletScript : MonoBehaviour
     private float timer;
     private Rigidbody2D rb;
     private GameObject Player;
+
+    private int shieldInt => PlayerManager.Instance.shieldValue;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,8 +50,16 @@ public class EnemybulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerHealth>().takeDamage = true;
-            other.gameObject.GetComponent<PlayerHealth>().health -= 20; //bulletdamage  //TODO 修改判斷
+            if (PlayerController.Instance.invincible)
+                return;
+            if (shieldInt == 0)
+            {
+                other.gameObject.GetComponent<PlayerHealth>().takeDamage = true;
+                PlayerManager.Instance.nowHealth--;
+                PlayerManager.Instance.UpdateHealth();
+            }
+            else
+                PlayerManager.Instance.shieldValue--;
             Destroy(gameObject);
         }
         if (!other.gameObject.CompareTag("MidFloor"))
@@ -69,9 +79,6 @@ public class EnemybulletScript : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// 
-    /// </summary>
 
     void Splits()       // TODO : 請換維上線處理
     {

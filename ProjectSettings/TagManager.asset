@@ -17,6 +17,18 @@ TagManager:
   - MidFloor
   - MidCeiling
   - MidWall
+  - CardDrop
+  - Water
+  - Flag14
+  - Flag21
+  - Chest
+  - BossZombieBattle
+  - HiddenTilemap
+  - Hp
+  - EX
+  - Boss
+  - End
+  - SR
   layers:
   - Default
   - TransparentFX

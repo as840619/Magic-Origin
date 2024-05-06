@@ -53,6 +53,33 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Draw"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0a6f0dc-3a18-40f5-825f-a1b1acc34287"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""66e01499-dac2-45f4-8275-7af07184d1cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowModeActivate"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6173838-fbd8-4abe-97b5-16ae2b0c1929"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +159,50 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bea7098c-6d02-4af4-903c-e0b88bd2b7a7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Draw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6674fe7d-6122-42ba-bd14-a3583f6c3ad4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Draw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5495a0a1-7343-4f2b-9148-97d10f06df5c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9057114-fdd2-4ac5-8360-ccc904652532"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowModeActivate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -143,6 +214,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""name"": ""SkipDialogue"",
                     ""type"": ""Button"",
                     ""id"": ""f351ffbe-4cee-4536-880a-3296bef241a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""pauseinput"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b2d1551-2b73-47b5-83b3-70e000e220be"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -160,6 +240,17 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                     ""action"": ""SkipDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a9f34ec-3256-41b0-87da-16217181f206"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pauseinput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,9 +262,13 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         m_Normal_Jump = m_Normal.FindAction("Jump", throwIfNotFound: true);
         m_Normal_Move = m_Normal.FindAction("Move", throwIfNotFound: true);
         m_Normal_Exit = m_Normal.FindAction("Exit", throwIfNotFound: true);
+        m_Normal_Draw = m_Normal.FindAction("Draw", throwIfNotFound: true);
+        m_Normal_Interact = m_Normal.FindAction("Interact", throwIfNotFound: true);
+        m_Normal_SlowModeActivate = m_Normal.FindAction("SlowModeActivate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
+        m_UI_pauseinput = m_UI.FindAction("pauseinput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -236,6 +331,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Normal_Jump;
     private readonly InputAction m_Normal_Move;
     private readonly InputAction m_Normal_Exit;
+    private readonly InputAction m_Normal_Draw;
+    private readonly InputAction m_Normal_Interact;
+    private readonly InputAction m_Normal_SlowModeActivate;
     public struct NormalActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -243,6 +341,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Normal_Jump;
         public InputAction @Move => m_Wrapper.m_Normal_Move;
         public InputAction @Exit => m_Wrapper.m_Normal_Exit;
+        public InputAction @Draw => m_Wrapper.m_Normal_Draw;
+        public InputAction @Interact => m_Wrapper.m_Normal_Interact;
+        public InputAction @SlowModeActivate => m_Wrapper.m_Normal_SlowModeActivate;
         public InputActionMap Get() { return m_Wrapper.m_Normal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +362,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Exit.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnExit;
+                @Draw.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Draw.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Draw.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnDraw;
+                @Interact.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnInteract;
+                @SlowModeActivate.started -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
+                @SlowModeActivate.performed -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
+                @SlowModeActivate.canceled -= m_Wrapper.m_NormalActionsCallbackInterface.OnSlowModeActivate;
             }
             m_Wrapper.m_NormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +384,15 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
+                @Draw.started += instance.OnDraw;
+                @Draw.performed += instance.OnDraw;
+                @Draw.canceled += instance.OnDraw;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @SlowModeActivate.started += instance.OnSlowModeActivate;
+                @SlowModeActivate.performed += instance.OnSlowModeActivate;
+                @SlowModeActivate.canceled += instance.OnSlowModeActivate;
             }
         }
     }
@@ -283,11 +402,13 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_SkipDialogue;
+    private readonly InputAction m_UI_pauseinput;
     public struct UIActions
     {
         private @PlayerInputControl m_Wrapper;
         public UIActions(@PlayerInputControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @SkipDialogue => m_Wrapper.m_UI_SkipDialogue;
+        public InputAction @pauseinput => m_Wrapper.m_UI_pauseinput;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -300,6 +421,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @SkipDialogue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
+                @pauseinput.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPauseinput;
+                @pauseinput.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPauseinput;
+                @pauseinput.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPauseinput;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -307,6 +431,9 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
                 @SkipDialogue.started += instance.OnSkipDialogue;
                 @SkipDialogue.performed += instance.OnSkipDialogue;
                 @SkipDialogue.canceled += instance.OnSkipDialogue;
+                @pauseinput.started += instance.OnPauseinput;
+                @pauseinput.performed += instance.OnPauseinput;
+                @pauseinput.canceled += instance.OnPauseinput;
             }
         }
     }
@@ -316,9 +443,13 @@ public partial class @PlayerInputControl : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnDraw(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnSlowModeActivate(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnSkipDialogue(InputAction.CallbackContext context);
+        void OnPauseinput(InputAction.CallbackContext context);
     }
 }

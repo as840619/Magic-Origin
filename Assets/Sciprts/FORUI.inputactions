@@ -1,0 +1,34 @@
+{
+    "name": "FORUI",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "1188ac9b-cfe0-4253-8cb3-9c189a3e5a1f",
+            "actions": [
+                {
+                    "name": "nextline",
+                    "type": "Button",
+                    "id": "e363efeb-d403-40fe-bcde-d284bbf52f07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bf2b5f88-83f4-44f8-b1f5-e582857b2d0b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "nextline",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
