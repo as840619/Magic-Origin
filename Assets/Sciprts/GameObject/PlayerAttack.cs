@@ -20,8 +20,9 @@ public class PlayerAttack : MonoBehaviour
         skillList = CardManager.Instance.GetComponentInChildren<CardSkillDetails>().SkillList;
     }
     Animator Animation => PlayerController.Instance.GetComponent<Animator>();
-
-    ////////////////////////////////////設置collider用區域//////////////////////////////////
+    /// <summary>
+    /// 設置collider用區域
+    /// </summary>
     private void SetColliderShapeAction1()
     {
         if (collider != null)
@@ -165,7 +166,9 @@ public class PlayerAttack : MonoBehaviour
     {
         //GameObject.Find("ShieldRing").SetActive(true);
     }
-
+    /// <summary>
+    /// 設置collider用區域
+    /// </summary>
 
     public void PerformAction1()
     {
@@ -227,9 +230,10 @@ public class PlayerAttack : MonoBehaviour
         SetColliderShapeAction10();
         Debug.Log("動作10結束");
     }
-    ////////////////////////////////////設置collider用區域//////////////////////////////////
-
-    //DoAction
+    /// <summary>
+    /// DoAction
+    /// </summary>
+    /// <param name="actionType"></param>
     public void DoAction(ActionType actionType)
     {
         print(actionType);
