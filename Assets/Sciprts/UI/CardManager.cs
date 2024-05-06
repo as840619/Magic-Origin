@@ -79,7 +79,7 @@ public class CardManager : MonoBehaviour
 
     public void DropCard(Vector3 vector3)
     {
-        graveYard.SetActive(false);
+        Instantiate(CardTrigger, vector3, Quaternion.identity);
     }
 
     public void CardInstantiate()
