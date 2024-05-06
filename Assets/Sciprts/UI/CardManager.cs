@@ -64,9 +64,17 @@ public class CardManager : MonoBehaviour
         Destroy(card);
     }
 
-    public void AddCardRemain(GameObject gameObject)
+    public void HandCards2GraveYard()
     {
-        GetComponent<CardRemain>().CardsAmount.Add(gameObject);
+        foreach (GameObject card in GetComponent<HandCards>().CardList)
+        {
+            GetComponent<GraveYard>().CardList.Add(card);
+        }
+        GetComponent<HandCards>().CardList.Clear();
+        foreach (GameObject card in GameObject.FindGameObjectsWithTag("Card"))
+        {
+            Destroy(card);
+        }
     }
 
     private void HideGY()
