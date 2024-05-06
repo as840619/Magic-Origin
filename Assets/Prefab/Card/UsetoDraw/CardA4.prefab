@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 5967293604095370719}
   - component: {fileID: 1919753019521000536}
   - component: {fileID: -3959629593171985910}
+  - component: {fileID: 6858076545541849599}
   m_Layer: 5
   m_Name: CardA4
   m_TagString: Card
@@ -474,6 +475,18 @@ MonoBehaviour:
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &-3959629593171985910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679635311318251162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6858076545541849599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
