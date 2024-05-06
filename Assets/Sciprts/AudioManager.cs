@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//參考:https://www.youtube.com/watch?v=0XI-JLcwhR8
+
 public class AudioManager : MonoBehaviour
 {
     public AudioClip bgmcity;
@@ -23,15 +23,11 @@ public class AudioManager : MonoBehaviour
             audios.Add(audio);
         }
     }
-    void Start()
-    {
 
-    }
-
-  public  void Play(int index, string name, bool isLoop)
+    public void Play(int index, string name, bool isLoop)
     {
         var clip = GetAudioClip(name);
-        if(clip != null)
+        if (clip != null)
         {
             var audio = audios[index];
             audios[index].clip = clip;
@@ -39,29 +35,21 @@ public class AudioManager : MonoBehaviour
             audio.Play();
         }
     }
+
     AudioClip GetAudioClip(string name)
     {
-        switch (name)
+        return name switch
         {
-            case "bgmcity":
-                return bgmcity;
-            case "bgmforest":
-                return bgmforest;
-            case "sePlayerATK":
-                return sePlayerATK;
-            case "sePlayerATK2":
-                return sePlayerATK2;
-            case "sePlayerWalk":
-                return sePlayerWalk;
-            case "sePlayerShield":
-                return sePlayerShield;
-            case "seEnemyShoot":
-                return seEnemyShoot;
-            case "seEnemyDeath":
-                return seEnemyDeath;
-            case "seEnemyBoss":
-                return seEnemyBoss;
-        }
-        return null;
+            "bgmcity" => bgmcity,
+            "bgmforest" => bgmforest,
+            "sePlayerATK" => sePlayerATK,
+            "sePlayerATK2" => sePlayerATK2,
+            "sePlayerWalk" => sePlayerWalk,
+            "sePlayerShield" => sePlayerShield,
+            "seEnemyShoot" => seEnemyShoot,
+            "seEnemyDeath" => seEnemyDeath,
+            "seEnemyBoss" => seEnemyBoss,
+            _ => null,
+        };
     }
 }
