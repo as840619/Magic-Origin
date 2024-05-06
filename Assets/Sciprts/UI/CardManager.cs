@@ -55,9 +55,13 @@ public class CardManager : MonoBehaviour
         HideGraveYard();
     }
 
-    public void DropCard(Vector3 vector3)
+    public void HandCard2GraveYard(GameObject card)
     {
-        Instantiate(CardTrigger, vector3, Quaternion.identity);
+        GameObject temp = CardType.Find(c => c.GetComponent<CardUse>().actionType == card.GetComponent<CardUse>().actionType);
+        int handCardNumber = card.GetComponent<CardUse>().HandCardNumber;
+        GetComponent<GraveYard>().CardList.Add(temp);
+        GetComponent<HandCards>().CardList.RemoveAll(card => card.GetComponent<CardUse>().HandCardNumber == handCardNumber);
+        Destroy(card);
     }
 
     public void AddCardRemain(GameObject gameObject)
