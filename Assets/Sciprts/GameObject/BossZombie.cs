@@ -153,7 +153,6 @@ public class BossZombie : MonoBehaviour
         GameManager.Instance.audioManager.Play(4, "seEnemyShoot", false);
         Vector2 newPosition = new(0f, -0.675f * i);
         return newPosition;
-        
     }
 
     public void TripperTake()      //3 to 1
