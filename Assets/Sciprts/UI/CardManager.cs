@@ -82,7 +82,15 @@ public class CardManager : MonoBehaviour
 
     public void CardInstantiate()
     {
-        graveYard.SetActive(true);
+        int index = Random.Range(0, CardType.Count);
+        GameObject card = CardType[index];
+        AddCardRemain(card);
+        StartCoroutine(CardAddEvent(card));
+    }
+
+    private void AddCardRemain(GameObject card)
+    {
+        GetComponent<CardRemain>().CardList.Add(card);
     }
 
     private IEnumerator CardAddEvent(GameObject gameObject)
