@@ -95,4 +95,14 @@ public class CardManager : MonoBehaviour
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(false);
     }
+
+    private void HideGraveYard()
+    {
+        graveYard.SetActive(false);
+    }
+
+    private void ShowGraveYard()
+    {
+        graveYard.SetActive(true);
+    }
 }
