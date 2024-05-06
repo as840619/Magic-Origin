@@ -77,7 +77,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private void HideGY()
+    public void DropCard(Vector3 vector3)
     {
         graveYard.SetActive(false);
     }
