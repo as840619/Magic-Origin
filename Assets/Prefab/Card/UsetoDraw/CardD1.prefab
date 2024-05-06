@@ -162,6 +162,14 @@ GameObject:
   - component: {fileID: 1415791640235344539}
   - component: {fileID: 324694390588663539}
   - component: {fileID: -7435474990941862152}
+  - component: {fileID: -1378007724172879339}
+  - component: {fileID: 7233797533214118398}
+  - component: {fileID: -8474101643012127934}
+  - component: {fileID: -4166775220235123150}
+  - component: {fileID: -284861887397414581}
+  - component: {fileID: -1484275058764175974}
+  - component: {fileID: 3522491683166170518}
+  - component: {fileID: 1697905169072575880}
   m_Layer: 5
   m_Name: CardD1
   m_TagString: Card
@@ -320,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 6
-  HandCardNumber: 3
+  HandCardNumber: 2
 --- !u!114 &7639106517169184190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +476,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-7435474990941862152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1378007724172879339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7233797533214118398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8474101643012127934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4166775220235123150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-284861887397414581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1484275058764175974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3522491683166170518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483178420348388986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697905169072575880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

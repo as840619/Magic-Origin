@@ -236,6 +236,14 @@ GameObject:
   - component: {fileID: 2469426363680255928}
   - component: {fileID: 8292148787669951363}
   - component: {fileID: 7711093854118145204}
+  - component: {fileID: 7672808485639347762}
+  - component: {fileID: 7138015244052716452}
+  - component: {fileID: 1334085055910149397}
+  - component: {fileID: 3183077728214651274}
+  - component: {fileID: 8344728710891013749}
+  - component: {fileID: -6004049259190478364}
+  - component: {fileID: -837727833816550652}
+  - component: {fileID: 7478723331635173811}
   m_Layer: 5
   m_Name: CardA3
   m_TagString: Card
@@ -394,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 2
-  HandCardNumber: 4
+  HandCardNumber: 3
 --- !u!114 &2186160512537399352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +502,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7711093854118145204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7672808485639347762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7138015244052716452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1334085055910149397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3183077728214651274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8344728710891013749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6004049259190478364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-837727833816550652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901042095572352926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464d87c854028744b6d6b7efd2ec967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7478723331635173811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
