@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
@@ -23,26 +20,25 @@ public class PlayerHealth : MonoBehaviour
         nowHealth = maxHealth;
     }
 
-    private void Update()       //TODO 修改判斷
+    private void Update()
     {
         if (!takeDamage)
             return;
-        if (heartRemain <= 0)
+        if (HeartRemain <= 0)
         {
             takeDamage = false;
-            Invoke(nameof(KillPlayer), dieTime);      //TODO 更改兩項invoke使用方式
+            Invoke(nameof(KillPlayer), dieTime);
             FlashColor(flashTime);
-            //KillPlayer();
         }
     }
 
-    Rigidbody2D playerRb => GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-    private int heartRemain => PlayerManager.Instance.nowHealth;
+    Rigidbody2D PlayerRb => GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+    private int HeartRemain => PlayerManager.Instance.nowHealth;
 
     private void FlashColor(float time)
     {
         sr.color = Color.black;
-        Invoke("ResetColor", time);
+        Invoke(nameof(ResetColor), time);
     }
 
     private void ResetColor()
@@ -53,24 +49,5 @@ public class PlayerHealth : MonoBehaviour
     private void KillPlayer()
     {
         SceneManager.LoadScene(1);
-        /*
-        StartCoroutine(GoingRestart());          //<-改這個就好 言下之意就是別讀秒
-        Debug.Log("121212");
-        GameManager.Instance.ResetObject();
-        */
     }
-
-    //計時完後讀取Scene
-    /*
-    private IEnumerator GoingRestart()
-    {
-        //把RIGIDBODY從DYNAMIC轉成STATIC(讓死亡角色無法移動)
-        Debug.Log("232323");
-        PlayerController.Instance.invincible = true;
-        playerRb.bodyType = RigidbodyType2D.Static;
-        Debug.Log("343434");
-        anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3F);
-    }
-    */
 }
