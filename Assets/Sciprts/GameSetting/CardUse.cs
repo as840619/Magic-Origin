@@ -15,10 +15,7 @@ public class CardUse : MonoBehaviour
     private PlayerAttack Pa => PlayerController.Instance.GetComponentInChildren<PlayerAttack>();
     private int StaminaValue => PlayerManager.Instance.staminaValue;
 
-    public void OnMouseOver()   //TODO：鼠標放上去會放大，同時卡牌會顯示名稱和功能
-    {
-        Debug.Log("Mouse is over this object.");
-    }
+    //TODO：鼠標放上去會放大，同時卡牌會顯示名稱和功能 OnMouseOver()
 
     public void OnMouseDown()
     {
