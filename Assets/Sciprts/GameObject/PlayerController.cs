@@ -127,8 +127,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         image.enabled = invincible;
-        moveDirection = move.ReadValue<Vector2>();
-        if (jump.IsPressed() && jumpLeft > 0)
+        moveDirection = canMove ? move.ReadValue<Vector2>() : Vector2.zero;
+        if (jump.IsPressed() && jumpLeft > 0 && canMove)
             Jump();
         ConfirmMovement(moveDirection.x, moveDirection.y, idleRigidbody.velocity.y); //parameter
         CheckAction();
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
     */
     private void Jump()
     {
-        Debug.Log(jumpLeft);
+        // Debug.Log(jumpLeft);
         idleRigidbody.velocity = Vector2.up * jumpSpeed;
         idleAnimation.SetTrigger("Jump");
         jumpLeft--;
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         idleAnimation.SetFloat("VerticalAxis", y);
         idleAnimation.SetFloat("VerticalVelocity", yVelocity); //
 
-        GameManager.Instance.audioManager.Play(1,"sePlayerWalk",false);
+        GameManager.Instance.audioManager.Play(1, "sePlayerWalk", false);
     }
 
     private void CheckFilp()

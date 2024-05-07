@@ -10,15 +10,9 @@ public class V_Dialog : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     public bool DialogueActive = false;
-
-    Rigidbody2D playerRb;
     private int index = 0;
     private void Start()
     {
-        if (playerRb == null)
-        {
-            playerRb = GameObject.FindWithTag("Player")?.GetComponent<Rigidbody2D>();
-        }
         StartDialogue();
     }
 
@@ -35,37 +29,19 @@ public class V_Dialog : MonoBehaviour
     {
         DialogueActive = true;
         index = 0;
-        playerRb.bodyType = RigidbodyType2D.Static;
+        PlayerController.Instance.canMove = false;
         StartCoroutine(TypeLine());
-        Debug.Log("StartDia");
+        // Debug.Log("StartDia");
     }
 
     public void EndDialogue()
     {
 
         DialogueActive = false;
-        playerRb.bodyType = RigidbodyType2D.Dynamic;
+        PlayerController.Instance.canMove = true;
         index = 0;
         gameObject.SetActive(false);
-        Debug.Log("ENDDia");
-    }
-
-    private void NextLine()
-    {
-
-        StopAllCoroutines();
-        index++;
-        Debug.Log("NextLine() - Current index: " + index);
-        if (index < lines.Length)
-        {
-
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            EndDialogue();
-        }
+        // Debug.Log("ENDDia");
     }
 
     IEnumerator TypeLine()
@@ -76,4 +52,23 @@ public class V_Dialog : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
+
+    private void NextLine()
+    {
+
+        StopAllCoroutines();
+        index++;
+        Debug.Log("NextLine() - Current index: " + index);
+        if (index < lines.Length)
+        {
+            textComponent.text = string.Empty;
+            StartCoroutine(TypeLine());
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+
 }
