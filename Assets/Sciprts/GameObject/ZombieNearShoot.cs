@@ -25,12 +25,12 @@ public class ZombieNearShoot : EnemyShooting
         {
             timer = 0;
             anim.SetTrigger("Fire");
-            if (distance >= 7f && distance <= 9f)
+            if (distance >= lineOf13 && distance <= lineOf11)
             {
                 Shoot();
                 gapFire = 0.5f;
             }
-            else if (distance >= 1.5f && distance <= 7f)
+            else if (distance >= 1.5f && distance <= lineOf13)
             {
                 ShotgunShot();
                 gapFire = 1f;

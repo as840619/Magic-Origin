@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     public float DisplaySpeed;
 
     private Queue<string> sentences;
-    private bool skipBool = false;
+    //private bool skipBool = false;
     private bool Displaying = false;
 
     private static DialogueManager instance;

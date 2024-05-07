@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpTimes = 2;
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpSpeed = 6;
-    [SerializeField] private float dashTime = 0.5f;
-    [SerializeField] float dashForse = 20f;
-    [SerializeField] float dashCoefficient = 1f;
-    [SerializeField] float distanceBetweenImages = 0.2f;
+    //[SerializeField] private float dashTime = 0.5f;
+    //[SerializeField] float dashForse = 20f;
+    //[SerializeField] float dashCoefficient = 1f;
+    //[SerializeField] float distanceBetweenImages = 0.2f;
 
     [Header("移動判斷")]
     public bool isGround;
@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
 
 
     private int jumpLeft;
-    private float dashTimeLeft;
-    private float lastImageXpos;
+    //private float dashTimeLeft;
+    //private float lastImageXpos;
     private InputAction move;
     private InputAction jump;
     private InputAction draw;
@@ -86,13 +86,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        dashTimeLeft = 0f;
-        lastImageXpos = 0f;
+        //dashTimeLeft = 0f;
+        //lastImageXpos = 0f;
         canMove = true;
         canFilp = true;
         isDashing = false;
         jumpLeft = jumpTimes;
-        dashForse *= dashCoefficient;
+        //dashForse *= dashCoefficient;
     }
 
     private void OnEnable()

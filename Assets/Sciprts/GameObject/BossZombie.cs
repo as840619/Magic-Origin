@@ -14,7 +14,7 @@ public class BossZombie : MonoBehaviour
     [SerializeField] float gapFire = 4f;
     [SerializeField] float timer = 2f;
     [SerializeField] float opTimer;
-    [SerializeField] float temp = 2f;
+    //[SerializeField] float temp = 2f;
     [Header("距離判定")]
     public float speed = 0.1f;
     public float zombieNearFor = 8.5f;

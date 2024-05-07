@@ -6,7 +6,7 @@ public class HiddenSpot : MonoBehaviour
 {
     [Header("基本")]
     [SerializeField] new Renderer renderer;
-    [SerializeField] bool touchedLine = false;
+    //[SerializeField] bool touchedLine = false;
 
     private void Start()
     {

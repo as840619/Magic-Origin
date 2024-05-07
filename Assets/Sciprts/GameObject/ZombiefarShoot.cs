@@ -7,7 +7,7 @@ public class ZombiefarShoot : EnemyShooting
     [Header("攻擊距離")]
     [SerializeField] float lineOflerp = 12f;
     [SerializeField] float lineOf31 = 5f;
-    [SerializeField] float lineOf13 = 5f;
+    [SerializeField] float lineOf13 = 1.5f;
     public string enemyType = "ZombieFar";
 
     void Start()
@@ -19,19 +19,19 @@ public class ZombiefarShoot : EnemyShooting
     void Update()
     {
         float distance = Vector2.Distance(transform.position, playerPosition);
-        if (distance >= 12f)
+        if (distance >= lineOflerp)
             return;
         timer += Time.deltaTime;
         if (timer > gapFire)
         {
             timer = 0;
             anim.SetTrigger("Fire");
-            if (distance >= 5f && distance <= 12f)
+            if (distance >= lineOf31 && distance <= lineOflerp)
             {
                 LerpShot();
                 gapFire = 1f;
             }
-            else if (distance >= 1.5f && distance <= 5f)
+            else if (distance >= lineOf13 && distance <= lineOf31)
             {
                 switch (op)
                 {
