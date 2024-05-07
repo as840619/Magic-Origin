@@ -95,7 +95,7 @@ public class CardManager : MonoBehaviour
     private IEnumerator CardAddEvent(GameObject gameObject)
     {
         GameObject temp = Instantiate(gameObject, cardRewardShow.position, Quaternion.identity);
-        temp.transform.parent = handPlace;
+        temp.transform.SetParent(handPlace);
         yield return new WaitForSeconds(1.5F);
         plusOne.SetActive(true);
         Destroy(temp);
