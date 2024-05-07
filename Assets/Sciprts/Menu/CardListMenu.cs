@@ -13,20 +13,10 @@ public class CardListMenu : MonoBehaviour
             cardList.Add(gameObject);
         foreach (GameObject gameObject in CardManager.Instance.GetComponent<CardRemain>().CardList)
             cardList.Add(gameObject);
-        TagCatcher("Card");
+        foreach (GameObject gameObject in CardManager.Instance.GetComponent<HandCards>().CardList)
+            cardList.Add(gameObject);
         SortingList();
         ShowCards();
-    }
-
-    private void TagCatcher(string tag)
-    {
-        foreach (GameObject temp in GameObject.FindGameObjectsWithTag(tag))
-        {
-            if (temp.GetComponent<HandCard>() != null)
-            {
-                cardList.Add(temp.gameObject);
-            }
-        }
     }
 
     private void ShowCards()
@@ -36,7 +26,7 @@ public class CardListMenu : MonoBehaviour
             int j = i / 4;
             GameObject card = Instantiate(cardList[i], new Vector2(620 + i % 4 * (195.31F), 760 + j * -242), Quaternion.identity);
             card.name = cardList[i].name;
-            card.transform.parent = transform.parent;
+            card.transform.SetParent(transform.parent);
             card.AddComponent<CardListInUI>();
             Destroy(card.GetComponent<CardUse>());
         }

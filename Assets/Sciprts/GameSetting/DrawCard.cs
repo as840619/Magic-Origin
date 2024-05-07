@@ -18,7 +18,6 @@ public class DrawCard : MonoBehaviour
             GameObject cardObj = GetRandomCard();
             cardObj.GetComponent<CardUse>().HandCardNumber = i;
             CardManager.Instance.GetComponent<HandCards>().CardList.Add(cardObj);
-            cardObj.AddComponent<HandCard>();
         }
         CardManager.Instance.ShowHandCard();
         drawbutton.enabled = false;//抽卡按鈕關閉
