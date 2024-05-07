@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
         {
             for (int i = HeartCount; HeartCount < nowHealth; i++)
             {
-                Debug.Log("心呢" + nowHealth);
+                // Debug.Log("心呢" + nowHealth);
                 GameObject PlaerHeart = Instantiate(heart, new Vector2(-900 + i * 100, -480), Quaternion.identity);
                 PlaerHeart.transform.SetParent(GameObject.FindGameObjectWithTag("UUI").transform.Find("PlayerUI"), false);
                 GetComponent<PlayerHearts>().Hearts.Add(PlaerHeart);
