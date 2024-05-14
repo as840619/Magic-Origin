@@ -9,7 +9,9 @@ public class DrawCard : MonoBehaviour
 
     public Button drawbutton;
     private const int MAXHANDCARD = 5;
-
+    public GameObject changeColorPanel;
+    Color32 inv = new Color32(255,255,255,0);
+    Color32 grayy = new Color32(43, 43, 43, 221); 
     public void Onclick()
     {
         CardManager.Instance.HandCards2GraveYard();
@@ -21,6 +23,7 @@ public class DrawCard : MonoBehaviour
         }
         CardManager.Instance.ShowHandCard();
         drawbutton.enabled = false;//抽卡按鈕關閉
+        changeColorPanel.GetComponent<Image>().color = grayy;
         UseDraw();
     }
 
@@ -36,8 +39,9 @@ public class DrawCard : MonoBehaviour
 
     private IEnumerator DrawCoolDown()   //計時器
     {
-        yield return new WaitForSecondsRealtime(1/*5*/);//真實秒數
+        yield return new WaitForSecondsRealtime(5/*5*/);//真實秒數
         drawbutton.enabled = true;
+        changeColorPanel.GetComponent <Image>().color = inv;
     }
 
     private void UseDraw()//觸發計時器用
