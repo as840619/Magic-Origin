@@ -9,5 +9,6 @@ public class V_TouchDialog : MonoBehaviour
             return;
         DialScript.gameObject.SetActive(true);
         DialScript.StartDialogue();
+        gameObject.SetActive(false);
     }
 }
